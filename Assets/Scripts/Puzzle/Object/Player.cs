@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,18 @@ public class Player : MapObject
     private void Awake()
     {
         _transform = GetComponent<Transform>();
+    }
+
+    /// <summary>
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("Test!");
+            SceneLoader.Instance.LoadSceneAsync<TestScene>(null).Forget();
+        }
     }
 
     private void OnMoveUp()
