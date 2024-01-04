@@ -1,13 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class MapData
 {
-    private List<MapObject> _objectList = new();
+    public List<(Coordinate, ObjectInfo)> MapObjects;
+    public ColorType InitColor;
 
-    public bool TryGetObjectAtCoordinate(Coordinate dir, out MapObject obj)
+    public void ImportData(string json)
+    {
+        throw new NotImplementedException();
+    }
+
+    public string ExportData()
     {
         throw new NotImplementedException();
     }

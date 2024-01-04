@@ -2,12 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MapObject : MonoBehaviour
+public class MapObject : MonoBehaviour
 {
-    public ObjectType Type;
+    public ObjectInfo Info;
     public ColorType Color;
     public Coordinate Coordinate;
-    protected MapData _mapData;
+    // TODO: Injection 어캐 할 지 생각해야함
+    protected MapModel _mapModel;
+}
+
+/// <summary>
+/// 퍼즐 오브젝트 저장 데이터 형식
+/// </summary>
+public struct ObjectInfo
+{
+    public ObjectType Type;
 }
 
 public enum ObjectType
