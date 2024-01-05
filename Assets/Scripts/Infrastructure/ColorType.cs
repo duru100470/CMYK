@@ -1,36 +1,36 @@
 using System;
 
+[Serializable]
 public struct ColorType : IEquatable<ColorType>
 {
-    private ColorTypeEnum _type;
-    public ColorTypeEnum Type => _type;
+    public ColorTypeEnum Type;
 
     public ColorType(ColorTypeEnum type)
     {
-        _type = type;
+        Type = type;
     }
 
     public ColorType(ColorType color)
     {
-        _type = color.Type;
+        Type = color.Type;
     }
 
     public void SetColor(ColorType color)
     {
-        _type = color.Type;
+        Type = color.Type;
     }
 
     public void SetColor(ColorTypeEnum type)
     {
-        _type = type;
+        Type = type;
     }
 
     public void AddColor(ColorTypeEnum type)
     {
-        var (cc, cm, cy) = ColorTypeToFlag(_type);
+        var (cc, cm, cy) = ColorTypeToFlag(Type);
         var (nc, nm, ny) = ColorTypeToFlag(type);
         var ret = (cc | nc, cm | nm, cy | ny);
-        _type = FlagToColorType(ret);
+        Type = FlagToColorType(ret);
     }
 
     public void AddColor(ColorType color)
@@ -38,10 +38,10 @@ public struct ColorType : IEquatable<ColorType>
 
     public void RemoveColor(ColorTypeEnum type)
     {
-        var (cc, cm, cy) = ColorTypeToFlag(_type);
+        var (cc, cm, cy) = ColorTypeToFlag(Type);
         var (nc, nm, ny) = ColorTypeToFlag(type);
         var ret = ((cc ^ nc) & (!nc), (cm ^ nm) & (!nm), (cy ^ ny) & (!ny));
-        _type = FlagToColorType(ret);
+        Type = FlagToColorType(ret);
     }
 
     public void RemoveColor(ColorType color)
@@ -58,6 +58,7 @@ public struct ColorType : IEquatable<ColorType>
             ColorTypeEnum.Green => (true, false, true),
             ColorTypeEnum.Blue => (true, true, false),
             ColorTypeEnum.Key => (true, true, true),
+            ColorTypeEnum.None => (false, false, false),
             _ => throw new Exception(),
         };
     }
@@ -73,7 +74,7 @@ public struct ColorType : IEquatable<ColorType>
             (true, false, true) => ColorTypeEnum.Green,
             (true, true, false) => ColorTypeEnum.Blue,
             (true, true, true) => ColorTypeEnum.Key,
-            _ => throw new Exception(),
+            (false, false, false) => ColorTypeEnum.None,
         };
     }
 
@@ -90,7 +91,7 @@ public struct ColorType : IEquatable<ColorType>
 
     public override int GetHashCode() => base.GetHashCode();
 
-    public bool Equals(ColorType other) => other._type == _type;
+    public bool Equals(ColorType other) => other.Type == Type;
 
     public static bool operator ==(ColorType c1, ColorType c2) => c1.Equals(c2);
 
@@ -117,6 +118,7 @@ public struct ColorType : IEquatable<ColorType>
 
 public enum ColorTypeEnum
 {
+    None,
     Cyan,
     Magenta,
     Yellow,

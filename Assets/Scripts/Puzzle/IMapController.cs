@@ -1,5 +1,5 @@
 public interface IMapController
 {
-    void GenerateMap(MapData mapData);
+    void InitMap(MapData mapData);
     void ResetMap();
 }

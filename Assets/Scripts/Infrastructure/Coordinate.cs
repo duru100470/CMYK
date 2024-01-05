@@ -67,4 +67,7 @@ public struct Coordinate : IEquatable<Coordinate>
 
     public bool Equals(Coordinate other)
         => _x == other.X && _y == other.Y;
+
+    public override string ToString()
+        => $"({_x}, {_y})";
 }

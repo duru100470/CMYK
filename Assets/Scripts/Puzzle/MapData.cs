@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class MapData
 {
-    public List<(Coordinate, ObjectInfo)> MapObjects;
+    public List<(Coordinate, ObjectInfo)> MapObjects = new();
     public ColorType InitColor;
 
     public void ImportData(string json)
