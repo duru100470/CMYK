@@ -11,6 +11,7 @@ public class SampleScene : SceneScope, IScene
 
     public override void InitializeContainer(ContainerBuilder builder)
     {
+        builder.AddSingleton<MapData>(null);
         builder.AddSingletonAs<MapModel, IMapModel>();
         builder.AddSingleton<MapController>(_mapController);
     }
@@ -19,8 +20,6 @@ public class SampleScene : SceneScope, IScene
     {
         base.Load();
         Debug.Log("Sample Scene is loaded!");
-
-        _mapController.InitMap(null);
     }
 
     public override void Unload()

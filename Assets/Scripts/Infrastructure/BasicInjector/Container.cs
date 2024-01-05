@@ -24,7 +24,7 @@ namespace BasicInjector
 
         public object Resolve(Type type)
         {
-            var resolver = GetResolver(type);
+            var resolver = GetResolver(type) ?? throw new ResolverNotFoundException(type.ToString());
             var instance = resolver.Resolve(this);
             return instance;
         }
@@ -38,6 +38,9 @@ namespace BasicInjector
         {
             var instance = ConstructorInjector.Inject(type, this);
             AttributeInjector.Inject(instance, this);
+
+            (instance as IInitializable)?.Initialize();
+
             return instance;
         }
 
@@ -48,7 +51,7 @@ namespace BasicInjector
 
         private void OverrideSelfInjection()
         {
-            // ResolverDict[typeof(Container)] = new SingletonValueResolver(this);
+            ResolverDict[typeof(Container)] = new SingletonValueResolver(this);
         }
     }
 }

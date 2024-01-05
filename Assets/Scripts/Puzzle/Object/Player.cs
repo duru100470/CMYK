@@ -42,8 +42,8 @@ public class Player : MapObject
         Coordinate += dir;
         _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
 
-        // IMoveable 오브젝트 밀 수 있는지 판별
+        // TODO: IMoveable 오브젝트 밀 수 있는지 판별
 
-        // 아이템 획득 판별
+        // TODO: 아이템 획득 판별
     }
 }

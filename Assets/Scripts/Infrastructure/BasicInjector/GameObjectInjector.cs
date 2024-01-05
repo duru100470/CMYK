@@ -10,6 +10,7 @@ namespace BasicInjector
             if (gameObject.TryGetComponent<MonoBehaviour>(out var monoBehaviour))
             {
                 AttributeInjector.Inject(monoBehaviour, container);
+                (monoBehaviour as IInitializable)?.Initialize();
             }
         }
 
@@ -29,6 +30,8 @@ namespace BasicInjector
                     {
                         AttributeInjector.Inject(monoBehaviour, container);
                     }
+
+                    (monoBehaviour as IInitializable)?.Initialize();
                 }
             }
         }

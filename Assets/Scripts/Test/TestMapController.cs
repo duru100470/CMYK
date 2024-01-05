@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using BasicInjector;
 using UnityEngine;
 
-public class TestMapController : MapController
+public class TestMapController : MapController, IInitializable
 {
     [Inject]
     public IMapModel mapModel;
+    [Inject]
+    public MapData mapData;
     [SerializeField]
     private Transform _puzzle;
     [SerializeField]
     private ColorType _startBGColor;
 
-    public override void InitMap(MapData mapData)
+    public void Initialize()
+    {
+        InitMap();
+    }
+
+    public override void InitMap()
     {
         var testMapData = new MapData();
         var mapObjects = _puzzle.GetComponentsInChildren<MapObject>();
