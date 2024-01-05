@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using BasicInjector;
 using UnityEngine;
 
-public class TestMapController : MonoBehaviour, IMapController
+public class TestMapController : MapController
 {
     [Inject]
     public IMapModel mapModel;
@@ -12,7 +12,7 @@ public class TestMapController : MonoBehaviour, IMapController
     [SerializeField]
     private ColorType _startBGColor;
 
-    public void InitMap(MapData mapData)
+    public override void InitMap(MapData mapData)
     {
         var testMapData = new MapData();
         var mapObjects = _puzzle.GetComponentsInChildren<MapObject>();
@@ -30,7 +30,7 @@ public class TestMapController : MonoBehaviour, IMapController
         mapModel.BackgroundColor.OnValueChanged += f => Camera.main.backgroundColor = f.ToColor();
     }
 
-    public void ResetMap()
+    public override void ResetMap()
     {
         throw new System.NotImplementedException();
     }

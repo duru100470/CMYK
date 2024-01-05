@@ -7,12 +7,12 @@ using UnityEngine;
 public class SampleScene : SceneScope, IScene
 {
     [SerializeField]
-    private TestMapController _testMapController;
+    private MapController _mapController;
 
     public override void InitializeContainer(ContainerBuilder builder)
     {
         builder.AddSingletonAs<MapModel, IMapModel>();
-        builder.AddSingletonAs<TestMapController, IMapController>(_testMapController);
+        builder.AddSingleton<MapController>(_mapController);
     }
 
     public override void Load(object param = null)
@@ -20,7 +20,7 @@ public class SampleScene : SceneScope, IScene
         base.Load();
         Debug.Log("Sample Scene is loaded!");
 
-        _testMapController.InitMap(null);
+        _mapController.InitMap(null);
     }
 
     public override void Unload()

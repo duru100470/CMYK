@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MapObject
 {
+    [Inject]
+    public TestMono testMono;
     private Transform _transform;
 
     /// <summary>

@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : SingletonBehaviour<SceneLoader>
 {
     private IScene _current;
+    private ProjectScope _projectScope;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -15,6 +16,9 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
     protected override void Awake()
     {
         base.Awake();
+
+        _projectScope = GetComponent<ProjectScope>();
+        _projectScope?.Init();
 
         _current = GetISceneInActiveScene();
         _current.Load(null);
