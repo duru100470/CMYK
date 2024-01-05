@@ -8,11 +8,14 @@ public class SampleScene : SceneScope, IScene
 {
     [SerializeField]
     private MapController _mapController;
+    [SerializeField]
+    private TestView _testView;
 
     public override void InitializeContainer(ContainerBuilder builder)
     {
         builder.AddSingleton<MapData>(null);
         builder.AddSingletonAs<MapModel, IMapModel>();
+        builder.AddSingleton<TestView>(_testView);
         builder.AddSingleton<MapController>(_mapController);
     }
 

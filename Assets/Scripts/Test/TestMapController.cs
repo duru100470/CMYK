@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using BasicInjector;
@@ -8,11 +9,14 @@ public class TestMapController : MapController, IInitializable
     [Inject]
     public IMapModel mapModel;
     [Inject]
+    public TestView testView;
+    [Inject]
     public MapData mapData;
     [SerializeField]
     private Transform _puzzle;
     [SerializeField]
     private ColorType _startBGColor;
+
 
     public void Initialize()
     {
@@ -34,7 +38,14 @@ public class TestMapController : MapController, IInitializable
         }
 
         mapModel.BackgroundColor.Value = _startBGColor;
-        mapModel.BackgroundColor.OnValueChanged += f => Camera.main.backgroundColor = f.ToColor();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            mapModel.BackgroundColor.Value = ColorType.Cyan;
+        }
     }
 
     public override void ResetMap()

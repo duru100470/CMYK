@@ -15,6 +15,15 @@ public struct ColorType : IEquatable<ColorType>
         Type = color.Type;
     }
 
+    public static ColorType Cyan => new(ColorTypeEnum.Cyan);
+    public static ColorType Magenta => new(ColorTypeEnum.Magenta);
+    public static ColorType Yellow => new(ColorTypeEnum.Yellow);
+    public static ColorType Red => new(ColorTypeEnum.Red);
+    public static ColorType Green => new(ColorTypeEnum.Green);
+    public static ColorType Blue => new(ColorTypeEnum.Blue);
+    public static ColorType Key => new(ColorTypeEnum.Key);
+    public static ColorType None => new(ColorTypeEnum.None);
+
     public void SetColor(ColorType color)
     {
         Type = color.Type;
@@ -46,6 +55,7 @@ public struct ColorType : IEquatable<ColorType>
 
     public void RemoveColor(ColorType color)
         => RemoveColor(color.Type);
+
 
     private (bool, bool, bool) ColorTypeToFlag(ColorTypeEnum type)
     {
