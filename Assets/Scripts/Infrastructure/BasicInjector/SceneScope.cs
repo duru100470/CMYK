@@ -14,20 +14,6 @@ namespace BasicInjector
 
         public Container Container => _container;
 
-        protected void Awake()
-        {
-            if (Instance == null)
-                Instance = this;
-            else
-                Destroy(this);
-        }
-
-        protected void OnDestroy()
-        {
-            if (Instance == this)
-                Instance = null;
-        }
-
         public GameObject Instantiate(GameObject original)
         {
             var go = UnityEngine.Object.Instantiate(original);
@@ -65,6 +51,11 @@ namespace BasicInjector
         /// </summary>
         public virtual void Load(object param = null)
         {
+            if (Instance == null)
+                Instance = this;
+            else
+                Destroy(this);
+
             var containerBuilder = new ContainerBuilder();
 
             InitializeContainer(containerBuilder);
@@ -76,6 +67,8 @@ namespace BasicInjector
 
         public virtual void Unload()
         {
+            if (Instance == this)
+                Instance = null;
         }
 
         /// <summary>
