@@ -366,6 +366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mapController: {fileID: 141090068}
   _testView: {fileID: 1598446988}
+  _testMono: {fileID: 984464133}
 --- !u!1 &984464131
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,6 +727,7 @@ MonoBehaviour:
   Coordinate:
     _x: 0
     _y: 0
+  testMono: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -735,5 +737,5 @@ SceneRoots:
   - {fileID: 937809834}
   - {fileID: 1872084277}
   - {fileID: 141090069}
-  - {fileID: 984464132}
   - {fileID: 1598446987}
+  - {fileID: 984464132}

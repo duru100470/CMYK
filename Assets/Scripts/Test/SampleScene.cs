@@ -10,6 +10,8 @@ public class SampleScene : SceneScope, IScene
     private MapController _mapController;
     [SerializeField]
     private TestView _testView;
+    [SerializeField]
+    private TestMono _testMono;
 
     public override void InitializeContainer(ContainerBuilder builder)
     {
@@ -17,6 +19,7 @@ public class SampleScene : SceneScope, IScene
         builder.AddSingletonAs<MapModel, IMapModel>();
         builder.AddSingleton<TestView>(_testView);
         builder.AddSingleton<MapController>(_mapController);
+        builder.AddSingleton<TestMono>(_testMono);
     }
 
     public override void Load(object param = null)
