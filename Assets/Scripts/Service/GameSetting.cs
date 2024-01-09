@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -10,12 +11,15 @@ public class GameSetting
     public float MasterVolume = 1.0f;
     public float MusicVolume = 1.0f;
     public float SFXVolume = 1.0f;
+    public List<string> WorldClearData = new();
 
     public GameSetting()
     {
         LoadAsync().Forget();
     }
 
+    private bool _isAvailable = false;
+    public bool IsAvailable => _isAvailable;
     private const string SaveKey = "GameSettings";
 
     /// <summary>
@@ -71,10 +75,12 @@ public class GameSetting
         if (string.IsNullOrEmpty(json))
         {
             Save();
+            _isAvailable = true;
             return;
         }
 
         // if saved, apply to this object
         FromJSON(json);
+        _isAvailable = true;
     }
 }
