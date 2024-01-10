@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
 
 public class MapData
 {
@@ -9,11 +11,23 @@ public class MapData
 
     public void ImportData(string json)
     {
-        throw new NotImplementedException();
+        string path = Application.persistentDataPath + "/mapdata.json";
+
+        if (!File.Exists(path))
+        {
+            return;
+        }
+
+        json = File.ReadAllText(path);
+        MapData mapData = JsonUtility.FromJson<MapData>(json);
     }
 
     public string ExportData()
     {
-        throw new NotImplementedException();
+        string json = JsonUtility.ToJson(this);
+
+        File.WriteAllText(Application.persistentDataPath + "/mapdata.json", json);
+
+        return json;
     }
 }
