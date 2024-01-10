@@ -10,16 +10,8 @@ using UnityEngine;
 public class TestMapController : MapController, IInitializable
 {
     [Inject]
-    public IMapModel mapModel;
-    [Inject]
-    public MapData mapData;
-    [Inject]
     public TestView testView;
-    [Inject]
-    public AssetLoader assetLoader;
 
-    [SerializeField]
-    private Transform _puzzle;
     [SerializeField]
     private ColorType _startBGColor;
     [SerializeField]
@@ -33,10 +25,7 @@ public class TestMapController : MapController, IInitializable
 
     public override void InitMap()
     {
-        if (mapData == null)
-            GenerateMapFromScene();
-        else
-            GenerateMapFromData();
+        GenerateMapFromScene();
     }
 
     private void GenerateMapFromScene()
@@ -55,24 +44,6 @@ public class TestMapController : MapController, IInitializable
 
         mapModel.BackgroundColor.Value = _startBGColor;
         mapData = testMapData;
-    }
-
-    private void GenerateMapFromData()
-    {
-        foreach (var (coor, info) in mapData.MapObjects)
-        {
-            var go =
-                SceneLoader.Instance.CurrentSceneScope.Instantiate(assetLoader.LoadPrefab<GameObject>($"MapObjects/{info.Type}"));
-            var mo = go.GetComponent<MapObject>();
-            mo.Coordinate = coor;
-            mo.Info = info;
-            mo.Init();
-
-            mapModel.AddMapObject(mo);
-            Debug.Log($"Create MapObject! [{mo.Coordinate}, {mo.Info.Type}]");
-        }
-
-        mapModel.BackgroundColor.Value = _startBGColor;
     }
 
     public override void ResetMap()
