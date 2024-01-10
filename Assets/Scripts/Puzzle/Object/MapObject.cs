@@ -10,6 +10,12 @@ public class MapObject : MonoBehaviour
     public IMapModel MapModel;
     public ObjectInfo Info;
     public Coordinate Coordinate;
+
+    public virtual void Init()
+    {
+        GetComponent<Transform>().position = Coordinate.CoordinateToWorldPoint(Coordinate);
+        GetComponent<SpriteRenderer>().color = Info.Color.ToColor();
+    }
 }
 
 /// <summary>

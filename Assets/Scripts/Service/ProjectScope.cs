@@ -12,6 +12,8 @@ public abstract class ProjectScope : MonoBehaviour, IInstaller
     {
         if (Instance == null)
             Instance = this;
+        else
+            Debug.LogError("Multiple ProjectScope were detected! Please fix it");
     }
 
     public abstract void InitializeContainer(ContainerBuilder containerBuilder);

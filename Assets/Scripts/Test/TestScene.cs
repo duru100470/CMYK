@@ -1,16 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using BasicInjector;
 using UnityEngine;
 
-public class TestScene : MonoBehaviour, IScene
+public class TestScene : SceneScope, IScene
 {
-    public void Load(object param)
+    [SerializeField]
+    private MapController _mapController;
+    [SerializeField]
+    private TestView _testView;
+    public SceneScope SceneScope => this;
+
+    public override void Load(object param)
     {
+        base.Load();
         Debug.Log("Test scene is loaded!");
     }
 
-    public void Unload()
+    public override void Unload()
     {
         Debug.Log("Test scene is unloaded!");
+    }
+
+    public override void InitializeContainer(ContainerBuilder builder)
+    {
+        builder.AddSingleton<MapData>(null);
+        builder.AddSingletonAs<MapModel, IMapModel>();
+        builder.AddSingleton<MapController>(_mapController);
+        builder.AddSingleton<TestView>(_testView);
     }
 }
