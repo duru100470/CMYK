@@ -59,6 +59,7 @@ public class Player : MapObject
                         return;
 
                 case ObjectType.Paint:
+                case ObjectType.Eraser:
                     IObtainable obtainableObj = obj as IObtainable;
                     if(obtainableObj == null)
                     {
