@@ -47,6 +47,7 @@ public class Player : MapObject
                     IMoveable movableObj = obj as IMoveable;
                     if(movableObj == null)
                     {
+                        // TODO: exception 만들어서 Debug.LogError() 대체하기??
                         Debug.LogError("MapObject.Info.Type is Rock but the object is not IMovable");
                         Debug.Break();
                         return;

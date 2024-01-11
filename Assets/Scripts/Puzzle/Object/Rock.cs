@@ -25,6 +25,11 @@ public class Rock : MapObject, IMoveable
                 case ObjectType.Wall:
                 case ObjectType.Rock:
                     return false;
+                case ObjectType.Flag:
+                case ObjectType.Paint:
+                case ObjectType.Eraser:
+                    MapModel.RemoveMapObject(obj);
+                    break;
             }
         }
 
