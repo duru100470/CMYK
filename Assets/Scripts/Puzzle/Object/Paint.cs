@@ -7,10 +7,7 @@ public class Paint : MapObject, IObtainable
 
     public void Obtain()
     {
-        var backgroundColorType = MapModel.BackgroundColor.Value;
-        backgroundColorType.AddColor(Info.Color);
-
-        MapModel.BackgroundColor.Value = backgroundColorType;
+        MapModel.BackgroundColor.Value += Info.Color;
 
         MapModel.RemoveMapObject(this);
     }
