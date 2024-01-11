@@ -13,6 +13,11 @@ public class MapData
     public void ImportData(string json)
     {
         MapData mapData = JsonConvert.DeserializeObject<MapData>(json);
+
+        MapObjects.Clear();
+
+        MapObjects.AddRange(mapData.MapObjects);
+        InitColor = mapData.InitColor;
     }
 
     public string ExportData()

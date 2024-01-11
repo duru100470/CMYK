@@ -18,7 +18,7 @@ public class AssetLoader
             return (T)v;
         }
 
-        var op = await Resources.LoadAsync<T>("/Prefabs/" + prefabAddress + ".prefab");
+        var op = await Resources.LoadAsync<T>("Prefabs/" + prefabAddress);
 
         _loadedDict[prefabAddress] = (T)op;
         return (T)op;
@@ -34,7 +34,7 @@ public class AssetLoader
             return (T)v;
         }
 
-        var op = Resources.Load<T>("/Prefabs/" + prefabAddress + ".prefab");
+        var op = Resources.Load<T>("Prefabs/" + prefabAddress);
 
         if (op == null)
         {

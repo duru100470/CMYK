@@ -7,9 +7,17 @@ namespace BasicInjector
     {
         public static void InjectSingle(GameObject gameObject, Container container)
         {
-            if (gameObject.TryGetComponent<MonoBehaviour>(out var monoBehaviour))
+            var monoBehaviours = gameObject.GetComponents<MonoBehaviour>();
+
+            for (int j = 0; j < monoBehaviours.Length; j++)
             {
-                AttributeInjector.Inject(monoBehaviour, container);
+                var monoBehaviour = monoBehaviours[j];
+
+                if (monoBehaviour != null)
+                {
+                    AttributeInjector.Inject(monoBehaviour, container);
+                }
+
                 (monoBehaviour as IInitializable)?.Initialize();
             }
         }
