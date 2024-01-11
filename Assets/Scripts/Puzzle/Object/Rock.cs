@@ -23,7 +23,7 @@ public class Rock : MapObject, IMoveable
             switch(obj.Info.Type)
             {
                 case ObjectType.Wall:
-                case ObjectType.Movable:
+                case ObjectType.Rock:
                     return false;
             }
         }
