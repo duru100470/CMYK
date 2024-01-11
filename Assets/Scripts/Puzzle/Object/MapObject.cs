@@ -10,6 +10,11 @@ public class MapObject : MonoBehaviour
     public IMapModel MapModel;
     public ObjectInfo Info;
     public Coordinate Coordinate;
+    
+    public void DestroyObject()
+    {
+        Destroy(gameObject);
+    }
 }
 
 /// <summary>
