@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+using Newtonsoft.Json;
 
 public class MapData
 {
@@ -9,11 +12,13 @@ public class MapData
 
     public void ImportData(string json)
     {
-        throw new NotImplementedException();
+        MapData mapData = JsonConvert.DeserializeObject<MapData>(json);
     }
 
     public string ExportData()
     {
-        throw new NotImplementedException();
+        string json = JsonConvert.SerializeObject(this);
+
+        return json;
     }
 }
