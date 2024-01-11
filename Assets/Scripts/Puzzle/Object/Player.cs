@@ -58,6 +58,17 @@ public class Player : MapObject
                     else
                         return;
 
+                case ObjectType.Paint:
+                    IObtainable obtainableObj = obj as IObtainable;
+                    if(obtainableObj == null)
+                    {
+                        // TODO: exception 만들어서 Debug.LogError() 대체하기??
+                        Debug.LogError("MapObject.Info.Type is Obatainable but the object is not IObtainable");
+                        Debug.Break();
+                        return;
+                    }
+                    obtainableObj.Obtain();
+                    break;
                 
             }
         }
