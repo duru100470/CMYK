@@ -26,6 +26,7 @@ public enum ObjectType
 {
     Player,
     Wall,
+    Movable,
     Paint,
     Eraser
 }

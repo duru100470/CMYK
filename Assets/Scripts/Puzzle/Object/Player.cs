@@ -38,8 +38,27 @@ public class Player : MapObject
 
         if (MapModel.TryGetObject(target, out var obj))
         {
-            if (obj.Info.Type == ObjectType.Wall)
-                return;
+            switch(obj.Info.Type)
+            {
+                case ObjectType.Wall:
+                    return;
+                
+                case ObjectType.Movable:
+                    IMoveable movableObj = obj as IMoveable;
+                    if(movableObj == null)
+                    {
+                        Debug.LogError("MapObject.Type.Info is Movable but the object is not IMovable");
+                        Debug.Break();
+                        return;
+                    }
+
+                    if(movableObj.TryMove(dir))
+                        break;
+                    else
+                        return;
+
+                
+            }
         }
 
         Coordinate += dir;
