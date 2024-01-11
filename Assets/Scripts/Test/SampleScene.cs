@@ -12,6 +12,7 @@ public class SampleScene : SceneScope, IScene
     private TestView _testView;
     [SerializeField]
     private TestMono _testMono;
+    public SceneScope SceneScope => this;
 
     public override void InitializeContainer(ContainerBuilder builder)
     {

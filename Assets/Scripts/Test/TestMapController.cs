@@ -1,21 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using BasicInjector;
+using UnityEditor;
 using UnityEngine;
 
 public class TestMapController : MapController, IInitializable
 {
     [Inject]
-    public IMapModel mapModel;
-    [Inject]
     public TestView testView;
-    [Inject]
-    public MapData mapData;
-    [SerializeField]
-    private Transform _puzzle;
+
     [SerializeField]
     private ColorType _startBGColor;
+    [SerializeField]
+    private string _filename;
 
 
     public void Initialize()
@@ -24,6 +24,11 @@ public class TestMapController : MapController, IInitializable
     }
 
     public override void InitMap()
+    {
+        GenerateMapFromScene();
+    }
+
+    private void GenerateMapFromScene()
     {
         var testMapData = new MapData();
         var mapObjects = _puzzle.GetComponentsInChildren<MapObject>();
@@ -38,18 +43,65 @@ public class TestMapController : MapController, IInitializable
         }
 
         mapModel.BackgroundColor.Value = _startBGColor;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            mapModel.BackgroundColor.Value = ColorType.Cyan;
-        }
+        mapData = testMapData;
     }
 
     public override void ResetMap()
     {
-        throw new System.NotImplementedException();
+        int children = _puzzle.transform.childCount;
+
+        for (int i = children - 1; i >= 0; i--)
+        {
+            var go = _puzzle.GetChild(i).gameObject;
+            mapModel.RemoveMapObject(go.GetComponent<MapObject>());
+            Destroy(go);
+        }
+    }
+
+    [ContextMenu("Load Map")]
+    public void Load()
+    {
+#if UNITY_EDITOR
+        try
+        {
+            ResetMap();
+
+            var path = $"{Application.dataPath}/Maps/{_filename}.json";
+            var jsonData = File.ReadAllText(path);
+
+            mapData.ImportData(jsonData);
+            GenerateMapFromData();
+
+            Debug.Log($"Map data in {path} was loaded.");
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+#else
+        Debug.LogError($"Map Editor is not available in production.");
+#endif
+    }
+
+    [ContextMenu("Save Map")]
+    public void Save()
+    {
+#if UNITY_EDITOR
+        try
+        {
+            var json = mapData.ExportData();
+            var path = $"{Application.dataPath}/Maps/{_filename}.json";
+
+            File.WriteAllText(path, json);
+
+            Debug.Log($"Map data was saved in {path}");
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+#else
+        Debug.LogError($"Map Editor is not available in production.");
+#endif
     }
 }

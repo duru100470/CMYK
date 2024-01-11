@@ -3,30 +3,31 @@ using System.Collections.Generic;
 using BasicInjector;
 using UnityEngine;
 
-public class TestScene : SceneScope, IScene
+public class PuzzleScene : SceneScope, IScene
 {
     [SerializeField]
     private MapController _mapController;
-    [SerializeField]
-    private TestView _testView;
+    private MapData _mapData;
+
     public SceneScope SceneScope => this;
 
     public override void Load(object param)
     {
+        _mapData = param as MapData;
+
         base.Load();
-        Debug.Log("Test scene is loaded!");
+        Debug.Log("Puzzle scene is loaded!");
     }
 
     public override void Unload()
     {
-        Debug.Log("Test scene is unloaded!");
+        Debug.Log("Puzzle scene is unloaded!");
     }
 
     public override void InitializeContainer(ContainerBuilder builder)
     {
-        builder.AddSingleton<MapData>(null);
+        builder.AddSingleton<MapData>(_mapData);
         builder.AddSingletonAs<MapModel, IMapModel>();
         builder.AddSingleton<MapController>(_mapController);
-        builder.AddSingleton<TestView>(_testView);
     }
 }

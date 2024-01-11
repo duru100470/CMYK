@@ -10,6 +10,8 @@ public class SceneLoader : SingletonBehaviour<SceneLoader>
     private IScene _current;
     private ProjectScope _projectScope;
 
+    public SceneScope CurrentSceneScope => _current.SceneScope;
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
