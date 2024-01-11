@@ -27,6 +27,7 @@ public enum ObjectType
     Player,
     Wall,
     Rock,
+    Flag,
     Paint,
     Eraser
 }
