@@ -20,8 +20,6 @@ public abstract class MapController : MonoBehaviour
     {
         foreach (var (coor, info) in mapData.MapObjects)
         {
-            Debug.Log($"MapObjects/{info.Type}");
-
             var go =
                 SceneLoader.Instance.CurrentSceneScope.Instantiate(assetLoader.LoadPrefab<GameObject>($"MapObjects/{info.Type}"), _puzzle);
 

@@ -16,6 +16,7 @@ public class TestMapController : MapController, IInitializable
     private ColorType _startBGColor;
     [SerializeField]
     private string _filename;
+    private string _loadedFilename;
 
 
     public void Initialize()
@@ -58,50 +59,85 @@ public class TestMapController : MapController, IInitializable
         }
     }
 
-    [ContextMenu("Load Map")]
-    public void Load()
+    public string Load()
     {
 #if UNITY_EDITOR
-        try
+        var path = $"{Application.dataPath}/Maps/{_filename}.json";
+        var jsonData = File.ReadAllText(path);
+
+        if (Application.isPlaying)
         {
             ResetMap();
-
-            var path = $"{Application.dataPath}/Maps/{_filename}.json";
-            var jsonData = File.ReadAllText(path);
-
             mapData.ImportData(jsonData);
             GenerateMapFromData();
-
-            Debug.Log($"Map data in {path} was loaded.");
         }
-        catch (Exception e)
+        else
         {
-            Debug.LogException(e);
+            int children = _puzzle.transform.childCount;
+
+            for (int i = children - 1; i >= 0; i--)
+            {
+                var go = _puzzle.GetChild(i).gameObject;
+                DestroyImmediate(go);
+            }
+
+            var data = new MapData();
+            data.ImportData(jsonData);
+
+            var assetLoader = new AssetLoader();
+
+            foreach (var (coor, info) in data.MapObjects)
+            {
+                var go =
+                    Instantiate(assetLoader.LoadPrefab<GameObject>($"MapObjects/{info.Type}"), _puzzle);
+
+                var mo = go.GetComponent<MapObject>();
+                mo.Coordinate = coor;
+                mo.Info = info;
+                mo.Init();
+
+                Debug.Log($"Create MapObject! [{mo.Coordinate}, {mo.Info.Type}]");
+            }
         }
+
+        _loadedFilename = _filename;
+        return $"Map data in {path} was loaded.";
 #else
-        Debug.LogError($"Map Editor is not available in production.");
+        throw new InvalidOperationException("Map Editor is not available in production.");
 #endif
     }
 
-    [ContextMenu("Save Map")]
-    public void Save()
+    public string Save()
     {
 #if UNITY_EDITOR
-        try
-        {
-            var json = mapData.ExportData();
-            var path = $"{Application.dataPath}/Maps/{_filename}.json";
+        var path = $"{Application.dataPath}/Maps/{_filename}.json";
+        var json = "";
 
-            File.WriteAllText(path, json);
+        if (Application.isPlaying)
+            throw new InvalidOperationException("Cannot save a map while playing.");
 
-            Debug.Log($"Map data was saved in {path}");
-        }
-        catch (Exception e)
+        var testMapData = new MapData();
+        var mapObjects = _puzzle.GetComponentsInChildren<MapObject>();
+
+        foreach (var o in mapObjects)
         {
-            Debug.LogException(e);
+            o.Coordinate = Coordinate.WorldPointToCoordinate(o.GetComponent<Transform>().position);
+            testMapData.MapObjects.Add((o.Coordinate, o.Info));
+
+            Debug.Log($"Add MapObject! [{o.Coordinate}, {o.Info.Type}]");
         }
+
+        json = testMapData.ExportData();
+
+        if (File.Exists(path) && _filename != _loadedFilename)
+        {
+            throw new InvalidOperationException("There is already a file at the target directory. Change the filename before save it map.");
+        }
+
+        File.WriteAllText(path, json);
+        return $"Map data was saved in {path}";
 #else
-        Debug.LogError($"Map Editor is not available in production.");
+        throw new InvalidOperationException("Map Editor is not available in production.");
 #endif
     }
 }

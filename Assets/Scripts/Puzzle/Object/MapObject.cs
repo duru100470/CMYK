@@ -16,6 +16,15 @@ public class MapObject : MonoBehaviour
         GetComponent<Transform>().position = Coordinate.CoordinateToWorldPoint(Coordinate);
         GetComponent<SpriteRenderer>().color = Info.Color.ToColor();
     }
+
+    /// <summary>
+    /// Called when the script is loaded or a value is changed in the
+    /// inspector (Called in the editor only).
+    /// </summary>
+    private void OnValidate()
+    {
+        Init();
+    }
 }
 
 /// <summary>
