@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using Newtonsoft.Json;
 
 public class MapData
 {
@@ -11,12 +12,12 @@ public class MapData
 
     public void ImportData(string json)
     {
-        MapData mapData = JsonUtility.FromJson<MapData>(json);
+        MapData mapData = JsonConvert.DeserializeObject<MapData>(json);
     }
 
     public string ExportData()
     {
-        string json = JsonUtility.ToJson(this);
+        string json = JsonConvert.SerializeObject(this);
 
         return json;
     }
