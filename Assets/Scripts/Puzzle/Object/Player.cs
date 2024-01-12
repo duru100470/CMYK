@@ -38,40 +38,20 @@ public class Player : MapObject
 
         if (MapModel.TryGetObject(target, out var obj))
         {
-            switch(obj.Info.Type)
+            if (obj.Info.Type == ObjectType.Wall)
+                return;
+            
+            if (obj is IMoveable)
             {
-                case ObjectType.Wall:
+                var movableObj = obj as IMoveable;
+
+                if(!movableObj.TryMove(dir))
                     return;
-                
-                case ObjectType.Rock:
-                    IMoveable movableObj = obj as IMoveable;
-                    if(movableObj == null)
-                    {
-                        // TODO: exception 만들어서 Debug.LogError() 대체하기??
-                        Debug.LogError("MapObject.Info.Type is Rock but the object is not IMovable");
-                        Debug.Break();
-                        return;
-                    }
-
-                    if(movableObj.TryMove(dir))
-                        break;
-                    else
-                        return;
-
-                case ObjectType.Flag:
-                case ObjectType.Paint:
-                case ObjectType.Eraser:
-                    IObtainable obtainableObj = obj as IObtainable;
-                    if(obtainableObj == null)
-                    {
-                        // TODO: exception 만들어서 Debug.LogError() 대체하기??
-                        Debug.LogError("MapObject.Info.Type is Obatainable but the object is not IObtainable");
-                        Debug.Break();
-                        return;
-                    }
-                    obtainableObj.Obtain();
-                    break;
-                
+            }
+            if (obj is IObtainable)
+            {
+                var obtainableObj = obj as IObtainable;
+                obtainableObj.Obtain();
             }
         }
 
