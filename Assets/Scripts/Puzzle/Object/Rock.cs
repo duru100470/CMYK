@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class Rock : MapObject, IMoveable
@@ -20,17 +21,12 @@ public class Rock : MapObject, IMoveable
 
         if(MapModel.TryGetObject(target, out var obj))
         {
-            switch(obj.Info.Type)
-            {
-                case ObjectType.Wall:
-                case ObjectType.Rock:
-                    return false;
-                case ObjectType.Flag:
-                case ObjectType.Paint:
-                case ObjectType.Eraser:
-                    MapModel.RemoveMapObject(obj);
-                    break;
-            }
+            if(obj.Info.Type == ObjectType.Wall)
+                return false;
+            if(obj is IMoveable)
+                return false;
+            if(obj is IObtainable)
+                MapModel.RemoveMapObject(obj);
         }
 
         Move(dir);
