@@ -57,9 +57,10 @@ public abstract class SceneScope : MonoBehaviour, IInstaller
 
         var containerBuilder = new ContainerBuilder();
 
-        ProjectScope.Instance?.InitializeContainer(containerBuilder);
         InitializeContainer(containerBuilder);
-        _container = containerBuilder.Build();
+        _container = containerBuilder
+            .SetParent(ProjectScope.Instance != null ? ProjectScope.Instance.Container : null)
+            .Build();
 
         var objs = SceneManager.GetActiveScene().GetRootGameObjects();
         GameObjectInjector.InjectRecursiveMany(objs.ToList(), _container);

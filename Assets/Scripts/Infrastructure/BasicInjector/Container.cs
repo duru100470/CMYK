@@ -1,15 +1,18 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine.Analytics;
 
 namespace BasicInjector
 {
     public class Container : IDisposable
     {
         internal Dictionary<Type, IResolver> ResolverDict { get; }
+        private Container _parentContainer;
 
-        public Container(Dictionary<Type, IResolver> resolverDict)
+        public Container(Dictionary<Type, IResolver> resolverDict, Container container)
         {
             ResolverDict = resolverDict;
+            _parentContainer = container;
             OverrideSelfInjection();
         }
 
@@ -31,7 +34,14 @@ namespace BasicInjector
 
         public IResolver GetResolver(Type type)
         {
-            return ResolverDict.GetValueOrDefault(type);
+            if (_parentContainer != null && _parentContainer.HasBinding(type))
+            {
+                return _parentContainer.GetResolver(type);
+            }
+            else
+            {
+                return ResolverDict.GetValueOrDefault(type);
+            }
         }
 
         public object Construct(Type type)

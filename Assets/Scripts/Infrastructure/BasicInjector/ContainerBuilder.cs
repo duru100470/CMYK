@@ -6,6 +6,7 @@ namespace BasicInjector
     public sealed class ContainerBuilder
     {
         private Dictionary<Type, IResolver> _buffer = new();
+        private Container _container = null;
 
         public Container Build()
         {
@@ -16,7 +17,7 @@ namespace BasicInjector
                 resolverDict[k] = v;
             }
 
-            var instance = new Container(resolverDict);
+            var instance = new Container(resolverDict, _container);
             return instance;
         }
 
@@ -59,6 +60,12 @@ namespace BasicInjector
         public ContainerBuilder AddTransientAs<T, U>() where T : U
         {
             _buffer[typeof(U)] = new TransientResolver(typeof(T));
+            return this;
+        }
+
+        public ContainerBuilder SetParent(Container container)
+        {
+            _container = container;
             return this;
         }
     }
