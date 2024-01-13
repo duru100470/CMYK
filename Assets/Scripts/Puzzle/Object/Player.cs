@@ -1,20 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using BasicInjector;
-using Cysharp.Threading.Tasks;
+using MessageChannel;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MapObject
+public class Player : MapObject, IInitializable
 {
+    [Inject]
+    public IMapModel mapModel;
+    [Inject]
+    public Channel<PlayerEvent> channel;
+
     private Transform _transform;
 
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    private void Awake()
+    public void Initialize()
     {
         _transform = GetComponent<Transform>();
+        mapModel.BackgroundColor.OnValueChanged += OnBackgroundColorChanged;
+    }
+
+    private void OnDestroy()
+    {
+        mapModel.BackgroundColor.OnValueChanged -= OnBackgroundColorChanged;
+    }
+
+    private void OnBackgroundColorChanged(ColorType color)
+    {
+        if (Info.Color == color)
+        {
+            channel.Notify(new PlayerEvent { Type = PlayerEventType.GameOver });
+            mapModel.RemoveMapObject(this);
+        }
     }
 
     private void OnMoveUp()
