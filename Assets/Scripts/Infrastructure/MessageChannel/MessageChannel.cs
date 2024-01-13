@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace MessageChannel
 {
-    public class Channel<T>
+    public class Channel<T> where T : IEvent
     {
         private Action<T> _subscribers;
 
@@ -29,4 +29,6 @@ namespace MessageChannel
             _subscribers?.Invoke(message);
         }
     }
+
+    public interface IEvent { }
 }

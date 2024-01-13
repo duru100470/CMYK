@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using BasicInjector;
+using MessageChannel;
 using UnityEngine;
 
 public class Flag : MapObject, IObtainable
 {
+    [Inject]
+    public Channel<PlayerEvent> channel;
 
     public void Obtain()
     {
-        Debug.Log("Clear!!");
-        //TODO: 스테이지 클리어 후 처리
-        
+        channel.Notify(new PlayerEvent { Type = PlayerEventType.GameClear });
+
         MapModel.RemoveMapObject(this);
     }
 }
