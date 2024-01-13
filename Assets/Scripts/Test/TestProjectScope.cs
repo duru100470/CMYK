@@ -7,11 +7,12 @@ using UnityEngine;
 
 public class TestProjectScope : ProjectScope
 {
-    public override void InitializeContainer(ContainerBuilder builder)
-    {
-        Debug.Log("Project Scope!!");
-        builder.AddSingleton<Channel<TestMessage>>();
-        builder.AddSingleton<GameSetting>();
-        builder.AddTransient<AssetLoader>();
-    }
+        public override void InitializeContainer(ContainerBuilder builder)
+        {
+                Debug.Log("Project Scope!!");
+                builder.AddSingleton<Channel<TestMessage>>();
+                builder.AddSingleton<Channel<PlayerEvent>>();
+                builder.AddSingleton<GameSetting>();
+                builder.AddTransient<AssetLoader>();
+        }
 }

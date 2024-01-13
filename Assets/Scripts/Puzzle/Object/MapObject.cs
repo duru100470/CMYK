@@ -25,6 +25,11 @@ public class MapObject : MonoBehaviour
     {
         Init();
     }
+
+    public void DestroyObject()
+    {
+        Destroy(gameObject);
+    }
 }
 
 /// <summary>
@@ -41,6 +46,8 @@ public enum ObjectType
 {
     Player,
     Wall,
+    Rock,
+    Flag,
     Paint,
     Eraser
 }

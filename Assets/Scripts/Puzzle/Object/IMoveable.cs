@@ -1,5 +1,5 @@
 public interface IMoveable
 {
-    void Move();
-    bool TryMove();
+    void Move(Coordinate dir);
+    bool TryMove(Coordinate dir);
 }

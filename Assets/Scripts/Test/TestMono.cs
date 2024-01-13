@@ -34,12 +34,12 @@ public class TestMono : MonoBehaviour
     }
 }
 
-public class TestMessage
+public class TestMessage : IEvent
 {
     public string Message;
 }
 
-public class PlayerDeathEvent
+public class PlayerDeathEvent : IEvent
 {
     public string Reason;
 }

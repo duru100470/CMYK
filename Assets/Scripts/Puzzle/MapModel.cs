@@ -18,7 +18,9 @@ public class MapModel : IMapModel
 
     public void RemoveMapObject(MapObject mapObject)
     {
-        throw new NotImplementedException();
+        _objectList.Remove(mapObject);
+        mapObject.DestroyObject();
+        
     }
 
     /// <summary>
