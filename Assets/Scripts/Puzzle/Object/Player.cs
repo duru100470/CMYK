@@ -37,12 +37,12 @@ public class Player : MapObject
         {
             if (obj.Info.Type == ObjectType.Wall)
                 return;
-            
+
             if (obj is IMoveable)
             {
                 var movableObj = obj as IMoveable;
 
-                if(!movableObj.TryMove(dir))
+                if (!movableObj.TryMove(dir))
                     return;
             }
             if (obj is IObtainable)
@@ -54,7 +54,5 @@ public class Player : MapObject
 
         Coordinate += dir;
         _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
-
-        // TODO: 아이템 획득 판별
     }
 }
