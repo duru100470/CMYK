@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,11 @@ namespace UnityEditor
         private bool _paintMode = false;
         [SerializeField]
         private int _paletteIndex;
+        private int _editorMode = 0;
         private List<ColorType> _colors = new() { ColorType.None, ColorType.Cyan, ColorType.Magenta, ColorType.Yellow, ColorType.Red, ColorType.Green, ColorType.Blue, ColorType.Key };
         private int _colorIndex;
         private Transform _puzzleObject;
+        private TestMapController _mapController;
         private string _message = "";
         private IMapModel _mapModel;
 
@@ -26,6 +29,19 @@ namespace UnityEditor
 
         // Called to draw the MapEditor windows.
         private void OnGUI()
+        {
+            _editorMode = GUILayout.SelectionGrid(_editorMode, new string[2] { "Palette", "Map" }, 2);
+            if (_editorMode == 0)
+            {
+                ShowPaletteEditor();
+            }
+            else
+            {
+                ShowMapLoader();
+            }
+        }
+
+        private void ShowPaletteEditor()
         {
             GUILayout.Space(20f);
             EditorGUILayout.BeginHorizontal();
@@ -68,6 +84,51 @@ namespace UnityEditor
             _paletteIndex = GUILayout.SelectionGrid(_paletteIndex, paletteIcons.ToArray(), 6);
             GUILayout.Space(10f);
             GUILayout.Box(_message, GUILayout.ExpandWidth(true));
+        }
+
+        private void ShowMapLoader()
+        {
+            GUILayout.Space(20f);
+            _mapController = (TestMapController)EditorGUILayout.ObjectField("Target: ", _mapController, typeof(TestMapController), true);
+
+            if (_mapController is not null)
+            {
+                _mapController.Filename = EditorGUILayout.TextField("Filename: ", _mapController.Filename);
+            }
+
+            EditorGUILayout.BeginHorizontal();
+            var boxStyle = new GUIStyle(GUI.skin.box);
+            if (GUILayout.Button("Load"))
+            {
+                try
+                {
+                    _message = _mapController.Load();
+                    boxStyle.normal.textColor = Color.green;
+                }
+                catch (Exception e)
+                {
+                    boxStyle.normal.textColor = Color.red;
+                    _message = e.ToString();
+                }
+            }
+
+            if (GUILayout.Button("Save"))
+            {
+                try
+                {
+                    _message = _mapController.Save();
+                    boxStyle.normal.textColor = Color.green;
+                }
+                catch (Exception e)
+                {
+                    boxStyle.normal.textColor = Color.red;
+                    _message = e.ToString();
+                }
+            }
+            EditorGUILayout.EndHorizontal();
+
+            GUILayout.Space(10f);
+            GUILayout.Box(_message, boxStyle, GUILayout.ExpandWidth(true));
         }
 
         // Does the rendering of the map editor in the scene view.

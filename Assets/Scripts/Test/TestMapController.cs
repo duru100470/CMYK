@@ -14,8 +14,7 @@ public class TestMapController : MapController, IInitializable
 
     [SerializeField]
     private ColorType _startBGColor;
-    [SerializeField]
-    private string _filename;
+    public string Filename;
     private string _loadedFilename;
 
 
@@ -62,7 +61,7 @@ public class TestMapController : MapController, IInitializable
     public string Load()
     {
 #if UNITY_EDITOR
-        var path = $"{Application.dataPath}/Maps/{_filename}.json";
+        var path = $"{Application.dataPath}/Maps/{Filename}.json";
         var jsonData = File.ReadAllText(path);
 
         if (Application.isPlaying)
@@ -100,7 +99,7 @@ public class TestMapController : MapController, IInitializable
             }
         }
 
-        _loadedFilename = _filename;
+        _loadedFilename = Filename;
         return $"Map data in {path} was loaded.";
 #else
         throw new InvalidOperationException("Map Editor is not available in production.");
@@ -110,7 +109,7 @@ public class TestMapController : MapController, IInitializable
     public string Save()
     {
 #if UNITY_EDITOR
-        var path = $"{Application.dataPath}/Maps/{_filename}.json";
+        var path = $"{Application.dataPath}/Maps/{Filename}.json";
         var json = "";
 
         if (Application.isPlaying)
@@ -129,7 +128,7 @@ public class TestMapController : MapController, IInitializable
 
         json = testMapData.ExportData();
 
-        if (File.Exists(path) && _filename != _loadedFilename)
+        if (File.Exists(path) && Filename != _loadedFilename)
         {
             throw new InvalidOperationException("There is already a file at the target directory. Change the filename before save it map.");
         }
