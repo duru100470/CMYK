@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace UnityEditor
@@ -10,6 +11,8 @@ namespace UnityEditor
         private bool _paintMode = false;
         [SerializeField]
         private int _paletteIndex;
+        private List<ColorType> _colors = new() { ColorType.None, ColorType.Cyan, ColorType.Magenta, ColorType.Yellow, ColorType.Red, ColorType.Green, ColorType.Blue, ColorType.Key };
+        private int _colorIndex;
         private Transform _puzzleObject;
         private string _message = "";
         private IMapModel _mapModel;
@@ -18,15 +21,38 @@ namespace UnityEditor
         [MenuItem("Tools/Map Editor")]
         private static void ShowWindow()
         {
-            EditorWindow.GetWindow(typeof(TestMapEditor));
+            GetWindow(typeof(TestMapEditor));
         }
 
         // Called to draw the MapEditor windows.
         private void OnGUI()
         {
-            _puzzleObject = (Transform)EditorGUILayout.ObjectField(_puzzleObject, typeof(Transform), true);
+            GUILayout.Space(20f);
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            _paintMode = GUILayout.Toggle(_paintMode, "Start painting", "Button", GUILayout.Width(120f), GUILayout.Height(30f));
+            GUILayout.FlexibleSpace();
+            EditorGUILayout.EndHorizontal();
+
             GUILayout.Space(10f);
-            _paintMode = GUILayout.Toggle(_paintMode, "Start painting", "Button", GUILayout.Height(60f));
+            _puzzleObject = (Transform)EditorGUILayout.ObjectField("Target: ", _puzzleObject, typeof(Transform), true);
+            GUILayout.Space(10f);
+
+            List<GUIContent> colorIcons = new List<GUIContent>();
+            for (int i = 0; i < 8; i++)
+            {
+                var texture = new Texture2D(15, 15);
+                Color[] pixels = Enumerable.Repeat(_colors[i].ToColor(), 225).ToArray();
+                texture.SetPixels(pixels);
+                texture.Apply();
+                colorIcons.Add(new GUIContent(texture));
+            }
+
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            _colorIndex = GUILayout.SelectionGrid(_colorIndex, colorIcons.ToArray(), 8);
+            GUILayout.FlexibleSpace();
+            EditorGUILayout.EndHorizontal();
             GUILayout.Space(10f);
 
             // Get a list of previews, one for each of our prefabs
@@ -117,6 +143,8 @@ namespace UnityEditor
 
                 var mo = gameObject.GetComponent<MapObject>();
                 mo.Coordinate = Coordinate.WorldPointToCoordinate(cellCenter);
+                mo.Info.Color = _colors[_colorIndex];
+                mo.Init();
                 _mapModel.AddMapObject(mo);
 
                 // Allow the use of Undo (Ctrl+Z, Ctrl+Y).
