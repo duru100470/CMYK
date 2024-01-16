@@ -263,6 +263,9 @@ namespace UnityEditor
 
             RefreshPalette();
             RefreshModel();
+
+            _mapController = GameObject.Find("Controllers").GetComponent<TestMapController>();
+            _puzzleObject = GameObject.Find("Puzzle").GetComponent<Transform>();
         }
 
         void OnDestroy()
