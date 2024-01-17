@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BasicInjector;
 using UnityEngine;
+using MessageChannel;
 
 public class TestScene : SceneScope, IScene
 {
@@ -28,5 +29,6 @@ public class TestScene : SceneScope, IScene
         builder.AddSingletonAs<MapModel, IMapModel>();
         builder.AddSingleton<MapController>(_mapController);
         builder.AddSingleton<TestView>(_testView);
+        builder.AddSingleton<Channel<PlayerMoveEvent>>();
     }
 }

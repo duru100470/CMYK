@@ -6,29 +6,44 @@ using System.Text;
 using BasicInjector;
 using UnityEditor;
 using UnityEngine;
+using MessageChannel;
 
 public class TestMapController : MapController, IInitializable
 {
     [Inject]
     public TestView testView;
+    [Inject]
+    public Channel<PlayerMoveEvent> channel;
 
     [SerializeField]
     private ColorType _startBGColor;
     [SerializeField]
     private string _filename;
     private string _loadedFilename;
+    private Stack<MapData> _moveRecord = new Stack<MapData>();
 
-
+    private void OnDestroy()
+    {
+        channel.Unsubscribe(OnPlayerEventOccurred);
+    }
     public void Initialize()
     {
         InitMap();
+        channel.Subscribe(OnPlayerEventOccurred);
     }
 
     public override void InitMap()
     {
         GenerateMapFromScene();
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            // TODO : 게임 클리어 상황에서 뒤로가기 비활성화
+            Undo();
+        }
+    }
     private void GenerateMapFromScene()
     {
         var testMapData = new MapData();
@@ -139,5 +154,57 @@ public class TestMapController : MapController, IInitializable
 #else
         throw new InvalidOperationException("Map Editor is not available in production.");
 #endif
+    }
+
+    public void Undo()
+    {
+        if (_moveRecord.Count == 0)
+        {
+            Debug.Log("push");
+            return;
+        }
+
+        ResetMap();
+        var tempMapData = _moveRecord.Pop();
+        foreach (var (coor, info) in tempMapData.MapObjects)
+        {
+            var go =
+                SceneLoader.Instance.CurrentSceneScope.Instantiate(assetLoader.LoadPrefab<GameObject>($"MapObjects/{info.Type}"), _puzzle);
+
+            var mo = go.GetComponent<MapObject>();
+            mo.Coordinate = coor;
+            mo.Info = info;
+            mo.Init();
+
+            mapModel.AddMapObject(mo);
+            Debug.Log($"Create MapObject! [{mo.Coordinate}, {mo.Info.Type}]");
+        }
+
+        mapModel.BackgroundColor.Value = tempMapData.InitColor;
+    }
+
+    public void OnPlayerEventOccurred(PlayerMoveEvent playerMoveEvent)
+    {
+        switch (playerMoveEvent.Type)
+        {
+            case PlayerMoveEventType.TrueMove:
+                var tempMapData = new MapData();
+                var mapObjects = _puzzle.GetComponentsInChildren<MapObject>();
+
+                foreach (var o in mapObjects)
+                {
+                    o.Coordinate = Coordinate.WorldPointToCoordinate(o.GetComponent<Transform>().position);
+                    tempMapData.MapObjects.Add((o.Coordinate, o.Info));
+                }
+                tempMapData.InitColor = mapModel.BackgroundColor.Value;
+
+                _moveRecord.Push(tempMapData);
+                break;
+
+            case PlayerMoveEventType.FakeMove:
+                _moveRecord.Pop();
+                break;
+        }
+
     }
 }
