@@ -11,6 +11,8 @@ public class Player : MapObject, IInitializable
     public IMapModel mapModel;
     [Inject]
     public Channel<PlayerEvent> channel;
+    [Inject]
+    public Channel<PlayerMoveEvent> movechannel;
 
     private Transform _transform;
 
@@ -48,19 +50,26 @@ public class Player : MapObject, IInitializable
 
     private void Move(Coordinate dir)
     {
-        var target = Coordinate + dir;
+        movechannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
 
+        var target = Coordinate + dir;
         if (MapModel.TryGetObject(target, out var obj))
         {
             if (obj.Info.Type == ObjectType.Wall)
+            {
+                movechannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.FakeMove });
                 return;
+            }
 
             if (obj is IMoveable)
             {
                 var movableObj = obj as IMoveable;
 
                 if (!movableObj.TryMove(dir))
+                {
+                    movechannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.FakeMove });
                     return;
+                }
             }
             if (obj is IObtainable)
             {
@@ -71,5 +80,6 @@ public class Player : MapObject, IInitializable
 
         Coordinate += dir;
         _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
+        
     }
 }

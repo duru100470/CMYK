@@ -6,28 +6,43 @@ using System.Text;
 using BasicInjector;
 using UnityEditor;
 using UnityEngine;
+using MessageChannel;
 
 public class TestMapController : MapController, IInitializable
 {
     [Inject]
     public TestView testView;
+    [Inject]
+    public Channel<PlayerMoveEvent> channel;
 
     [SerializeField]
     private ColorType _startBGColor;
     public string Filename;
     private string _loadedFilename;
+    private Stack<MapData> _moveRecord = new Stack<MapData>();
 
-
+    private void OnDestroy()
+    {
+        channel.Unsubscribe(OnPlayerEventOccurred);
+    }
     public void Initialize()
     {
         InitMap();
+        channel.Subscribe(OnPlayerEventOccurred);
     }
 
     public override void InitMap()
     {
         GenerateMapFromScene();
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            // TODO : 게임 클리어 상황에서 뒤로가기 비활성화
+            Undo();
+        }
+    }
     private void GenerateMapFromScene()
     {
         var testMapData = new MapData();
