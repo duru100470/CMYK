@@ -20,7 +20,7 @@ public class MapModel : IMapModel
     {
         _objectList.Remove(mapObject);
         mapObject.DestroyObject();
-        
+
     }
 
     /// <summary>
@@ -29,16 +29,18 @@ public class MapModel : IMapModel
     /// <returns>탐색 성공 여부</returns>
     public bool TryGetObject(Coordinate dir, out MapObject obj, bool ignoreColor = false)
     {
-        var target = _objectList.FirstOrDefault(obj => obj.Coordinate == dir);
+        var candidates = _objectList.Where(obj => obj.Coordinate == dir);
         obj = null;
 
-        if (target == default)
-            return false;
+        foreach (var target in candidates)
+        {
+            if (target.Info.Color != BackgroundColor.Value && !ignoreColor)
+            {
+                obj = target;
+                return true;
+            }
+        }
 
-        if (target.Info.Color == BackgroundColor.Value && !ignoreColor)
-            return false;
-
-        obj = target;
-        return true;
+        return false;
     }
 }
