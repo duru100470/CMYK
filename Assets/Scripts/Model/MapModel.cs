@@ -14,13 +14,14 @@ public class MapModel : IMapModel
     public void AddMapObject(MapObject mapObject)
     {
         _objectList.Add(mapObject);
+        BackgroundColor.OnValueChanged += mapObject.OnBackgroundColorChanged;
     }
 
     public void RemoveMapObject(MapObject mapObject)
     {
         _objectList.Remove(mapObject);
+        BackgroundColor.OnValueChanged -= mapObject.OnBackgroundColorChanged;
         mapObject.DestroyObject();
-        
     }
 
     /// <summary>

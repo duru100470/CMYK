@@ -8,8 +8,6 @@ using UnityEngine.InputSystem;
 public class Player : MapObject, IInitializable
 {
     [Inject]
-    public IMapModel mapModel;
-    [Inject]
     public Channel<PlayerEvent> channel;
     [Inject]
     public Channel<PlayerMoveEvent> movechannel;
@@ -19,12 +17,12 @@ public class Player : MapObject, IInitializable
     public void Initialize()
     {
         _transform = GetComponent<Transform>();
-        mapModel.BackgroundColor.OnValueChanged += OnBackgroundColorChanged;
+        MapModel.BackgroundColor.OnValueChanged += OnBackgroundColorChanged;
     }
 
     private void OnDestroy()
     {
-        mapModel.BackgroundColor.OnValueChanged -= OnBackgroundColorChanged;
+        MapModel.BackgroundColor.OnValueChanged -= OnBackgroundColorChanged;
     }
 
     private void OnBackgroundColorChanged(ColorType color)
@@ -32,7 +30,7 @@ public class Player : MapObject, IInitializable
         if (Info.Color == color)
         {
             channel.Notify(new PlayerEvent { Type = PlayerEventType.GameOver });
-            mapModel.RemoveMapObject(this);
+            MapModel.RemoveMapObject(this);
         }
     }
 
@@ -80,6 +78,6 @@ public class Player : MapObject, IInitializable
 
         Coordinate += dir;
         _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
-        
+
     }
 }

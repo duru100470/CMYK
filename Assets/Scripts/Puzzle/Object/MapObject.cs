@@ -17,6 +17,17 @@ public class MapObject : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Info.Color.ToColor();
     }
 
+    public void OnBackgroundColorChanged(ColorType color)
+    {
+        GetComponent<SpriteRenderer>().sortingOrder =
+            color == Info.Color ? 0 : 1;
+    }
+
+    public void DestroyObject()
+    {
+        Destroy(gameObject);
+    }
+
     /// <summary>
     /// Called when the script is loaded or a value is changed in the
     /// inspector (Called in the editor only).
@@ -24,11 +35,6 @@ public class MapObject : MonoBehaviour
     private void OnValidate()
     {
         Init();
-    }
-
-    public void DestroyObject()
-    {
-        Destroy(gameObject);
     }
 }
 
