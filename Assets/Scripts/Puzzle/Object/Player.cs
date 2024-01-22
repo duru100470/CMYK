@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 public class Player : MapObject, IInitializable
 {
     [Inject]
+    public ISoundController _soundController;
+    [Inject]
     public Channel<PlayerEvent> channel;
     [Inject]
     public Channel<PlayerMoveEvent> movechannel;
@@ -29,6 +31,8 @@ public class Player : MapObject, IInitializable
     {
         if (Info.Color == color)
         {
+            _soundController.PlayEffect(SFXType.GameOver, 1.0f, 1.0f);
+
             channel.Notify(new PlayerEvent { Type = PlayerEventType.GameOver });
             MapModel.RemoveMapObject(this);
         }

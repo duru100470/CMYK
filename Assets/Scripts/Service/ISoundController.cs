@@ -7,7 +7,10 @@ public interface ISoundController
 
 public enum SFXType
 {
-
+    ObtainEraser,
+    ObtainPaint,
+    GameClear,
+    GameOver
 }
 
 public enum BGMType
