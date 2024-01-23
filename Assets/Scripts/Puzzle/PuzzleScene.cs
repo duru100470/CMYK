@@ -31,5 +31,6 @@ public class PuzzleScene : SceneScope, IScene
         builder.AddSingletonAs<MapModel, IMapModel>();
         builder.AddSingleton<MapController>(_mapController);
         builder.AddSingleton<Channel<PlayerEvent>>();
+        builder.AddSingleton<Channel<PlayerMoveEvent>>();
     }
 }
