@@ -1,9 +1,11 @@
 using BasicInjector;
 using System.Collections.Generic;
 using UnityEngine;
-
+using MessageChannel;
 public abstract class MapController : MonoBehaviour
 {
+    [Inject]
+    public Channel<ColorChangeEvent> colorChannel;
     [Inject]
     public IMapModel mapModel;
     [Inject]

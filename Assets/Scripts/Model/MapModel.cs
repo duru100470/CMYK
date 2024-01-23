@@ -1,8 +1,10 @@
+using BasicInjector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
 
 public class MapModel : IMapModel
 {
@@ -40,7 +42,30 @@ public class MapModel : IMapModel
                 return true;
             }
         }
-
+        
         return false;
+    }
+
+    public void OnColorEventOccurred(ColorChangeEvent colorChangeEvent)
+    {
+        Stack<MapObject> willRemove = new();
+        foreach (MapObject rock in _objectList)
+        {
+            if(rock.Info.Type == ObjectType.Rock)
+            {
+                foreach (MapObject overLapO in _objectList)
+                {
+                    if (rock.Coordinate.Equals(overLapO.Coordinate) && (rock != overLapO))
+                    {
+                        willRemove.Push(overLapO);
+                        break;
+                    }
+                }
+            }
+        }
+        for(int i = 0; i < willRemove.Count; i++)
+        {
+            RemoveMapObject(willRemove.Pop());
+        }
     }
 }
