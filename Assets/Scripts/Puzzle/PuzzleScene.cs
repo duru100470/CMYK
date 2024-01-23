@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using BasicInjector;
+using MessageChannel;
 using UnityEngine;
 
 public class PuzzleScene : SceneScope, IScene
@@ -29,5 +30,7 @@ public class PuzzleScene : SceneScope, IScene
         builder.AddSingleton<MapData>(_mapData);
         builder.AddSingletonAs<MapModel, IMapModel>();
         builder.AddSingleton<MapController>(_mapController);
+        builder.AddSingleton<Channel<PlayerEvent>>();
+        builder.AddSingleton<Channel<PlayerMoveEvent>>();
     }
 }

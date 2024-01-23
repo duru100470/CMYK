@@ -23,18 +23,19 @@ public class TestMapController : MapController, IInitializable
 
     private void OnDestroy()
     {
-        channel.Unsubscribe(OnPlayerEventOccurred);
+        channel.Unsubscribe(OnPlayerMoveEventOccurred);
     }
     public void Initialize()
     {
         InitMap();
-        channel.Subscribe(OnPlayerEventOccurred);
+        channel.Subscribe(OnPlayerMoveEventOccurred);
     }
 
     public override void InitMap()
     {
         GenerateMapFromScene();
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))
@@ -43,6 +44,7 @@ public class TestMapController : MapController, IInitializable
             Undo();
         }
     }
+
     private void GenerateMapFromScene()
     {
         var testMapData = new MapData();

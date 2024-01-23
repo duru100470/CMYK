@@ -65,7 +65,7 @@ public abstract class MapController : MonoBehaviour
         mapModel.BackgroundColor.Value = tempMapData.InitColor;
     }
 
-    public void OnPlayerEventOccurred(PlayerMoveEvent playerMoveEvent)
+    protected void OnPlayerMoveEventOccurred(PlayerMoveEvent playerMoveEvent)
     {
         switch (playerMoveEvent.Type)
         {
