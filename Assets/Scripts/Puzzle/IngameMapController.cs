@@ -7,21 +7,26 @@ using UnityEngine;
 public class IngameMapController : MapController, IInitializable
 {
     [Inject]
-    public Channel<PlayerEvent> channel;
-
+    public Channel<PlayerEvent> _playerEventChannel;
+    [Inject]
+    public Channel<PlayerMoveEvent> _playerMoveEventChannel;
     // TODO: 임시로 월드 1개만 처리하게 짜놓음
     [Inject]
     public WorldScriptableObject _world;
+    [Inject]
+    public WorldClearData _worldClear;
 
     public void Initialize()
     {
         InitMap();
-        channel.Subscribe(OnPlayerEventOccurred);
+        _playerEventChannel.Subscribe(OnPlayerEventOccurred);
+        _playerMoveEventChannel.Subscribe(OnPlayerMoveEventOccurred);
     }
 
     private void OnDestroy()
     {
-        channel.Unsubscribe(OnPlayerEventOccurred);
+        _playerEventChannel.Unsubscribe(OnPlayerEventOccurred);
+        _playerMoveEventChannel.Unsubscribe(OnPlayerMoveEventOccurred);
     }
 
     public override void InitMap()
@@ -45,20 +50,11 @@ public class IngameMapController : MapController, IInitializable
     {
         if (@event.Type == PlayerEventType.GameClear)
         {
-            SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(null).Forget();
+            _worldClear.LastID++;
+
+            if (_world.Maps.Count > _worldClear.LastID)
+                SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(_world.Maps[_worldClear.LastID].Data).Forget();
         }
-
-        if (@event.Type == PlayerEventType.GameOver)
-        {
-            StartCoroutine(GameOverCoroutine());
-        }
-    }
-
-    private IEnumerator GameOverCoroutine()
-    {
-        yield return new WaitForSeconds(3f);
-
-        SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(mapData).Forget();
     }
 
     private void Update()
@@ -67,6 +63,12 @@ public class IngameMapController : MapController, IInitializable
         {
             // TODO : 게임 클리어 상황에서 뒤로가기 비활성화
             Undo();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetMap();
+            InitMap();
         }
     }
 }

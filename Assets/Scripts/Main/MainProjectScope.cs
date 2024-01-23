@@ -14,5 +14,6 @@ public class MainProjectScope : ProjectScope
         builder.AddSingleton<GameSetting>();
         builder.AddTransient<AssetLoader>();
         builder.AddSingleton<WorldScriptableObject>(_world);
+        builder.AddSingleton<WorldClearData>();
     }
 }
