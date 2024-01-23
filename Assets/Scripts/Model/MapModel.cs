@@ -55,7 +55,7 @@ public class MapModel : IMapModel
             {
                 foreach (MapObject overLapO in _objectList)
                 {
-                    if (rock.Coordinate.Equals(overLapO.Coordinate) && (rock != overLapO))
+                    if (rock.Coordinate.Equals(overLapO.Coordinate) && (rock != overLapO) && (overLapO.Info.Type != ObjectType.Player))
                     {
                         willRemove.Push(overLapO);
                         break;
