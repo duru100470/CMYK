@@ -57,7 +57,7 @@ public class IngameMapController : MapController, IInitializable
             if (_world.Maps.Count > _worldClear.LastID)
                 SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(_world.Maps[_worldClear.LastID].Data).Forget();
 
-            if (_world.Maps.Count > _worldClear.LastID)
+            if (_world.Maps.Count == _worldClear.LastID)
                 Application.Quit();
         }
     }
