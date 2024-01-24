@@ -30,5 +30,6 @@ public class TestScene : SceneScope, IScene
         builder.AddSingleton<MapController>(_mapController);
         builder.AddSingleton<TestView>(_testView);
         builder.AddSingleton<Channel<PlayerMoveEvent>>();
+        builder.AddSingleton<Channel<ColorChangeEvent>>();
     }
 }

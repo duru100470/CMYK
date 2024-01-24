@@ -22,3 +22,8 @@ public enum PlayerMoveEventType
     FakeMove
 }
 
+public class ColorChangeEvent : IEvent
+{
+    public ColorType ChangColor; // 어떤 색깔로 바뀌는지에 관한 정보
+}
+

@@ -36,5 +36,23 @@ namespace UnityEditor
             obj = target;
             return true;
         }
+
+        public void OnColorEventOccurred(ColorChangeEvent colorChangeEvent)
+        {
+            foreach (MapObject rock in _objectList)
+            {
+                if (rock.Info.Type == ObjectType.Rock)
+                {
+                    foreach (MapObject overLapO in _objectList)
+                    {
+                        if (rock.Coordinate.Equals(overLapO.Coordinate) && (rock != overLapO))
+                        {
+                            RemoveMapObject(overLapO);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
