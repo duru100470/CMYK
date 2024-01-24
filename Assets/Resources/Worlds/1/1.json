@@ -1,0 +1,185 @@
+{
+  "MapObjects": [
+    {
+      "Item1": { "X": -8, "Y": 0 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -8, "Y": -1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -8, "Y": -2 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 7, "Y": 0 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 7, "Y": -1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 7, "Y": -2 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -8, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -7, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -6, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -5, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -4, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -3, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -2, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -1, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 0, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 1, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 2, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 3, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 4, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 5, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 6, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 7, "Y": -3 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -8, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -7, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -6, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -5, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -4, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -3, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -2, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 3, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 4, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 5, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 6, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 7, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -1, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 5, "Y": -1 },
+      "Item2": { "Type": 3, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 3, "Y": -1 },
+      "Item2": { "Type": 1, "Color": { "Type": 2 } }
+    },
+    {
+      "Item1": { "X": -6, "Y": -1 },
+      "Item2": { "Type": 0, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": -2, "Y": -1 },
+      "Item2": { "Type": 4, "Color": { "Type": 2 } }
+    },
+    {
+      "Item1": { "X": 0, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 1, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 2, "Y": 1 },
+      "Item2": { "Type": 1, "Color": { "Type": 7 } }
+    },
+    {
+      "Item1": { "X": 3, "Y": -2 },
+      "Item2": { "Type": 1, "Color": { "Type": 2 } }
+    },
+    {
+      "Item1": { "X": 3, "Y": 0 },
+      "Item2": { "Type": 1, "Color": { "Type": 2 } }
+    }
+  ],
+  "DecorationObjects": [
+    { "Item1": { "X": -4, "Y": 3 }, "Item2": "Move" },
+    { "Item1": { "X": 3, "Y": 3 }, "Item2": "Reset" }
+  ],
+  "InitColor": { "Type": 0 }
+}
