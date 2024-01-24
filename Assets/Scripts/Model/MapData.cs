@@ -9,6 +9,7 @@ public class MapData
 {
     public List<(Coordinate, ObjectInfo)> MapObjects = new();
     public ColorType InitColor;
+    public float MapSize;
 
     public void ImportData(string json)
     {
@@ -18,6 +19,7 @@ public class MapData
 
         MapObjects.AddRange(mapData.MapObjects);
         InitColor = mapData.InitColor;
+        MapSize = mapData.MapSize;
     }
 
     public string ExportData()

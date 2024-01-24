@@ -16,6 +16,13 @@ public abstract class MapController : MonoBehaviour
 
     private Stack<MapData> _moveRecord = new Stack<MapData>();
 
+    private Camera camera;
+
+    void Awake()
+    {
+        camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+    }
+
     public abstract void InitMap();
     public abstract void ResetMap();
 
@@ -36,6 +43,7 @@ public abstract class MapController : MonoBehaviour
         }
 
         mapModel.BackgroundColor.Value = mapData.InitColor;
+        camera.orthographicSize = mapData.MapSize;
     }
 
     public void Undo()
