@@ -7,6 +7,7 @@ using BasicInjector;
 using UnityEditor;
 using UnityEngine;
 using MessageChannel;
+using UnityEngine.U2D;
 
 public class TestMapController : MapController, IInitializable
 {
@@ -23,20 +24,21 @@ public class TestMapController : MapController, IInitializable
 
     private void OnDestroy()
     {
-        channel.Unsubscribe(OnPlayerEventOccurred);
         colorChannel.Unsubscribe(mapModel.OnColorEventOccurred);
+        channel.Unsubscribe(OnPlayerMoveEventOccurred);
     }
     public void Initialize()
     {
         InitMap();
-        channel.Subscribe(OnPlayerEventOccurred);
         colorChannel.Subscribe(mapModel.OnColorEventOccurred);
+        channel.Subscribe(OnPlayerMoveEventOccurred);
     }
 
     public override void InitMap()
     {
         GenerateMapFromScene();
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))
@@ -45,6 +47,7 @@ public class TestMapController : MapController, IInitializable
             Undo();
         }
     }
+
     private void GenerateMapFromScene()
     {
         var testMapData = new MapData();
@@ -73,6 +76,14 @@ public class TestMapController : MapController, IInitializable
             mapModel.RemoveMapObject(go.GetComponent<MapObject>());
             Destroy(go);
         }
+
+        int children2 = _decorations.transform.childCount;
+
+        for (int i = children2 - 1; i >= 0; i--)
+        {
+            var go = _decorations.GetChild(i).gameObject;
+            Destroy(go);
+        }
     }
 
     public string Load()
@@ -97,6 +108,14 @@ public class TestMapController : MapController, IInitializable
                 DestroyImmediate(go);
             }
 
+            int children2 = _decorations.transform.childCount;
+
+            for (int i = children2 - 1; i >= 0; i--)
+            {
+                var go = _decorations.GetChild(i).gameObject;
+                DestroyImmediate(go);
+            }
+
             var data = new MapData();
             data.ImportData(jsonData);
 
@@ -113,6 +132,15 @@ public class TestMapController : MapController, IInitializable
                 mo.Init();
 
                 Debug.Log($"Create MapObject! [{mo.Coordinate}, {mo.Info.Type}]");
+            }
+
+            foreach (var (coor, name) in data.DecorationObjects)
+            {
+                var go =
+                    Instantiate(assetLoader.LoadPrefab<GameObject>($"Decorations/{name}"), _decorations);
+                go.transform.position = Coordinate.CoordinateToWorldPoint(coor);
+
+                Debug.Log($"Create DecorationObject! [{coor}, {name}]");
             }
         }
 
@@ -141,6 +169,15 @@ public class TestMapController : MapController, IInitializable
             testMapData.MapObjects.Add((o.Coordinate, o.Info));
 
             Debug.Log($"Add MapObject! [{o.Coordinate}, {o.Info.Type}]");
+        }
+
+        var decorationObjects = _decorations.GetComponentsInChildren<SpriteRenderer>();
+        foreach (var o in decorationObjects)
+        {
+            var coor = Coordinate.WorldPointToCoordinate(o.GetComponent<Transform>().position);
+            testMapData.DecorationObjects.Add((coor, o.gameObject.name));
+
+            Debug.Log($"Add DecorationObject! [{coor}, {o.gameObject.name}]");
         }
 
         json = testMapData.ExportData();

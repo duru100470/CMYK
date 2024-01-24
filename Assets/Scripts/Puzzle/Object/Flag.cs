@@ -10,7 +10,6 @@ public class Flag : MapObject, IObtainable
     public void Obtain()
     {
         channel.Notify(new PlayerEvent { Type = PlayerEventType.GameClear });
-
         MapModel.RemoveMapObject(this);
     }
 }

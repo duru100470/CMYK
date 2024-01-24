@@ -11,7 +11,6 @@ public class TestProjectScope : ProjectScope
         {
                 Debug.Log("Project Scope!!");
                 builder.AddSingleton<Channel<TestMessage>>();
-                builder.AddSingleton<Channel<PlayerEvent>>();
                 builder.AddSingleton<GameSetting>();
                 builder.AddTransient<AssetLoader>();
         }

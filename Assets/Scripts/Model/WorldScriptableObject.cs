@@ -65,7 +65,7 @@ public class WorldScriptableObject : ScriptableObject
     {
         foreach (var map in Maps)
         {
-            var asset = await Resources.LoadAsync<TextAsset>($"Worlds/{Index}/Map{map.Index}.json") as TextAsset;
+            var asset = await Resources.LoadAsync<TextAsset>($"Worlds/{Index}/{map.Index}") as TextAsset;
 
             var data = new MapData();
             data.ImportData(asset.text);
