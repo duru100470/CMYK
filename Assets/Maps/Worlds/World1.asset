@@ -43,4 +43,12 @@ MonoBehaviour:
     Requirements: 05000000
     IsClear: 0
     IsAvailable: 0
+  - Index: 7
+    Requirements: 06000000
+    IsClear: 0
+    IsAvailable: 0
+  - Index: 8
+    Requirements: 07000000
+    IsClear: 0
+    IsAvailable: 0
   Requirements: 
