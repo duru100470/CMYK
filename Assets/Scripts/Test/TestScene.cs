@@ -31,6 +31,5 @@ public class TestScene : SceneScope, IScene
         builder.AddSingleton<TestView>(_testView);
         builder.AddSingleton<Channel<PlayerEvent>>();
         builder.AddSingleton<Channel<PlayerMoveEvent>>();
-        builder.AddSingleton<Channel<ColorChangeEvent>>();
     }
 }

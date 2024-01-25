@@ -24,13 +24,13 @@ public class TestMapController : MapController, IInitializable
 
     private void OnDestroy()
     {
-        colorChannel.Unsubscribe(mapModel.OnColorEventOccurred);
+        mapModel.BackgroundColor.OnValueChanged -= mapModel.OnColorEventOccurred;
         channel.Unsubscribe(OnPlayerMoveEventOccurred);
     }
     public void Initialize()
     {
         InitMap();
-        colorChannel.Subscribe(mapModel.OnColorEventOccurred);
+        mapModel.BackgroundColor.OnValueChanged += mapModel.OnColorEventOccurred;
         channel.Subscribe(OnPlayerMoveEventOccurred);
     }
 

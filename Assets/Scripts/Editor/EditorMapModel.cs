@@ -37,7 +37,7 @@ namespace UnityEditor
             return true;
         }
 
-        public void OnColorEventOccurred(ColorChangeEvent colorChangeEvent)
+        public void OnColorEventOccurred(ColorType color)
         {
             foreach (MapObject rock in _objectList)
             {
