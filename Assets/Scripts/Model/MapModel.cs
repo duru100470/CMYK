@@ -13,6 +13,10 @@ public class MapModel : IMapModel
 
     public ReactiveProperty<ColorType> BackgroundColor => _colorType;
 
+    public MapModel()
+    {
+        BackgroundColor.OnValueChanged += OnColorEventOccurred;
+    }
     public void AddMapObject(MapObject mapObject)
     {
         _objectList.Add(mapObject);
