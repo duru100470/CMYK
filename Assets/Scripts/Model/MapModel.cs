@@ -16,13 +16,11 @@ public class MapModel : IMapModel
     public void AddMapObject(MapObject mapObject)
     {
         _objectList.Add(mapObject);
-        BackgroundColor.OnValueChanged += mapObject.OnBackgroundColorChanged;
     }
 
     public void RemoveMapObject(MapObject mapObject)
     {
         _objectList.Remove(mapObject);
-        BackgroundColor.OnValueChanged -= mapObject.OnBackgroundColorChanged;
         mapObject.DestroyObject();
     }
 
@@ -43,7 +41,7 @@ public class MapModel : IMapModel
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -52,7 +50,7 @@ public class MapModel : IMapModel
         Stack<MapObject> willRemove = new();
         foreach (MapObject rock in _objectList)
         {
-            if(rock.Info.Type == ObjectType.Rock)
+            if (rock.Info.Type == ObjectType.Rock)
             {
                 foreach (MapObject overLapO in _objectList)
                 {
@@ -64,7 +62,7 @@ public class MapModel : IMapModel
                 }
             }
         }
-        for(int i = 0; i < willRemove.Count; i++)
+        for (int i = 0; i < willRemove.Count; i++)
         {
             RemoveMapObject(willRemove.Pop());
         }

@@ -14,19 +14,16 @@ public class Player : MapObject, IInitializable
 
     private Transform _transform;
 
-    public void Initialize()
+    public override void Initialize()
     {
+        base.Initialize();
         _transform = GetComponent<Transform>();
-        MapModel.BackgroundColor.OnValueChanged += OnBackgroundColorChanged;
     }
 
-    private void OnDestroy()
+    protected override void OnBackgroundColorChanged(ColorType color)
     {
-        MapModel.BackgroundColor.OnValueChanged -= OnBackgroundColorChanged;
-    }
+        base.OnBackgroundColorChanged(color);
 
-    private void OnBackgroundColorChanged(ColorType color)
-    {
         if (Info.Color == color)
         {
             channel.Notify(new PlayerEvent { Type = PlayerEventType.GameOver });
