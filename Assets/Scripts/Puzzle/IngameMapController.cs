@@ -21,14 +21,12 @@ public class IngameMapController : MapController, IInitializable
         InitMap();
         _playerEventChannel.Subscribe(OnPlayerEventOccurred);
         _playerMoveEventChannel.Subscribe(OnPlayerMoveEventOccurred);
-        mapModel.BackgroundColor.OnValueChanged += mapModel.OnColorEventOccurred;
     }
 
     private void OnDestroy()
     {
         _playerEventChannel.Unsubscribe(OnPlayerEventOccurred);
         _playerMoveEventChannel.Unsubscribe(OnPlayerMoveEventOccurred);
-        mapModel.BackgroundColor.OnValueChanged -= mapModel.OnColorEventOccurred;
     }
 
     public override void InitMap()
