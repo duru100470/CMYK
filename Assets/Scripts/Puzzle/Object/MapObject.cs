@@ -69,5 +69,6 @@ public enum ObjectType
     Eraser,
     Key,
     KeyDoor,
-    CharacterPaint
+    CharacterPaint,
+    ComplementPaint
 }
