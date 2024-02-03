@@ -11,6 +11,9 @@ public class Player : MapObject, IInitializable
     public Channel<PlayerEvent> channel;
     [Inject]
     public Channel<PlayerMoveEvent> moveChannel;
+    
+    public ReactiveProperty<ColorType> playerColor = new();
+
 
     private Transform _transform;
 
@@ -18,6 +21,18 @@ public class Player : MapObject, IInitializable
     {
         base.Initialize();
         _transform = GetComponent<Transform>();
+
+        playerColor.Value = Info.Color;
+        playerColor.OnValueChanged += OnPlayerColorChanged;
+    }
+    void OnDestroy()
+    {
+        playerColor.OnValueChanged -= OnPlayerColorChanged;
+    }
+    private void OnPlayerColorChanged(ColorType color)
+    {
+        Info.Color = color;
+        GetComponent<SpriteRenderer>().color = color.ToColor();
     }
 
     protected override void OnBackgroundColorChanged(ColorType color)
