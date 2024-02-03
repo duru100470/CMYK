@@ -40,6 +40,16 @@ public class Player : MapObject, IInitializable
             MapModel.RemoveMapObject(this);
         }
     }
+    //playerColor를 직접 변경하여 색상을 교환하는 과정에서 둘의 색상이 같아져 게임오버가 되는것을 방지하기 위해 구현 
+    public void SwapColorWithBackground()
+    {
+        ColorType playerColor = Info.Color, backgroundColor = MapModel.BackgroundColor.Value;
+
+        Info.Color = backgroundColor;
+        GetComponent<SpriteRenderer>().color = backgroundColor.ToColor();
+
+        MapModel.BackgroundColor.Value = playerColor;
+    }
 
     protected override void OnBackgroundColorChanged(ColorType color)
     {

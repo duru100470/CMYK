@@ -71,5 +71,6 @@ public enum ObjectType
     KeyDoor,
     CharacterPaint,
     ComplementPaint,
-    CharacterComplementPaint
+    CharacterComplementPaint,
+    ColorSwap
 }
