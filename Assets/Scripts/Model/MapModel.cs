@@ -44,7 +44,10 @@ public class MapModel : IMapModel
 
         return false;
     }
-
+    public IEnumerable<MapObject> GetObjectsByInfo(ObjectInfo info)
+    {
+        return _objectList.Where(obj => obj.Info.Type == info.Type && obj.Info.Color == info.Color).ToList<MapObject>();
+    }
     public void OnColorEventOccurred(ColorChangeEvent colorChangeEvent)
     {
         Stack<MapObject> willRemove = new();

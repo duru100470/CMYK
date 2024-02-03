@@ -66,5 +66,7 @@ public enum ObjectType
     Rock,
     Flag,
     Paint,
-    Eraser
+    Eraser,
+    Key,
+    KeyDoor
 }
