@@ -33,6 +33,12 @@ public class Player : MapObject, IInitializable
     {
         Info.Color = color;
         GetComponent<SpriteRenderer>().color = color.ToColor();
+
+        if (Info.Color == color)
+        {
+            channel.Notify(new PlayerEvent { Type = PlayerEventType.GameOver });
+            MapModel.RemoveMapObject(this);
+        }
     }
 
     protected override void OnBackgroundColorChanged(ColorType color)
