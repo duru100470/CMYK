@@ -72,5 +72,6 @@ public enum ObjectType
     CharacterPaint,
     ComplementPaint,
     CharacterComplementPaint,
-    ColorSwap
+    ColorSwap,
+    CharacterEraser
 }
