@@ -43,7 +43,19 @@ public abstract class MapController : MonoBehaviour
         }
 
         mapModel.BackgroundColor.Value = mapData.InitColor;
-        camera.orthographicSize = mapData.MapSize;
+
+        switch (mapData.MapSize)
+        {
+            case 0:
+                camera.orthographicSize = 5;
+                break;
+            case 1:
+                camera.orthographicSize = 10;
+                break;
+            case 2:
+                camera.orthographicSize = 13;
+                break;
+        }
     }
 
     public void Undo()
