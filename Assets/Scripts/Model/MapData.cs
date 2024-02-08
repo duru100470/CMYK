@@ -9,7 +9,7 @@ public class MapData
 {
     public List<(Coordinate, ObjectInfo)> MapObjects = new();
     public ColorType InitColor;
-    public float MapSize;
+    public int MapSize;
 
     public void ImportData(string json)
     {
