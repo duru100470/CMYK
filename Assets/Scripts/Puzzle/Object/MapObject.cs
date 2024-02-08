@@ -19,6 +19,8 @@ public class MapObject : MonoBehaviour, IInitializable
 
     public virtual void Initialize()
     {
+        Debug.Log(Info.Type);
+
         MapModel.BackgroundColor.OnValueChanged += OnBackgroundColorChanged;
     }
 
@@ -30,13 +32,12 @@ public class MapObject : MonoBehaviour, IInitializable
 
     public void DestroyObject()
     {
-        Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        if (MapModel is not null)
+        if (MapModel != null)
+        {
             MapModel.BackgroundColor.OnValueChanged -= OnBackgroundColorChanged;
+        }
+
+        Destroy(gameObject);
     }
 
     /// <summary>

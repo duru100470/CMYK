@@ -16,10 +16,13 @@ public class TestScene : SceneScope, IScene
     {
         base.Load();
         Debug.Log("Test scene is loaded!");
+
+        _mapController.InitMap();
     }
 
     public override void Unload()
     {
+        _mapController.ResetMap();
         Debug.Log("Test scene is unloaded!");
     }
 
@@ -31,6 +34,5 @@ public class TestScene : SceneScope, IScene
         builder.AddSingleton<TestView>(_testView);
         builder.AddSingleton<Channel<PlayerEvent>>();
         builder.AddSingleton<Channel<PlayerMoveEvent>>();
-        builder.AddSingleton<Channel<ColorChangeEvent>>();
     }
 }

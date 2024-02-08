@@ -13,6 +13,10 @@ public class MapModel : IMapModel
 
     public ReactiveProperty<ColorType> BackgroundColor => _colorType;
 
+    public MapModel()
+    {
+        BackgroundColor.OnValueChanged += OnColorEventOccurred;
+    }
     public void AddMapObject(MapObject mapObject)
     {
         _objectList.Add(mapObject);
@@ -45,7 +49,7 @@ public class MapModel : IMapModel
         return false;
     }
 
-    public void OnColorEventOccurred(ColorChangeEvent colorChangeEvent)
+    public void OnColorEventOccurred(ColorType color)
     {
         Stack<MapObject> willRemove = new();
         foreach (MapObject rock in _objectList)
