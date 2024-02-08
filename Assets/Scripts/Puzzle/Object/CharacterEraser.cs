@@ -1,12 +1,13 @@
+using System;
 using System.Linq;
 public class CharacterEraser : MapObject, IObtainable
 {
     public void Obtain()
     {
-        var character = MapModel.GetObjects(new ObjectInfo { Type = ObjectType.Player }, true).First();
+        var character = MapModel.GetObjects()
+            .First(obj => obj.Info.Type == ObjectType.Player);
 
-        if (character is Player)
-            (character as Player).PlayerColor.Value -= Info.Color;
+        (character as Player).PlayerColor.Value -= Info.Color;
 
         MapModel.RemoveMapObject(this);
     }

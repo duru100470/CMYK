@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,32 +38,14 @@ namespace UnityEditor
             return true;
         }
 
-        public IEnumerable<MapObject> GetObjects(ObjectInfo info, bool ignoreColor = false)
+        public IEnumerable<MapObject> GetObjects(bool ignoreColor = false)
         {
-            IEnumerable<MapObject> objects = _objectList.Where(obj => obj.Info.Type == info.Type);
-
-            if (!ignoreColor)
-                objects = objects.Where(obj => obj.Info.Color == info.Color);
-
-            return objects;
+            throw new NotImplementedException();
         }
 
         public void OnColorEventOccurred(ColorChangeEvent colorChangeEvent)
         {
-            foreach (MapObject rock in _objectList)
-            {
-                if (rock.Info.Type == ObjectType.Rock)
-                {
-                    foreach (MapObject overLapO in _objectList)
-                    {
-                        if (rock.Coordinate.Equals(overLapO.Coordinate) && (rock != overLapO))
-                        {
-                            RemoveMapObject(overLapO);
-                            break;
-                        }
-                    }
-                }
-            }
+            throw new NotImplementedException();
         }
     }
 }

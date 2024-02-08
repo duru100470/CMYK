@@ -6,7 +6,7 @@ public interface IMapModel
     void AddMapObject(MapObject mapObject);
     void RemoveMapObject(MapObject mapObject);
     bool TryGetObject(Coordinate dir, out MapObject mapObject, bool ignoreColor = false);
-    public IEnumerable<MapObject> GetObjects(ObjectInfo info, bool ignoreColor = false);
+    IEnumerable<MapObject> GetObjects(bool ignoreColor = false);
     // FIXME: BackgroundColor.OnValueChanged 이벤트가 있는데??
     public void OnColorEventOccurred(ColorChangeEvent colorChangeEvent);
 }

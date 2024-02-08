@@ -13,6 +13,9 @@ public class MapModel : IMapModel
 
     public ReactiveProperty<ColorType> BackgroundColor => _colorType;
 
+    public IEnumerable<MapObject> GetObjects(bool ignoreColor = false)
+        => _objectList.Where(obj => obj.Info.Color != BackgroundColor.Value && !ignoreColor);
+
     public void AddMapObject(MapObject mapObject)
     {
         _objectList.Add(mapObject);
@@ -44,15 +47,7 @@ public class MapModel : IMapModel
 
         return false;
     }
-    public IEnumerable<MapObject> GetObjects(ObjectInfo info, bool ignoreColor = false)
-    {
-        IEnumerable<MapObject> objects = _objectList.Where(obj => obj.Info.Type == info.Type);
 
-        if (!ignoreColor)
-            objects = objects.Where(obj => obj.Info.Color == info.Color);
-
-        return objects;
-    }
     public void OnColorEventOccurred(ColorChangeEvent colorChangeEvent)
     {
         Stack<MapObject> willRemove = new();
