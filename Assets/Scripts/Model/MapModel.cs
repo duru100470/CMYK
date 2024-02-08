@@ -49,7 +49,7 @@ public class MapModel : IMapModel
         return false;
     }
 
-    public void OnColorEventOccurred(ColorType color)
+    private void OnColorEventOccurred(ColorType color)
     {
         Stack<MapObject> willRemove = new();
         foreach (MapObject rock in _objectList)

@@ -24,7 +24,7 @@ public class WorldScriptableObject : ScriptableObject
     [SerializeField]
     private int _index;
     [SerializeField]
-    private List<MapInfo> _maps;
+    private List<Map> _maps;
     [SerializeField]
     private List<int> _requirements;
 
@@ -52,7 +52,7 @@ public class WorldScriptableObject : ScriptableObject
         return false;
     }
 
-    public async UniTask UpdateClearData(int index, bool isClear = true)
+    public async UniTask UpdateClearDataAsync(int index, bool isClear = true)
     {
         _isLoaded = false;
 
@@ -70,6 +70,16 @@ public class WorldScriptableObject : ScriptableObject
         await LoadClearDataAsync();
 
         _isLoaded = true;
+    }
+
+    public MapStatus GetStatus(int index)
+    {
+        if (_maps[index].IsClear)
+            return MapStatus.Cleared;
+        else if (_maps[index].IsAvailable)
+            return MapStatus.Available;
+        else
+            return MapStatus.Locked;
     }
 
     public async UniTask LoadClearDataAsync()
@@ -118,16 +128,16 @@ public class WorldScriptableObject : ScriptableObject
             map.Data = data;
         }
     }
-}
 
-[Serializable]
-public class MapInfo
-{
-    public int Index;
-    public MapData Data;
-    public List<int> Requirements;
-    [HideInInspector]
-    public bool IsClear;
-    [HideInInspector]
-    public bool IsAvailable;
+    [Serializable]
+    private class Map
+    {
+        public int Index;
+        public MapData Data;
+        public List<int> Requirements;
+        [HideInInspector]
+        public bool IsClear;
+        [HideInInspector]
+        public bool IsAvailable;
+    }
 }

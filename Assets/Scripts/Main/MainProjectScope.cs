@@ -6,7 +6,7 @@ using UnityEngine;
 public class MainProjectScope : ProjectScope
 {
     [SerializeField]
-    private WorldScriptableObject _world;
+    private WorldLoader _worldLoader;
     [SerializeField]
     private GameSetting _gameSetting = new();
 
@@ -15,8 +15,7 @@ public class MainProjectScope : ProjectScope
         Debug.Log("Project Scope!!");
         builder.AddSingleton<GameSetting>(_gameSetting);
         builder.AddTransient<AssetLoader>();
-        builder.AddSingleton<WorldScriptableObject>(_world);
-        builder.AddSingleton<WorldClearData>();
+        builder.AddSingleton<WorldLoader>(_worldLoader);
     }
 
     [ContextMenu("Reset Settings")]

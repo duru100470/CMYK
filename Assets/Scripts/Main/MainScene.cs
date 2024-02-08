@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using BasicInjector;
 using Cysharp.Threading.Tasks;
-using Cysharp.Threading.Tasks.CompilerServices;
-using MessageChannel;
 using UnityEngine;
 
 public class MainScene : SceneScope, IScene
 {
     public SceneScope SceneScope => this;
 
+    [HideInInspector]
     [Inject]
-    public WorldScriptableObject _world;
-    private bool _isMapLoaded = false;
+    public GameSetting _gameSetting;
+    [Inject]
+    public WorldLoader _worldLoader;
 
     public override void Load(object param)
     {
@@ -29,24 +27,14 @@ public class MainScene : SceneScope, IScene
 
     private async UniTaskVoid LoadAsync()
     {
-        var setting = Container.Resolve<GameSetting>();
-
-        await UniTask.WhenAll(setting.LoadAsync(), LoadWorldDataAsync(setting));
-    }
-
-    private async UniTask LoadWorldDataAsync(GameSetting setting)
-    {
-        await _world.LoadAsync(setting);
-
-        Debug.Log("World data is loaded!");
-        _isMapLoaded = true;
+        await (_gameSetting.LoadAsync(), _worldLoader.InitWorlds(_gameSetting));
     }
 
     private void Update()
     {
-        if (Input.anyKeyDown && _isMapLoaded)
+        if (Input.anyKeyDown && _worldLoader.IsWorldLoaded)
         {
-            if (_world.TryGetMapData(0, out var data))
+            if (_worldLoader.TryLoadMap(0, 0, out var data))
                 SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(data).Forget();
         }
     }

@@ -11,9 +11,8 @@ public class IngameMapController : MapController, IInitializable
     public MessageChannel.Channel<PlayerEvent> _playerEventChannel;
     [Inject]
     public MessageChannel.Channel<PlayerMoveEvent> _playerMoveEventChannel;
-    // TODO: 임시로 월드 1개만 처리하게 짜놓음
     [Inject]
-    public WorldScriptableObject _world;
+    public WorldLoader _worldLoader;
 
     public void Initialize()
     {
@@ -48,7 +47,7 @@ public class IngameMapController : MapController, IInitializable
     {
         if (@event.Type == PlayerEventType.GameClear)
         {
-            _world.UpdateClearData(0).Forget();
+            _worldLoader.UpdateClearDataAsync(0, 0).Forget();
 
             // if (_world.Maps.Count > _worldClear.LastID)
             //     SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(_world.Maps[_worldClear.LastID].Data).Forget();

@@ -4,5 +4,4 @@ public interface IMapModel
     void AddMapObject(MapObject mapObject);
     void RemoveMapObject(MapObject mapObject);
     bool TryGetObject(Coordinate dir, out MapObject mapObject, bool ignoreColor = false);
-    public void OnColorEventOccurred(ColorType color);
 }

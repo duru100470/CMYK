@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 93182384}
   - component: {fileID: 93182383}
   - component: {fileID: 93182385}
+  - component: {fileID: 93182386}
   m_Layer: 0
   m_Name: SceneLoader
   m_TagString: Untagged
@@ -248,7 +249,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5377072503b258747bfd922c8b944a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _world: {fileID: 11400000, guid: d8f44980f4152594db21f2f340feff3a, type: 2}
+  _worldLoader: {fileID: 93182386}
+  _gameSetting:
+    MasterVolume: 1
+    MusicVolume: 1
+    SFXVolume: 1
+    WorldClearData: []
+--- !u!114 &93182386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93182381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b20478f5e3ec0614ca8963d69093053f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameSetting:
+    MasterVolume: 1
+    MusicVolume: 1
+    SFXVolume: 1
+    WorldClearData: []
+  _worldScriptableObjects:
+  - {fileID: 11400000, guid: d8f44980f4152594db21f2f340feff3a, type: 2}
 --- !u!1 &703305431
 GameObject:
   m_ObjectHideFlags: 0
