@@ -28,7 +28,6 @@ public class TestMapController : MapController, IInitializable
     }
     public void Initialize()
     {
-        InitMap();
         channel.Subscribe(OnPlayerMoveEventOccurred);
     }
 

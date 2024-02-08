@@ -18,7 +18,6 @@ public class IngameMapController : MapController, IInitializable
 
     public void Initialize()
     {
-        InitMap();
         _playerEventChannel.Subscribe(OnPlayerEventOccurred);
         _playerMoveEventChannel.Subscribe(OnPlayerMoveEventOccurred);
     }
