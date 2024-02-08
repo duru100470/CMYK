@@ -3,10 +3,10 @@ public class CharacterEraser : MapObject, IObtainable
 {
     public void Obtain()
     {
-        var character = MapModel.GetObjectsByInfo(new ObjectInfo { Type = ObjectType.Player}, true).First();
+        var character = MapModel.GetObjects(new ObjectInfo { Type = ObjectType.Player }, true).First();
 
-        if(character is Player)
-            (character as Player).playerColor.Value -= Info.Color;
+        if (character is Player)
+            (character as Player).PlayerColor.Value -= Info.Color;
 
         MapModel.RemoveMapObject(this);
     }

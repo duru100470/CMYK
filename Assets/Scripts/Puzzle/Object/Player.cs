@@ -11,9 +11,9 @@ public class Player : MapObject, IInitializable
     public Channel<PlayerEvent> channel;
     [Inject]
     public Channel<PlayerMoveEvent> moveChannel;
-    
-    public ReactiveProperty<ColorType> playerColor = new();
 
+    private ReactiveProperty<ColorType> _playerColor = new();
+    public ReactiveProperty<ColorType> PlayerColor => _playerColor;
 
     private Transform _transform;
 
@@ -22,13 +22,15 @@ public class Player : MapObject, IInitializable
         base.Initialize();
         _transform = GetComponent<Transform>();
 
-        playerColor.Value = Info.Color;
-        playerColor.OnValueChanged += OnPlayerColorChanged;
+        PlayerColor.Value = Info.Color;
+        PlayerColor.OnValueChanged += OnPlayerColorChanged;
     }
+
     void OnDestroy()
     {
-        playerColor.OnValueChanged -= OnPlayerColorChanged;
+        PlayerColor.OnValueChanged -= OnPlayerColorChanged;
     }
+
     private void OnPlayerColorChanged(ColorType color)
     {
         Info.Color = color;
@@ -40,7 +42,8 @@ public class Player : MapObject, IInitializable
             MapModel.RemoveMapObject(this);
         }
     }
-    //playerColor를 직접 변경하여 색상을 교환하는 과정에서 둘의 색상이 같아져 게임오버가 되는것을 방지하기 위해 구현 
+
+    // playerColor를 직접 변경하여 색상을 교환하는 과정에서 둘의 색상이 같아져 게임오버가 되는것을 방지하기 위해 구현 
     public void SwapColorWithBackground()
     {
         ColorType playerColor = Info.Color, backgroundColor = MapModel.BackgroundColor.Value;
@@ -106,6 +109,5 @@ public class Player : MapObject, IInitializable
 
         Coordinate += dir;
         _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
-
     }
 }

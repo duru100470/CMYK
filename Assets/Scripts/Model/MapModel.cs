@@ -44,13 +44,13 @@ public class MapModel : IMapModel
 
         return false;
     }
-    public IEnumerable<MapObject> GetObjectsByInfo(ObjectInfo info, bool ignoreColor = false)
+    public IEnumerable<MapObject> GetObjects(ObjectInfo info, bool ignoreColor = false)
     {
         IEnumerable<MapObject> objects = _objectList.Where(obj => obj.Info.Type == info.Type);
-        
-        if(!ignoreColor)
+
+        if (!ignoreColor)
             objects = objects.Where(obj => obj.Info.Color == info.Color);
-        
+
         return objects;
     }
     public void OnColorEventOccurred(ColorChangeEvent colorChangeEvent)

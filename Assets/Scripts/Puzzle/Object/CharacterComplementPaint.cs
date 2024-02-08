@@ -4,13 +4,13 @@ public class CharacterComplementPaint : MapObject, IObtainable
 {
     public void Obtain()
     {
-        var character = MapModel.GetObjectsByInfo(new ObjectInfo { Type = ObjectType.Player}, true).First();
+        var character = MapModel.GetObjects(new ObjectInfo { Type = ObjectType.Player }, true).First();
 
-            if(character is Player)
-            {
-                var player = character as Player; 
-                player.playerColor.Value = player.playerColor.Value.GetComplementColor();
-            }
+        if (character is Player)
+        {
+            var player = character as Player;
+            player.PlayerColor.Value = player.PlayerColor.Value.GetComplementColor();
+        }
 
         MapModel.RemoveMapObject(this);
     }
