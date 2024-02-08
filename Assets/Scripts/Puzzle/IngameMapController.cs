@@ -1,20 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using BasicInjector;
+using Cysharp.Threading.Tasks;
 using MessageChannel;
 using UnityEngine;
 
 public class IngameMapController : MapController, IInitializable
 {
     [Inject]
-    public Channel<PlayerEvent> _playerEventChannel;
+    public MessageChannel.Channel<PlayerEvent> _playerEventChannel;
     [Inject]
-    public Channel<PlayerMoveEvent> _playerMoveEventChannel;
+    public MessageChannel.Channel<PlayerMoveEvent> _playerMoveEventChannel;
     // TODO: 임시로 월드 1개만 처리하게 짜놓음
     [Inject]
     public WorldScriptableObject _world;
-    [Inject]
-    public WorldClearData _worldClear;
 
     public void Initialize()
     {
@@ -49,13 +48,13 @@ public class IngameMapController : MapController, IInitializable
     {
         if (@event.Type == PlayerEventType.GameClear)
         {
-            _worldClear.LastID++;
+            _world.UpdateClearData(0).Forget();
 
-            if (_world.Maps.Count > _worldClear.LastID)
-                SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(_world.Maps[_worldClear.LastID].Data).Forget();
+            // if (_world.Maps.Count > _worldClear.LastID)
+            //     SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(_world.Maps[_worldClear.LastID].Data).Forget();
 
-            if (_world.Maps.Count == _worldClear.LastID)
-                Application.Quit();
+            // if (_world.Maps.Count == _worldClear.LastID)
+            //     Application.Quit();
         }
     }
 

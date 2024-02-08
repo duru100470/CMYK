@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BasicInjector;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.CompilerServices;
 using MessageChannel;
 using UnityEngine;
 
@@ -18,7 +19,7 @@ public class MainScene : SceneScope, IScene
         base.Load();
         Debug.Log("Main scene is loaded!");
 
-        LoadWorldDataAsync().Forget();
+        LoadAsync().Forget();
     }
 
     public override void Unload()
@@ -26,9 +27,16 @@ public class MainScene : SceneScope, IScene
         Debug.Log("Main scene is unloaded!");
     }
 
-    private async UniTaskVoid LoadWorldDataAsync()
+    private async UniTaskVoid LoadAsync()
     {
-        await _world.LoadMapDataAsync();
+        var setting = Container.Resolve<GameSetting>();
+
+        await UniTask.WhenAll(setting.LoadAsync(), LoadWorldDataAsync(setting));
+    }
+
+    private async UniTask LoadWorldDataAsync(GameSetting setting)
+    {
+        await _world.LoadAsync(setting);
 
         Debug.Log("World data is loaded!");
         _isMapLoaded = true;
@@ -38,7 +46,8 @@ public class MainScene : SceneScope, IScene
     {
         if (Input.anyKeyDown && _isMapLoaded)
         {
-            SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(_world.Maps[0].Data).Forget();
+            if (_world.TryGetMapData(0, out var data))
+                SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(data).Forget();
         }
     }
 
