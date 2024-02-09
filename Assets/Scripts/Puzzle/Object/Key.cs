@@ -6,7 +6,8 @@ public class Key : MapObject, IObtainable
     public void Obtain()
     {
         var doors = MapModel.GetObjects()
-            .Where(obj => obj.Info.Type == ObjectType.KeyDoor && obj.Info.Color == Info.Color);
+            .Where(obj => obj.Info.Type == ObjectType.KeyDoor && obj.Info.Color == Info.Color)
+            .ToList();
 
         foreach (var keyDoor in doors)
         {
