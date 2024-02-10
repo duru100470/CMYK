@@ -2,6 +2,7 @@ using BasicInjector;
 using System.Collections.Generic;
 using UnityEngine;
 using MessageChannel;
+using System;
 public abstract class MapController : MonoBehaviour
 {
     [Inject]
@@ -17,13 +18,6 @@ public abstract class MapController : MonoBehaviour
     protected Transform _decorations;
 
     private Stack<MapData> _moveRecord = new Stack<MapData>();
-
-    private Camera _camera;
-
-    private void Awake()
-    {
-        _camera = Camera.main;
-    }
 
     public abstract void InitMap();
     public abstract void ResetMap();
@@ -54,19 +48,18 @@ public abstract class MapController : MonoBehaviour
         }
 
         mapModel.BackgroundColor.Value = mapData.InitColor;
+        ChangeCameraSize(mapData.MapSize);
+    }
 
-        switch (mapData.MapSize)
+    protected void ChangeCameraSize(int size)
+    {
+        Camera.main.orthographicSize = size switch
         {
-            case 0:
-                _camera.orthographicSize = 5;
-                break;
-            case 1:
-                _camera.orthographicSize = 10;
-                break;
-            case 2:
-                _camera.orthographicSize = 13;
-                break;
-        }
+            0 => 5,
+            1 => 10,
+            2 => 13,
+            _ => throw new InvalidOperationException()
+        };
     }
 
     public void Undo()

@@ -141,6 +141,8 @@ public class TestMapController : MapController, IInitializable
 
                 Debug.Log($"Create DecorationObject! [{coor}, {name}]");
             }
+
+            ChangeCameraSize(data.MapSize);
         }
 
         _loadedFilename = Filename;
