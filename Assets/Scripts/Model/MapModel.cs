@@ -13,10 +13,14 @@ public class MapModel : IMapModel
 
     public ReactiveProperty<ColorType> BackgroundColor => _colorType;
 
+    public IEnumerable<MapObject> GetObjects(bool ignoreColor = false)
+        => _objectList.Where(obj => obj.Info.Color != BackgroundColor.Value && !ignoreColor);
+
     public MapModel()
     {
         BackgroundColor.OnValueChanged += OnColorEventOccurred;
     }
+
     public void AddMapObject(MapObject mapObject)
     {
         _objectList.Add(mapObject);
