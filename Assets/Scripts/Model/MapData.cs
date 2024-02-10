@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 public class MapData
 {
     public List<(Coordinate, ObjectInfo)> MapObjects = new();
+    public List<(Coordinate, string)> DecorationObjects = new();
     public ColorType InitColor;
     public int MapSize;
 
@@ -16,8 +17,11 @@ public class MapData
         MapData mapData = JsonConvert.DeserializeObject<MapData>(json);
 
         MapObjects.Clear();
-
         MapObjects.AddRange(mapData.MapObjects);
+
+        DecorationObjects.Clear();
+        DecorationObjects.AddRange(mapData.DecorationObjects);
+
         InitColor = mapData.InitColor;
         MapSize = mapData.MapSize;
     }

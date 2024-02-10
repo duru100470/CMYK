@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,11 @@ namespace UnityEditor
 
             obj = target;
             return true;
+        }
+
+        public IEnumerable<MapObject> GetObjects(bool ignoreColor = false)
+        {
+            throw new NotImplementedException();
         }
     }
 }

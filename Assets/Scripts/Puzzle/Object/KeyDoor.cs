@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WorldClearData
+public class KeyDoor : MapObject
 {
-    public int LastID = 0;
 }
+

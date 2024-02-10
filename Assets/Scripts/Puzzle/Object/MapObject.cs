@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using BasicInjector;
 using UnityEngine;
 
-public class MapObject : MonoBehaviour
+public class MapObject : MonoBehaviour, IInitializable
 {
     [Inject]
     public IMapModel MapModel;
@@ -17,7 +17,14 @@ public class MapObject : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Info.Color.ToColor();
     }
 
-    public void OnBackgroundColorChanged(ColorType color)
+    public virtual void Initialize()
+    {
+        Debug.Log(Info.Type);
+
+        MapModel.BackgroundColor.OnValueChanged += OnBackgroundColorChanged;
+    }
+
+    protected virtual void OnBackgroundColorChanged(ColorType color)
     {
         GetComponent<SpriteRenderer>().sortingOrder =
             color == Info.Color ? 0 : 1;
@@ -25,6 +32,11 @@ public class MapObject : MonoBehaviour
 
     public void DestroyObject()
     {
+        if (MapModel != null)
+        {
+            MapModel.BackgroundColor.OnValueChanged -= OnBackgroundColorChanged;
+        }
+
         Destroy(gameObject);
     }
 
@@ -55,5 +67,12 @@ public enum ObjectType
     Rock,
     Flag,
     Paint,
-    Eraser
+    Eraser,
+    Key,
+    KeyDoor,
+    CharacterPaint,
+    ComplementPaint,
+    CharacterComplementPaint,
+    ColorSwap,
+    CharacterEraser
 }
