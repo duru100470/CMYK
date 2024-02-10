@@ -16,6 +16,11 @@ public class MapModel : IMapModel
     public IEnumerable<MapObject> GetObjects(bool ignoreColor = false)
         => _objectList.Where(obj => obj.Info.Color != BackgroundColor.Value && !ignoreColor);
 
+    public MapModel()
+    {
+        BackgroundColor.OnValueChanged += OnColorEventOccurred;
+    }
+
     public void AddMapObject(MapObject mapObject)
     {
         _objectList.Add(mapObject);
@@ -48,7 +53,7 @@ public class MapModel : IMapModel
         return false;
     }
 
-    public void OnColorEventOccurred(ColorChangeEvent colorChangeEvent)
+    private void OnColorEventOccurred(ColorType color)
     {
         Stack<MapObject> willRemove = new();
         foreach (MapObject rock in _objectList)

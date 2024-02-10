@@ -42,10 +42,5 @@ namespace UnityEditor
         {
             throw new NotImplementedException();
         }
-
-        public void OnColorEventOccurred(ColorChangeEvent colorChangeEvent)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

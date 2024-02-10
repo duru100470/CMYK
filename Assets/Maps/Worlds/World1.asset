@@ -12,43 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685d04f6eed7249449e6d03395bca555, type: 3}
   m_Name: World1
   m_EditorClassIdentifier: 
-  _setting:
-    MasterVolume: 1
-    MusicVolume: 1
-    SFXVolume: 1
-    WorldClearData: []
-  Index: 1
-  Maps:
-  - Index: 1
+  _index: 0
+  _maps:
+  - Index: 0
     Requirements: 
+    IsClear: 0
+    IsAvailable: 1
+  - Index: 1
+    Requirements: 00000000
     IsClear: 0
     IsAvailable: 0
   - Index: 2
     Requirements: 01000000
     IsClear: 0
     IsAvailable: 0
-  - Index: 3
-    Requirements: 02000000
-    IsClear: 0
-    IsAvailable: 0
-  - Index: 4
-    Requirements: 03000000
-    IsClear: 0
-    IsAvailable: 0
-  - Index: 5
-    Requirements: 04000000
-    IsClear: 0
-    IsAvailable: 0
-  - Index: 6
-    Requirements: 05000000
-    IsClear: 0
-    IsAvailable: 0
-  - Index: 7
-    Requirements: 06000000
-    IsClear: 0
-    IsAvailable: 0
-  - Index: 8
-    Requirements: 07000000
-    IsClear: 0
-    IsAvailable: 0
-  Requirements: 
+  _requirements: 

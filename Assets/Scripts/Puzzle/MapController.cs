@@ -5,8 +5,6 @@ using MessageChannel;
 public abstract class MapController : MonoBehaviour
 {
     [Inject]
-    public Channel<ColorChangeEvent> colorChannel;
-    [Inject]
     public IMapModel mapModel;
     [Inject]
     public MapData mapData;
