@@ -16,11 +16,11 @@ public abstract class MapController : MonoBehaviour
 
     private Stack<MapData> _moveRecord = new Stack<MapData>();
 
-    private Camera camera;
+    private Camera _camera;
 
-    void Awake()
+    private void Awake()
     {
-        camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        _camera = Camera.main;
     }
 
     public abstract void InitMap();
@@ -47,13 +47,13 @@ public abstract class MapController : MonoBehaviour
         switch (mapData.MapSize)
         {
             case 0:
-                camera.orthographicSize = 5;
+                _camera.orthographicSize = 5;
                 break;
             case 1:
-                camera.orthographicSize = 10;
+                _camera.orthographicSize = 10;
                 break;
             case 2:
-                camera.orthographicSize = 13;
+                _camera.orthographicSize = 13;
                 break;
         }
     }
@@ -107,6 +107,5 @@ public abstract class MapController : MonoBehaviour
                 _moveRecord.Pop();
                 break;
         }
-
     }
 }
