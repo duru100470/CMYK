@@ -18,6 +18,8 @@ public class TestMapController : MapController, IInitializable
 
     [SerializeField]
     private ColorType _startBGColor;
+    [SerializeField]
+    private int _mapSize = 0;
     public string Filename;
     private string _loadedFilename;
     private Stack<MapData> _moveRecord = new Stack<MapData>();
@@ -139,6 +141,8 @@ public class TestMapController : MapController, IInitializable
 
                 Debug.Log($"Create DecorationObject! [{coor}, {name}]");
             }
+
+            ChangeCameraSize(data.MapSize);
         }
 
         _loadedFilename = Filename;
@@ -176,6 +180,8 @@ public class TestMapController : MapController, IInitializable
 
             Debug.Log($"Add DecorationObject! [{coor}, {o.gameObject.name}]");
         }
+
+        testMapData.MapSize = _mapSize;
 
         json = testMapData.ExportData();
 

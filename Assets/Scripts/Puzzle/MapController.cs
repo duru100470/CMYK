@@ -2,6 +2,7 @@ using BasicInjector;
 using System.Collections.Generic;
 using UnityEngine;
 using MessageChannel;
+using System;
 public abstract class MapController : MonoBehaviour
 {
     [Inject]
@@ -47,6 +48,18 @@ public abstract class MapController : MonoBehaviour
         }
 
         mapModel.BackgroundColor.Value = mapData.InitColor;
+        ChangeCameraSize(mapData.MapSize);
+    }
+
+    protected void ChangeCameraSize(int size)
+    {
+        Camera.main.orthographicSize = size switch
+        {
+            0 => 5,
+            1 => 10,
+            2 => 13,
+            _ => throw new InvalidOperationException()
+        };
     }
 
     public void Undo()
@@ -99,6 +112,5 @@ public abstract class MapController : MonoBehaviour
                 _moveRecord.Pop();
                 break;
         }
-
     }
 }
