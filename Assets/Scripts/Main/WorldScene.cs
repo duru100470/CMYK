@@ -2,7 +2,7 @@ using BasicInjector;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class MainScene : SceneScope, IScene
+public class WorldScene : SceneScope, IScene
 {
     public SceneScope SceneScope => this;
 
@@ -15,30 +15,21 @@ public class MainScene : SceneScope, IScene
     public override void Load(object param)
     {
         base.Load();
-        Debug.Log("Main scene is loaded!");
+        Debug.Log("World scene is loaded!");
 
         LoadAsync().Forget();
     }
 
     public override void Unload()
     {
-        Debug.Log("Main scene is unloaded!");
+        Debug.Log("World scene is unloaded!");
     }
 
     private async UniTaskVoid LoadAsync()
     {
         await (_gameSetting.LoadAsync(), _worldLoader.InitWorlds(_gameSetting));
     }
-
-    private void Update()
-    {
-        /*if (Input.anyKeyDown && _worldLoader.IsWorldLoaded)
-        {
-            if (_worldLoader.TryLoadMap(0, 0, out var data))
-                SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(data).Forget();
-        }*/
-    }
-
+    
     public override void InitializeContainer(ContainerBuilder builder)
     {
         builder.AddSingletonAs<MapModel, IMapModel>();
