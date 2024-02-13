@@ -14,7 +14,6 @@ public class MainPlayer : MapObject, IInitializable
     {
         DontDestroyOnLoad(gameObject);
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log(sceneIndex);
     }
 
     public override void Initialize()
@@ -48,8 +47,8 @@ public class MainPlayer : MapObject, IInitializable
             if (sceneIndex < 1)
             {
                 sceneIndex = 1;
-                pos.x = 0f;
-                _transform.position = Camera.main.ViewportToWorldPoint(pos);
+                Coordinate += new Coordinate(1, 0);
+                _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
             }
             else
             {
@@ -59,6 +58,8 @@ public class MainPlayer : MapObject, IInitializable
                 if (sceneIndex == 1)
                 {
                     Destroy(gameObject);
+                    GameObject _sceneLoader = GameObject.Find("SceneLoader");
+                    Destroy(_sceneLoader);
                 }
             }
             
@@ -69,8 +70,8 @@ public class MainPlayer : MapObject, IInitializable
             if (sceneIndex > 5)
             {
                 sceneIndex = 5;
-                pos.x = 1f;
-                _transform.position = Camera.main.ViewportToWorldPoint(pos);
+                Coordinate += new Coordinate(-1, 0);
+                _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
             }
             else
             {
@@ -81,16 +82,14 @@ public class MainPlayer : MapObject, IInitializable
         }
         if (pos.y < 0f)
         {
-            pos.y = 0f;
-            _transform.position = Camera.main.ViewportToWorldPoint(pos);
+            Coordinate += new Coordinate(0, 1);
+            _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
         }
         if (pos.y > 1f)
         {
-            pos.y = 1f;
-            _transform.position = Camera.main.ViewportToWorldPoint(pos);
+            Coordinate += new Coordinate(0, -1);
+            _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
         }
     }
 //world 선택 좌표와 상호작용 구현(MapPortal 사용)
-//화면 가장자리까지 간 뒤 해당 방향으로 몇 번 이동 입력하면 반대 방향 움직임이 그 횟수만큼 씹힘
-//MainScene으로 돌아갈 때 ProjectScope 2개임
 }
