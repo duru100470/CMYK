@@ -106,6 +106,9 @@ MonoBehaviour:
     _x: 0
     _y: 0
   _dataEffect: {fileID: 4470968909400308642}
+  _worldLoader: {fileID: 0}
+  Chapter: 0
+  World: 0
 --- !u!1 &6010820346368246727
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,6 @@ public class ChapterCamera : MonoBehaviour
     public int cameraMax = 20;
 
     private float _speed = 2.0f;
-    
 
     void FixedUpdate()
     {
