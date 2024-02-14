@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using BasicInjector;
+using MessageChannel;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -9,10 +10,11 @@ public class MainPlayer : MapObject, IInitializable
 {
     private Transform _transform;
     private int sceneIndex;
+    [Inject]
+    public Channel<PlayerMoveEvent> moveChannel;
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
@@ -36,6 +38,18 @@ public class MainPlayer : MapObject, IInitializable
 
     private void Move(Coordinate dir)
     {
+        moveChannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
+
+        var target = Coordinate + dir;
+        if (MapModel.TryGetObject(target, out var obj))
+        {
+            if (obj is IObtainable)
+            {
+                var obtainableObj = obj as IObtainable;
+                obtainableObj.Obtain();
+            }
+        }
+
         Coordinate += dir;
         _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
 
@@ -53,11 +67,8 @@ public class MainPlayer : MapObject, IInitializable
             else
             {
                 SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
-                Coordinate = new Coordinate(11, -2);
-                _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
                 if (sceneIndex == 1)
                 {
-                    Destroy(gameObject);
                     GameObject _sceneLoader = GameObject.Find("SceneLoader");
                     Destroy(_sceneLoader);
                 }
@@ -76,8 +87,6 @@ public class MainPlayer : MapObject, IInitializable
             else
             {
                 SceneManager.LoadScene(sceneIndex, LoadSceneMode.Single);
-                Coordinate = new Coordinate(-11, -2);
-                _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
             }
         }
         if (pos.y < 0f)
@@ -91,5 +100,4 @@ public class MainPlayer : MapObject, IInitializable
             _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
         }
     }
-//world 선택 좌표와 상호작용 구현(MapPortal 사용)
 }
