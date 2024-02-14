@@ -21,6 +21,7 @@ public class TestMapController : MapController, IInitializable
     [SerializeField]
     private int _mapSize = 0;
     public string Filename;
+    public bool UndoEnable;
     private string _loadedFilename;
     private Stack<MapData> _moveRecord = new Stack<MapData>();
 
@@ -40,7 +41,7 @@ public class TestMapController : MapController, IInitializable
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) && UndoEnable)
         {
             // TODO : 게임 클리어 상황에서 뒤로가기 비활성화
             Undo();
