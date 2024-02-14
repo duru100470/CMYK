@@ -21,7 +21,10 @@ public class MapObject : MonoBehaviour, IInitializable
     {
         Debug.Log(Info.Type);
 
-        MapModel.BackgroundColor.OnValueChanged += OnBackgroundColorChanged;
+        if (MapModel != null)
+        {
+            MapModel.BackgroundColor.OnValueChanged += OnBackgroundColorChanged;
+        }
     }
 
     protected virtual void OnBackgroundColorChanged(ColorType color)
@@ -44,7 +47,7 @@ public class MapObject : MonoBehaviour, IInitializable
     /// Called when the script is loaded or a value is changed in the
     /// inspector (Called in the editor only).
     /// </summary>
-    private void OnValidate()
+    protected virtual void OnValidate()
     {
         Init();
     }
@@ -58,6 +61,7 @@ public struct ObjectInfo
 {
     public ObjectType Type;
     public ColorType Color;
+    public int SpriteIndex;
 }
 
 public enum ObjectType
