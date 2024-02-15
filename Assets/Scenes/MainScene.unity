@@ -269,6 +269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _worldScriptableObjects:
   - {fileID: 11400000, guid: d8f44980f4152594db21f2f340feff3a, type: 2}
+  - {fileID: 11400000, guid: c1c6be9094d1bda47b89563738fb3626, type: 2}
+  - {fileID: 11400000, guid: dbea6c10e3ff8954494d59a2bd1a5535, type: 2}
 --- !u!1001 &436999081
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 685d04f6eed7249449e6d03395bca555, type: 3}
-  m_Name: World1
+  m_Name: World2
   m_EditorClassIdentifier: 
-  _index: 0
+  _index: 1
   _maps:
   - Index: 0
     Requirements: 
     IsClear: 0
-    IsAvailable: 1
+    IsAvailable: 0
   - Index: 1
     Requirements: 00000000
     IsClear: 0
@@ -32,22 +32,6 @@ MonoBehaviour:
     IsAvailable: 0
   - Index: 4
     Requirements: 03000000
-    IsClear: 0
-    IsAvailable: 0
-  - Index: 5
-    Requirements: 04000000
-    IsClear: 0
-    IsAvailable: 0
-  - Index: 6
-    Requirements: 05000000
-    IsClear: 0
-    IsAvailable: 0
-  - Index: 7
-    Requirements: 06000000
-    IsClear: 0
-    IsAvailable: 0
-  - Index: 8
-    Requirements: 07000000
     IsClear: 0
     IsAvailable: 0
   _requirements: 
