@@ -71,14 +71,20 @@ public class WorldLoader : MonoBehaviour
     {
         _gameSetting = gameSetting;
 
-        var tasks = new List<UniTask>();
+        // var tasks = new List<UniTask>();
 
-        foreach (var world in _worldScriptableObjects)
+        // foreach (var world in _worldScriptableObjects)
+        // {
+        //     tasks.Add(world.LoadAsync(_gameSetting));
+        // }
+
+        // await UniTask.WhenAll(tasks.ToArray());
+
+        // FIXME : 임시로 바꿈
+        for (int i = 0; i < _worldScriptableObjects.Count; i++)
         {
-            tasks.Add(world.LoadAsync(_gameSetting));
+            await _worldScriptableObjects[i].LoadAsync(_gameSetting);
         }
-
-        await UniTask.WhenAll(tasks.ToArray());
 
         _isWorldLoaded = true;
         Debug.Log("World loading is finished!");
