@@ -16,7 +16,6 @@ public class Player : MapObject, IInitializable
     public ReactiveProperty<ColorType> PlayerColor => _playerColor;
 
     private Transform _transform;
-    private bool _moveable = true;
     private ColorType _myColorType;
     public bool IsMoveable { get; set; } = true;
 

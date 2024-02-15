@@ -8,8 +8,6 @@ public class Wall : MapObject
     [SerializeField]
     private Sprite[] _sprites;
 
-    private bool _spriteInit = false;
-
     public override void Init()
     {
         base.Init();
