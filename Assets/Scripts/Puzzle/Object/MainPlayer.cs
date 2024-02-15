@@ -51,7 +51,7 @@ public class MainPlayer : MapObject, IInitializable
             }
         }
 
-        if(target.X < -9 || target.Y > 4 || target.Y < -5 || target.X > MaxRight)
+        if (target.X < -8 || target.Y > 4 || target.Y < -4 || target.X > MaxRight)
         {
             return;
         }
