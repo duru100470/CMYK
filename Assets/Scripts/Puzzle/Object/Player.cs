@@ -16,6 +16,7 @@ public class Player : MapObject, IInitializable
     public ReactiveProperty<ColorType> PlayerColor => _playerColor;
 
     private Transform _transform;
+    public bool IsMoveable { get; set; } = true;
 
     public override void Initialize()
     {
@@ -79,6 +80,9 @@ public class Player : MapObject, IInitializable
 
     private void Move(Coordinate dir)
     {
+        if (!IsMoveable)
+            return;
+
         moveChannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
 
         var target = Coordinate + dir;
