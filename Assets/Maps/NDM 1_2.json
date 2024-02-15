@@ -302,7 +302,7 @@
       "Item2": {
         "Type": 1,
         "Color": { "Type": 7 },
-        "SpriteIndex": 13,
+        "SpriteIndex": 1,
         "IsSolidType": true
       }
     },
@@ -329,7 +329,7 @@
       "Item2": {
         "Type": 1,
         "Color": { "Type": 7 },
-        "SpriteIndex": 13,
+        "SpriteIndex": 1,
         "IsSolidType": true
       }
     },
@@ -392,7 +392,7 @@
       "Item2": {
         "Type": 13,
         "Color": { "Type": 7 },
-        "SpriteIndex": 1,
+        "SpriteIndex": 0,
         "IsSolidType": true
       }
     },
@@ -428,7 +428,7 @@
       "Item2": {
         "Type": 13,
         "Color": { "Type": 7 },
-        "SpriteIndex": 1,
+        "SpriteIndex": 0,
         "IsSolidType": true
       }
     },
