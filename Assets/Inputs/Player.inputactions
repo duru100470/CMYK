@@ -67,6 +67,17 @@
                 },
                 {
                     "name": "",
+                    "id": "afba6bfa-b51e-42e6-b6c6-d9551591b332",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "cd9794d5-106e-4097-a71d-01eb93d1ff68",
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
@@ -83,6 +94,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
+                    "action": "MoveDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cfd3c86e-d89f-4e3b-b1e7-33adde599716",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "MoveDown",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -111,6 +133,17 @@
                 },
                 {
                     "name": "",
+                    "id": "27b0de42-83af-4125-bad5-63f0204eccd3",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "60153cf5-85e9-4744-96e4-0520e39c7f84",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
@@ -127,6 +160,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
+                    "action": "MoveRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5357dc29-11b7-4e59-b74c-cf94a6c871d6",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "MoveRight",
                     "isComposite": false,
                     "isPartOfComposite": false
