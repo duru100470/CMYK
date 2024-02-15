@@ -261,7 +261,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cff951379c9b454d9cf6518610d7d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effect: {fileID: 305971882781235346, guid: 0a8235c9aa315124db31bfae01fd8b61, type: 3}
+  _effect: {fileID: 0}
 --- !u!1 &895742246
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
   _startBGColor:
     Type: 0
   _mapSize: 0
-  Filename: YSM1
+  Filename: NDM 1_1
   UndoEnable: 1
 --- !u!1001 &7903443501927882194
 PrefabInstance:
