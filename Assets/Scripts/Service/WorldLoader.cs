@@ -15,6 +15,7 @@ public class WorldLoader : MonoBehaviour
 
     private bool _isWorldLoaded = false;
     public bool IsWorldLoaded => _isWorldLoaded;
+    [SerializeField]
     private int _curWorldIdx = -1, _curMapIdx = -1;
     public (int, int) CurrentMapIndex => (_curWorldIdx, _curMapIdx);
 
@@ -46,8 +47,8 @@ public class WorldLoader : MonoBehaviour
 
         if (_isWorldLoaded && targetWorld.IsAvailable && targetWorld.TryGetMapData(mapIdx, out data))
         {
-            _curMapIdx = -1;
-            _curWorldIdx = -1;
+            _curMapIdx = mapIdx;
+            _curWorldIdx = worldIdx;
             return true;
         }
 
