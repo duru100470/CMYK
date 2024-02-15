@@ -136,3 +136,4 @@ MonoBehaviour:
   Coordinate:
     _x: 0
     _y: 0
+  MaxRight: 0
