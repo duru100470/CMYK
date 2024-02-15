@@ -55,7 +55,7 @@ public abstract class MapController : MonoBehaviour
     {
         Camera.main.orthographicSize = size switch
         {
-            0 => 5,
+            0 => 5.6f,
             1 => 10,
             2 => 13,
             _ => throw new InvalidOperationException()

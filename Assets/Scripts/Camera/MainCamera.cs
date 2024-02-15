@@ -25,23 +25,23 @@ public class MainCamera : MonoBehaviour
         }
         else if (_mainPlayer.Coordinate.X >= cameraMax)
         {
-            targetPos = new Vector3(80, 0.5f, -10);
+            targetPos = new Vector3(76.5f, 0.5f, -10);
         }
-        else if (_mainPlayer.Coordinate.X >= 11 && _mainPlayer.Coordinate.X < 31)
+        else if (_mainPlayer.Coordinate.X >= 10 && _mainPlayer.Coordinate.X < 29)
         {
-            targetPos = new Vector3(20, 0.5f, -10);
+            targetPos = new Vector3(19.5f, 0.5f, -10);
         }
-        else if (_mainPlayer.Coordinate.X >= 31 && _mainPlayer.Coordinate.X < 51)
+        else if (_mainPlayer.Coordinate.X >= 29 && _mainPlayer.Coordinate.X < 48)
         {
-            targetPos = new Vector3(40, 0.5f, -10);
+            targetPos = new Vector3(38.5f, 0.5f, -10);
         }
-        else if (_mainPlayer.Coordinate.X >= 51 && _mainPlayer.Coordinate.X < 71)
+        else if (_mainPlayer.Coordinate.X >= 48 && _mainPlayer.Coordinate.X < 67)
         {
-            targetPos = new Vector3(60, 0.5f, -10);
+            targetPos = new Vector3(57.5f, 0.5f, -10);
         }
-        else if (_mainPlayer.Coordinate.X >= 71)
+        else if (_mainPlayer.Coordinate.X >= 67)
         {
-            targetPos = new Vector3(80, 0.5f, -10);
+            targetPos = new Vector3(76.5f, 0.5f, -10);
         }
         else
         {

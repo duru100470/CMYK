@@ -261,7 +261,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -286,7 +286,7 @@ Transform:
   m_GameObject: {fileID: 251921958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0.5, y: 0.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -424,6 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cff951379c9b454d9cf6518610d7d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _effect: {fileID: 0}
 --- !u!1 &895742246
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +474,66 @@ MonoBehaviour:
   testView: {fileID: 0}
   _startBGColor:
     Type: 0
-  Filename: YSM1
+  _mapSize: 0
+  Filename: NDM 1_1
+  UndoEnable: 1
+--- !u!1001 &7903443501927882194
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 55629602305922643, guid: 6bf9336546f41824c8022bfcc11633f5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.0379243
+      objectReference: {fileID: 0}
+    - target: {fileID: 55629602305922643, guid: 6bf9336546f41824c8022bfcc11633f5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.75819534
+      objectReference: {fileID: 0}
+    - target: {fileID: 55629602305922643, guid: 6bf9336546f41824c8022bfcc11633f5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.04578192
+      objectReference: {fileID: 0}
+    - target: {fileID: 55629602305922643, guid: 6bf9336546f41824c8022bfcc11633f5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 55629602305922643, guid: 6bf9336546f41824c8022bfcc11633f5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 55629602305922643, guid: 6bf9336546f41824c8022bfcc11633f5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 55629602305922643, guid: 6bf9336546f41824c8022bfcc11633f5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 55629602305922643, guid: 6bf9336546f41824c8022bfcc11633f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 55629602305922643, guid: 6bf9336546f41824c8022bfcc11633f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 55629602305922643, guid: 6bf9336546f41824c8022bfcc11633f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214056258820379519, guid: 6bf9336546f41824c8022bfcc11633f5, type: 3}
+      propertyPath: m_Name
+      value: Puzzle UI
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6bf9336546f41824c8022bfcc11633f5, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -485,3 +545,4 @@ SceneRoots:
   - {fileID: 895742247}
   - {fileID: 749649906}
   - {fileID: 230179439}
+  - {fileID: 7903443501927882194}

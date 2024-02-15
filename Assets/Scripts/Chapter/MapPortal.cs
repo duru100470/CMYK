@@ -82,7 +82,6 @@ public class MapPortal : MapObject, IObtainable
                 default:
                     break;
             }
-            
         }
 
         if (!_init && _worldLoader != null)
