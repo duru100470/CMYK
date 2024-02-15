@@ -61,12 +61,12 @@ public class Player : MapObject, IInitializable
 
     protected override void OnBackgroundColorChanged(ColorType color)
     {
+        base.OnBackgroundColorChanged(color);
+
         if (color == _myColorType)
             return;
         else
             _myColorType = color;
-
-        base.OnBackgroundColorChanged(color);
 
         if (Info.Color == color)
         {
