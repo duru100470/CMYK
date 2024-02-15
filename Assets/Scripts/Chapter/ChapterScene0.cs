@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MessageChannel;
 using Cysharp.Threading.Tasks;
+using System.Linq;
 
 public class ChapterScene0 : SceneScope, IScene
 {

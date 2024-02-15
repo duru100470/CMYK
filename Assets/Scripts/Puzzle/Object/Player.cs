@@ -16,6 +16,8 @@ public class Player : MapObject, IInitializable
     public ReactiveProperty<ColorType> PlayerColor => _playerColor;
 
     private Transform _transform;
+    private bool _moveable = true;
+    private ColorType _myColorType;
     public bool IsMoveable { get; set; } = true;
 
     public override void Initialize()
@@ -25,6 +27,7 @@ public class Player : MapObject, IInitializable
 
         PlayerColor.Value = Info.Color;
         PlayerColor.OnValueChanged += OnPlayerColorChanged;
+        _myColorType = MapModel.BackgroundColor.Value;
     }
 
     void OnDestroy()
@@ -34,6 +37,7 @@ public class Player : MapObject, IInitializable
 
     private void OnPlayerColorChanged(ColorType color)
     {
+
         Info.Color = color;
         GetComponent<SpriteRenderer>().color = color.ToColor();
 
@@ -57,6 +61,11 @@ public class Player : MapObject, IInitializable
 
     protected override void OnBackgroundColorChanged(ColorType color)
     {
+        if (color == _myColorType)
+            return;
+        else
+            _myColorType = color;
+
         base.OnBackgroundColorChanged(color);
 
         if (Info.Color == color)
@@ -64,6 +73,13 @@ public class Player : MapObject, IInitializable
             channel.Notify(new PlayerEvent { Type = PlayerEventType.GameOver });
             MapModel.RemoveMapObject(this);
         }
+        IsMoveable = false;
+        Invoke("MoveableSetTrue", 1);
+    }
+
+    private void MoveableSetTrue()
+    {
+        IsMoveable = true;
     }
 
     private void OnMoveUp()
@@ -114,4 +130,7 @@ public class Player : MapObject, IInitializable
         Coordinate += dir;
         _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
     }
+
+    public void OnMoveRightInit()
+    => Move(new Coordinate(1, 0));
 }
