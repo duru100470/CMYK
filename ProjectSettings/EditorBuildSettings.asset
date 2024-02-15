@@ -6,10 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/PuzzleScene.unity
+    guid: d7b9a061d7c35ed4ab3f37f4f1bf931f
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 08d73021406d37c42ac16ed4be2dde44
   - enabled: 1
-    path: Assets/Scenes/PuzzleScene.unity
-    guid: d7b9a061d7c35ed4ab3f37f4f1bf931f
+    path: Assets/Scenes/World1.unity
+    guid: 5f8da0bb56b74cf4c83c42e18532a7d0
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e0f7c31a65e1e4542b2787c38da76da6, type: 2}

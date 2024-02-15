@@ -62,6 +62,10 @@ public struct ObjectInfo
     public ObjectType Type;
     public ColorType Color;
     public int SpriteIndex;
+    public bool IsSolidType
+        => Type == ObjectType.Wall ||
+            Type == ObjectType.KeyDoor ||
+            Type == ObjectType.Barrier;
 }
 
 public enum ObjectType
@@ -78,5 +82,6 @@ public enum ObjectType
     ComplementPaint,
     CharacterComplementPaint,
     ColorSwap,
-    CharacterEraser
+    CharacterEraser,
+    Barrier
 }

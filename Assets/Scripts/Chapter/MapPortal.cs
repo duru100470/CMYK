@@ -5,6 +5,7 @@ using UnityEngine;
 using MessageChannel;
 using UnityEngine.UI;
 using static Unity.Collections.AllocatorManager;
+using UnityEngine.SceneManagement;
 
 public class MapPortal : MapObject, IObtainable
 {
@@ -24,14 +25,20 @@ public class MapPortal : MapObject, IObtainable
     private MapStatus _mapStatus;
     public int Chapter;
     public int World;
+    private bool _isMainScene = false;
 
-    
     public override void Initialize()
     {
         base.Initialize();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         moveChannel.Subscribe(OnPlayeMoveEventOccurred);
+
+        var sceneName = SceneManager.GetActiveScene().name;
+
+        if (sceneName == "MainScene")
+            _isMainScene = true;
     }
+
     public void Obtain()
     {
         if (!_lock)
@@ -40,26 +47,32 @@ public class MapPortal : MapObject, IObtainable
             _inPlayer = true;
         }
     }
+
     private void OnPlayeMoveEventOccurred(PlayerMoveEvent moveEvent)
     {
-       if(_inPlayer)
-       {
+        if (_inPlayer)
+        {
             _dataEffect.AnimationOff();
             _inPlayer = false;
-       }
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _worldLoader.IsWorldLoaded && _inPlayer)
+        if (Input.GetKeyDown(KeyCode.Space) && _worldLoader.IsWorldLoaded && _inPlayer && !_isMainScene)
         {
             if (_worldLoader.TryLoadMap(World, Chapter, out var data))
                 SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(data).Forget();
         }
+        else if (Input.GetKeyDown(KeyCode.Space) && _isMainScene && _inPlayer)
+        {
+            SceneManager.LoadScene($"World{World}");
+        }
+
         if (!_init)
         {
-            Debug.Log("check");
             _mapStatus = _worldLoader.GetStatus(World, Chapter);
+
             switch (_mapStatus)
             {
                 case MapStatus.Cleared:

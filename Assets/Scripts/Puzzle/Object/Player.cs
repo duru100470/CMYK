@@ -84,7 +84,7 @@ public class Player : MapObject, IInitializable
         var target = Coordinate + dir;
         if (MapModel.TryGetObject(target, out var obj))
         {
-            if (obj.Info.Type == ObjectType.Wall || obj.Info.Type == ObjectType.KeyDoor)
+            if (obj.Info.IsSolidType)
             {
                 moveChannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.FakeMove });
                 return;
