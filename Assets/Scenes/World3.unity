@@ -711,7 +711,7 @@ MonoBehaviour:
   _decorations: {fileID: 1788786816}
   testView: {fileID: 0}
   _startBGColor:
-    Type: 1
+    Type: 3
   _mapSize: 0
   Filename: YSM1
   UndoEnable: 0
