@@ -66,6 +66,7 @@ public class MapPortal : MapObject, IObtainable
         }
         else if (Input.GetKeyDown(KeyCode.Space) && _isMainScene && _inPlayer)
         {
+            World += 1;
             SceneManager.LoadScene($"World{World}");
         }
 
