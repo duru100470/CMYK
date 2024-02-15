@@ -11,7 +11,7 @@ public class ChapterCamera : MonoBehaviour
 {
 
     public IMapModel MapModel;
-    public Player _player;
+    public ChapterPlayer _player;
     public int cameraMax = 20;
 
     private float _speed = 2.0f;

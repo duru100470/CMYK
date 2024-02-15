@@ -17,6 +17,8 @@ public class ChapterPlayer : MapObject, IInitializable
 
     private Transform _transform;
 
+    public int MaxRight;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -58,11 +60,10 @@ public class ChapterPlayer : MapObject, IInitializable
                 obtainableObj.Obtain();
             }
         }
-        if ()
+        if(target.X < -9 || target.Y > 4 || target.Y < -5 || target.X > MaxRight)
         {
-
+            return;
         }
-
         Coordinate += dir;
         _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
     }
