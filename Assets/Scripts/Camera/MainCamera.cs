@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
-using BuildReportTool;
 using UnityEngine.TextCore.Text;
 
 public class MainCamera : MonoBehaviour

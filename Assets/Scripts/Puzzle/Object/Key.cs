@@ -1,5 +1,4 @@
 using System.Linq;
-using BuildReportTool;
 
 public class Key : MapObject, IObtainable
 {

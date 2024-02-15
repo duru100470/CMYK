@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace UnityEditor
 {
+#if UNITY_EDITOR
     [CustomEditor(typeof(TestMapController))]
     public class TestMapControllerEditor : Editor
     {
@@ -58,4 +59,5 @@ namespace UnityEditor
             GUILayout.Box(_result, _boxStyle, GUILayout.ExpandWidth(true));
         }
     }
+#endif
 }
