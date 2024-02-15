@@ -11,6 +11,9 @@ public class TestView : MonoBehaviour, IInitializable
     [Inject]
     public Channel<PlayerEvent> channel;
 
+    [SerializeField]
+    private GameObject _effect;
+
     public void Initialize()
     {
         mapModel.BackgroundColor.OnValueChanged += ChangeBackgroundColor;
@@ -25,7 +28,17 @@ public class TestView : MonoBehaviour, IInitializable
 
     public void ChangeBackgroundColor(ColorType colorType)
     {
-        Camera.main.backgroundColor = colorType.ToColor();
+        StartCoroutine(ChangeColorAnimation(colorType));
+    }
+
+    private IEnumerator ChangeColorAnimation(ColorType color)
+    {
+        var go = SceneLoader.Instance.CurrentSceneScope.Instantiate(_effect, transform);
+        go.GetComponent<PaintEffect>().Play(color);
+
+        yield return new WaitForSeconds(1f);
+
+        Camera.main.backgroundColor = color.ToColor();
     }
 
     public void OnPlayerEventOccurred(PlayerEvent playerEvent)
