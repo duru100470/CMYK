@@ -43,6 +43,12 @@ public class MapModel : IMapModel
 
         foreach (var target in candidates)
         {
+            if (target.Info.Type == ObjectType.Barrier)
+            {
+                obj = target;
+                return true;
+            }
+
             if (target.Info.Color != BackgroundColor.Value && !ignoreColor)
             {
                 obj = target;

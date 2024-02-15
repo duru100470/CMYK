@@ -21,7 +21,7 @@ public class Rock : MapObject, IMoveable
 
         if (MapModel.TryGetObject(target, out var obj))
         {
-            if (obj.Info.Type == ObjectType.Wall || obj.Info.Type == ObjectType.KeyDoor)
+            if (obj.Info.IsSolidType)
                 return false;
             if (obj is IMoveable)
                 return false;
