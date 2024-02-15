@@ -7,6 +7,11 @@ public class MainScene : SceneScope, IScene
 {
     public SceneScope SceneScope => this;
 
+    [SerializeField]
+    private MapController _mapController;
+    [SerializeField]
+    private TestView _testView;
+
     [HideInInspector]
     [Inject]
     public GameSetting _gameSetting;
@@ -17,6 +22,8 @@ public class MainScene : SceneScope, IScene
     {
         base.Load();
         Debug.Log("Main scene is loaded!");
+
+        _mapController.InitMap();
 
         LoadAsync().Forget();
     }
@@ -33,7 +40,11 @@ public class MainScene : SceneScope, IScene
 
     public override void InitializeContainer(ContainerBuilder builder)
     {
+        builder.AddSingleton<MapData>(null);
         builder.AddSingletonAs<MapModel, IMapModel>();
+        builder.AddSingleton<MapController>(_mapController);
+        builder.AddSingleton<TestView>(_testView);
+        builder.AddSingleton<MessageChannel.Channel<PlayerEvent>>();
         builder.AddSingleton<MessageChannel.Channel<PlayerMoveEvent>>();
     }
 }

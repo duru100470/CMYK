@@ -17,15 +17,15 @@ public class MapPortal : MapObject, IObtainable
     private bool _inPlayer = false;
     public int Chapter;
     public int World;
-    private int sceneIndex;
-    private bool _isWorldScene = false;
+    private string sceneName;
+    private bool _isMainScene = false;
     
     void Awake()
     {
-        sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        if (sceneIndex >= 2 && sceneIndex <= 5)
+        sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == "MainScene")
         {
-            _isWorldScene = true;
+            _isMainScene = true;
         }
     }
     public override void Initialize()
@@ -49,19 +49,29 @@ public class MapPortal : MapObject, IObtainable
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log(_inPlayer);
-            Debug.Log(_isWorldScene);
-        }
-        if (Input.GetKeyDown(KeyCode.Space) && _worldLoader.IsWorldLoaded && _inPlayer && !_isWorldScene)
+        if (Input.GetKeyDown(KeyCode.Space) && _worldLoader.IsWorldLoaded && _inPlayer && !_isMainScene)
         {
             if (_worldLoader.TryLoadMap(World, Chapter, out var data))
                 SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(data).Forget();
         }
-        if (Input.GetKeyDown(KeyCode.Space) && _isWorldScene && _inPlayer)
+        if (Input.GetKeyDown(KeyCode.Space) && _isMainScene && _inPlayer)
         {
-            SceneManager.LoadScene(sceneIndex + 4, LoadSceneMode.Single);
+            if(World == 0)
+            {
+                SceneManager.LoadScene("World1");
+            }
+            if(World == 1)
+            {
+                SceneManager.LoadScene("World2");
+            }
+            if(World == 2)
+            {
+                SceneManager.LoadScene("World3");
+            }
+            if(World == 3)
+            {
+                SceneManager.LoadScene("World4");
+            }
         }
     }
 
