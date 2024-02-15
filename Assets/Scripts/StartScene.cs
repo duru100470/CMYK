@@ -1,34 +1,31 @@
 using BasicInjector;
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MessageChannel;
-using Cysharp.Threading.Tasks;
-using System.Linq;
 
-public class ChapterScene0 : SceneScope, IScene
+public class StartScene : SceneScope, IScene
 {
     public SceneScope SceneScope => this;
+
     [SerializeField]
     private MapController _mapController;
     [SerializeField]
     private TestView _testView;
-    private MapData _mapData;
 
+    [HideInInspector]
     [Inject]
     public GameSetting _gameSetting;
     [Inject]
     public WorldLoader _worldLoader;
-
 
     public override void Load(object param)
     {
         base.Load();
         Debug.Log("Main scene is loaded!");
 
-        _mapController.InitMap();
-
         LoadAsync().Forget();
+        SceneLoader.Instance.LoadSceneAsync<MainScene>(null).Forget();
     }
 
     public override void Unload()
@@ -43,7 +40,7 @@ public class ChapterScene0 : SceneScope, IScene
 
     public override void InitializeContainer(ContainerBuilder builder)
     {
-        builder.AddSingleton<MapData>(_mapData);
+        builder.AddSingleton<MapData>(null);
         builder.AddSingletonAs<MapModel, IMapModel>();
         builder.AddSingleton<MapController>(_mapController);
         builder.AddSingleton<TestView>(_testView);

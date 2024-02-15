@@ -13,10 +13,12 @@ public class TestView : MonoBehaviour, IInitializable
 
     [SerializeField]
     private GameObject _effect;
+    private ColorType _myColorType;
 
     public void Initialize()
     {
         mapModel.BackgroundColor.OnValueChanged += ChangeBackgroundColor;
+        _myColorType = mapModel.BackgroundColor.Value;
         channel.Subscribe(OnPlayerEventOccurred);
     }
 
@@ -28,6 +30,10 @@ public class TestView : MonoBehaviour, IInitializable
 
     public void ChangeBackgroundColor(ColorType colorType)
     {
+        if (colorType == _myColorType)
+            return;
+        else
+            _myColorType = colorType;
         StartCoroutine(ChangeColorAnimation(colorType));
     }
 
