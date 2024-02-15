@@ -132,6 +132,7 @@ MonoBehaviour:
     Type: 0
     Color:
       Type: 7
+    SpriteIndex: 0
   Coordinate:
     _x: 0
     _y: 0

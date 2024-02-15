@@ -60,7 +60,7 @@ public class ChapterPlayer : MapObject, IInitializable
                 obtainableObj.Obtain();
             }
         }
-        if(target.X < -9 || target.Y > 4 || target.Y < -5 || target.X > MaxRight)
+        if(target.X < -9 || target.Y > 4 || target.Y < -4 || target.X > MaxRight)
         {
             return;
         }
