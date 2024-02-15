@@ -55,31 +55,10 @@ public class IngameMapController : MapController, IInitializable
     {
         if (@event.Type == PlayerEventType.GameClear)
         {
-            _worldLoader.UpdateClearDataAsync(_worldLoader.CurrentMapIndex.Item1, _worldLoader.CurrentMapIndex.Item2).Forget();
+            _moveable = false;
 
-            switch (_worldLoader.CurrentMapIndex.Item1)
-            {
-                case 0:
-                    if(_worldLoader.CurrentMapIndex.Item2 == 8)
-                        SceneLoader.Instance.LoadSceneAsync<MainScene>(null).Forget();
-                    else
-                        SceneLoader.Instance.LoadSceneAsync<ChapterScene0>(null).Forget();
-                    break;
-                case 1:
-                    if (_worldLoader.CurrentMapIndex.Item2 == 4)
-                        SceneLoader.Instance.LoadSceneAsync<MainScene>(null).Forget();
-                    else
-                        SceneLoader.Instance.LoadSceneAsync<ChapterScene1>(null).Forget();
-                    break;
-                case 2:
-                    if (_worldLoader.CurrentMapIndex.Item2 == 2)
-                        SceneLoader.Instance.LoadSceneAsync<MainScene>(null).Forget();
-                    else
-                        SceneLoader.Instance.LoadSceneAsync<ChapterScene2>(null).Forget();
-                    break;
-                default:
-                    break;
-            }
+            Invoke("SceneChange", 2);
+
             // if (_world.Maps.Count > _worldClear.LastID)
             //     SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(_world.Maps[_worldClear.LastID].Data).Forget();
 
@@ -88,6 +67,36 @@ public class IngameMapController : MapController, IInitializable
         }
     }
 
+    private void SceneChange()
+    {
+        _worldLoader.UpdateClearDataAsync(_worldLoader.CurrentMapIndex.Item1, _worldLoader.CurrentMapIndex.Item2).Forget();
+
+
+
+        switch (_worldLoader.CurrentMapIndex.Item1)
+        {
+            case 0:
+                if (_worldLoader.CurrentMapIndex.Item2 == 7)
+                    SceneLoader.Instance.LoadSceneAsync<MainScene>(null).Forget();
+                else
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene0>(null).Forget();
+                break;
+            case 1:
+                if (_worldLoader.CurrentMapIndex.Item2 == 4)
+                    SceneLoader.Instance.LoadSceneAsync<MainScene>(null).Forget();
+                else
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene1>(null).Forget();
+                break;
+            case 2:
+                if (_worldLoader.CurrentMapIndex.Item2 == 2)
+                    SceneLoader.Instance.LoadSceneAsync<MainScene>(null).Forget();
+                else
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene2>(null).Forget();
+                break;
+            default:
+                break;
+        }
+    }
     private void OnColorEventOccurred(ColorType colorType)
     {
         if (colorType == _myColorType)
