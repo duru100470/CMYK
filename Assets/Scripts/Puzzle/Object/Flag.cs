@@ -16,6 +16,8 @@ public class Flag : MapObject, IObtainable
         var character = MapModel.GetObjects()
             .First(obj => obj.Info.Type == ObjectType.Player) as Player;
 
+        character.IsMoveable = false;
+
         var go = SceneLoader.Instance.CurrentSceneScope.Instantiate(_effect, transform.position, Quaternion.identity);
         go.GetComponent<ClearEffect>().Emit(character.PlayerColor.Value);
 
