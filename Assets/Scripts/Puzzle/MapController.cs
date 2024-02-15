@@ -84,7 +84,10 @@ public abstract class MapController : MonoBehaviour
             mo.Init();
 
             mapModel.AddMapObject(mo);
-            Debug.Log($"Create MapObject! [{mo.Coordinate}, {mo.Info.Type}]");
+            if(info.Type == ObjectType.Wall)
+            {
+                go.GetComponent<Wall>().SpriteInit();
+            }
         }
 
         mapModel.BackgroundColor.Value = tempMapData.InitColor;

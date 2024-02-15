@@ -123,52 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &83965193
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 83965195}
-  - component: {fileID: 83965194}
-  m_Layer: 0
-  m_Name: TestScene
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &83965194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83965193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 402c87017ee5c7a4b8bececb3dfe20d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mapController: {fileID: 1509374502}
-  _testView: {fileID: 1680387926}
---- !u!4 &83965195
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83965193}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.48353562, y: -0.905324, z: -0.06949389}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &144753420
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,84 +554,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1431495931
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1431495935}
-  - component: {fileID: 1431495934}
-  - component: {fileID: 1431495933}
-  - component: {fileID: 1431495932}
-  m_Layer: 0
-  m_Name: SceneLoader
-  m_TagString: Untagged
-  m_Icon: {fileID: 2800000, guid: d5839572b5a76af4d83f0dc478fd1a32, type: 3}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1431495932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1431495931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b20478f5e3ec0614ca8963d69093053f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _worldScriptableObjects:
-  - {fileID: 11400000, guid: d8f44980f4152594db21f2f340feff3a, type: 2}
---- !u!114 &1431495933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1431495931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5377072503b258747bfd922c8b944a03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _worldLoader: {fileID: 1431495932}
-  _gameSetting:
-    MasterVolume: 1
-    MusicVolume: 1
-    SFXVolume: 1
-    WorldClearData: []
---- !u!114 &1431495934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1431495931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6088b522c40cc428e71af505275d20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1431495935
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1431495931}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1509374501
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,32 +800,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1786810754}
-  - component: {fileID: 1786810753}
+  - component: {fileID: 1786810755}
   m_Layer: 0
-  m_Name: ChapterScene
+  m_Name: ChapterScene2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1786810753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1786810752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb9dbba8aa4947a48a00576d06759edc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameSetting:
-    MasterVolume: 1
-    MusicVolume: 1
-    SFXVolume: 1
-    WorldClearData: []
-  _worldLoader: {fileID: 0}
 --- !u!4 &1786810754
 Transform:
   m_ObjectHideFlags: 0
@@ -965,6 +823,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1786810755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786810752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a547bbc5a02a044bc9ea1153712318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mapController: {fileID: 1509374502}
+  _testView: {fileID: 1680387926}
+  _gameSetting:
+    MasterVolume: 1
+    MusicVolume: 1
+    SFXVolume: 1
+    WorldClearData: []
+  _worldLoader: {fileID: 0}
 --- !u!1 &1788786815
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,10 +1144,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1509374503}
-  - {fileID: 1431495935}
   - {fileID: 1251008666}
   - {fileID: 1810081977}
-  - {fileID: 83965195}
   - {fileID: 1788786816}
   - {fileID: 1680387927}
   - {fileID: 1786810754}
