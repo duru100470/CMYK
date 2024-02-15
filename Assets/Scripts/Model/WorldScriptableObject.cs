@@ -105,10 +105,7 @@ public class WorldScriptableObject : ScriptableObject
         {
             map.IsClear = clearString[map.Index] == '1';
 
-            var isAvailable = false;
-
-            if (map.Requirements.Count <= 0)
-                isAvailable = true;
+            var isAvailable = true;
 
             foreach (var r in map.Requirements)
                 isAvailable &= clearString[r] == '1';
