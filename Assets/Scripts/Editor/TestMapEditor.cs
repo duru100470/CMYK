@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace UnityEditor
 {
+#if UNITY_EDITOR
     public class TestMapEditor : EditorWindow
     {
         private Vector2 _cellSize = new Vector2(1f, 1f);
@@ -273,4 +274,5 @@ namespace UnityEditor
             SceneView.duringSceneGui -= this.OnSceneGUI;
         }
     }
+#endif
 }

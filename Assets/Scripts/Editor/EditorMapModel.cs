@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace UnityEditor
 {
+#if UNITY_EDITOR
     public class EditorMapModel : IMapModel
     {
         private List<MapObject> _objectList = new();
@@ -43,4 +44,5 @@ namespace UnityEditor
             throw new NotImplementedException();
         }
     }
+#endif
 }
