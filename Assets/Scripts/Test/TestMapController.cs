@@ -18,19 +18,19 @@ public class TestMapController : MapController, IInitializable
 
     [SerializeField]
     private ColorType _startBGColor;
+    [SerializeField]
+    private int _mapSize = 0;
     public string Filename;
+    public bool UndoEnable;
     private string _loadedFilename;
     private Stack<MapData> _moveRecord = new Stack<MapData>();
 
     private void OnDestroy()
     {
-        colorChannel.Unsubscribe(mapModel.OnColorEventOccurred);
         channel.Unsubscribe(OnPlayerMoveEventOccurred);
     }
     public void Initialize()
     {
-        InitMap();
-        colorChannel.Subscribe(mapModel.OnColorEventOccurred);
         channel.Subscribe(OnPlayerMoveEventOccurred);
     }
 
@@ -41,7 +41,7 @@ public class TestMapController : MapController, IInitializable
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) && UndoEnable)
         {
             // TODO : 게임 클리어 상황에서 뒤로가기 비활성화
             Undo();
@@ -142,6 +142,8 @@ public class TestMapController : MapController, IInitializable
 
                 Debug.Log($"Create DecorationObject! [{coor}, {name}]");
             }
+
+            ChangeCameraSize(data.MapSize);
         }
 
         _loadedFilename = Filename;
@@ -179,6 +181,8 @@ public class TestMapController : MapController, IInitializable
 
             Debug.Log($"Add DecorationObject! [{coor}, {o.gameObject.name}]");
         }
+
+        testMapData.MapSize = _mapSize;
 
         json = testMapData.ExportData();
 

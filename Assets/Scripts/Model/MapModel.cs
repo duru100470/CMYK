@@ -13,16 +13,22 @@ public class MapModel : IMapModel
 
     public ReactiveProperty<ColorType> BackgroundColor => _colorType;
 
+    public IEnumerable<MapObject> GetObjects(bool ignoreColor = false)
+        => _objectList.Where(obj => obj.Info.Color != BackgroundColor.Value && !ignoreColor);
+
+    public MapModel()
+    {
+        BackgroundColor.OnValueChanged += OnColorEventOccurred;
+    }
+
     public void AddMapObject(MapObject mapObject)
     {
         _objectList.Add(mapObject);
-        BackgroundColor.OnValueChanged += mapObject.OnBackgroundColorChanged;
     }
 
     public void RemoveMapObject(MapObject mapObject)
     {
         _objectList.Remove(mapObject);
-        BackgroundColor.OnValueChanged -= mapObject.OnBackgroundColorChanged;
         mapObject.DestroyObject();
     }
 
@@ -37,22 +43,28 @@ public class MapModel : IMapModel
 
         foreach (var target in candidates)
         {
+            if (target.Info.Type == ObjectType.Barrier)
+            {
+                obj = target;
+                return true;
+            }
+
             if (target.Info.Color != BackgroundColor.Value && !ignoreColor)
             {
                 obj = target;
                 return true;
             }
         }
-        
+
         return false;
     }
 
-    public void OnColorEventOccurred(ColorChangeEvent colorChangeEvent)
+    private void OnColorEventOccurred(ColorType color)
     {
         Stack<MapObject> willRemove = new();
         foreach (MapObject rock in _objectList)
         {
-            if(rock.Info.Type == ObjectType.Rock)
+            if (rock.Info.Type == ObjectType.Rock)
             {
                 foreach (MapObject overLapO in _objectList)
                 {
@@ -64,7 +76,7 @@ public class MapModel : IMapModel
                 }
             }
         }
-        for(int i = 0; i < willRemove.Count; i++)
+        for (int i = 0; i < willRemove.Count; i++)
         {
             RemoveMapObject(willRemove.Pop());
         }

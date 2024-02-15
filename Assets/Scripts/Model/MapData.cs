@@ -10,6 +10,7 @@ public class MapData
     public List<(Coordinate, ObjectInfo)> MapObjects = new();
     public List<(Coordinate, string)> DecorationObjects = new();
     public ColorType InitColor;
+    public int MapSize;
 
     public void ImportData(string json)
     {
@@ -22,6 +23,7 @@ public class MapData
         DecorationObjects.AddRange(mapData.DecorationObjects);
 
         InitColor = mapData.InitColor;
+        MapSize = mapData.MapSize;
     }
 
     public string ExportData()

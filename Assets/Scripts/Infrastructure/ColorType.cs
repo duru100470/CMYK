@@ -57,6 +57,7 @@ public struct ColorType : IEquatable<ColorType>
     public void RemoveColor(ColorType color)
         => RemoveColor(color.Type);
 
+    public ColorType GetComplementColor() => ColorType.Key - this;
 
     private (bool, bool, bool) ColorTypeToFlag(ColorTypeEnum type)
     {

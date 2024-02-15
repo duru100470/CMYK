@@ -18,10 +18,13 @@ public class PuzzleScene : SceneScope, IScene
 
         base.Load();
         Debug.Log("Puzzle scene is loaded!");
+
+        _mapController.InitMap();
     }
 
     public override void Unload()
     {
+        _mapController.ResetMap();
         Debug.Log("Puzzle scene is unloaded!");
     }
 
@@ -32,6 +35,5 @@ public class PuzzleScene : SceneScope, IScene
         builder.AddSingleton<MapController>(_mapController);
         builder.AddSingleton<Channel<PlayerEvent>>();
         builder.AddSingleton<Channel<PlayerMoveEvent>>();
-        builder.AddSingleton<Channel<ColorChangeEvent>>();
     }
 }

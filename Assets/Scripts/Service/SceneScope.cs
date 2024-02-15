@@ -55,6 +55,7 @@ public abstract class SceneScope : MonoBehaviour, IInstaller
         else
             Destroy(this);
 
+        var objs = SceneManager.GetActiveScene().GetRootGameObjects();
         var containerBuilder = new ContainerBuilder();
 
         InitializeContainer(containerBuilder);
@@ -62,7 +63,6 @@ public abstract class SceneScope : MonoBehaviour, IInstaller
             .SetParent(ProjectScope.Instance != null ? ProjectScope.Instance.Container : null)
             .Build();
 
-        var objs = SceneManager.GetActiveScene().GetRootGameObjects();
         GameObjectInjector.InjectRecursiveMany(objs.ToList(), _container);
     }
 
