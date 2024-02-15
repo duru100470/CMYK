@@ -2,6 +2,7 @@ using BasicInjector;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using MessageChannel;
+using TMPro;
 
 public class MainScene : SceneScope, IScene
 {
@@ -11,6 +12,8 @@ public class MainScene : SceneScope, IScene
     private MapController _mapController;
     [SerializeField]
     private TestView _testView;
+    [SerializeField]
+    private TextMeshProUGUI _version;
 
     [HideInInspector]
     [Inject]
@@ -26,6 +29,8 @@ public class MainScene : SceneScope, IScene
         _mapController.InitMap();
 
         LoadAsync().Forget();
+
+        _version.text = "Version: " + Application.version;
     }
 
     public override void Unload()
