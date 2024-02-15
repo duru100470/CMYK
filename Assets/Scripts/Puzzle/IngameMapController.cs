@@ -97,6 +97,11 @@ public class IngameMapController : MapController, IInitializable
                 break;
         }
     }
+
+    public void ToMain()
+    {
+        SceneLoader.Instance.LoadSceneAsync<MainScene>(null).Forget();
+    }
     private void OnColorEventOccurred(ColorType colorType)
     {
         if (colorType == _myColorType)
