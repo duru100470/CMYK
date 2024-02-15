@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using BasicInjector;
 using UnityEngine;
 
-public class Barrier : MapObject, IInitializable
+public class Barrier : MapObject
 {
-    public override void Initialize()
+    public override void Init()
     {
-        base.Initialize();
+        base.Init();
 
         GetComponent<SpriteRenderer>().color = Color.clear;
     }
