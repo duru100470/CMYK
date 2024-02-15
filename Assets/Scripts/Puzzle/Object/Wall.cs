@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using BasicInjector;
 using UnityEngine;
 
-public class Wall : MapObject, IInitializable
+public class Wall : MapObject
 {
     [SerializeField]
     private Sprite[] _sprites;
 
     private bool _spriteInit = false;
 
-    public override void Initialize()
+    public override void Init()
     {
-        base.Initialize();
+        base.Init();
 
         SpriteInit();
     }
@@ -20,10 +20,10 @@ public class Wall : MapObject, IInitializable
     protected override void OnValidate()
     {
         base.OnValidate();
-        Initialize();
+        Init();
     }
 
-   public void SpriteInit()
+    public void SpriteInit()
     {
         if (Info.SpriteIndex == 0)
             return;

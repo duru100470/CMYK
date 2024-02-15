@@ -442,6 +442,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d8f44980f4152594db21f2f340feff3a, type: 2}
   - {fileID: 11400000, guid: c1c6be9094d1bda47b89563738fb3626, type: 2}
   - {fileID: 11400000, guid: dbea6c10e3ff8954494d59a2bd1a5535, type: 2}
+  _curWorldIdx: -1
+  _curMapIdx: -1
 --- !u!1 &115043157
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,6 +1768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cff951379c9b454d9cf6518610d7d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _effect: {fileID: 305971882781235346, guid: 0a8235c9aa315124db31bfae01fd8b61, type: 3}
 --- !u!4 &997157162
 Transform:
   m_ObjectHideFlags: 0
