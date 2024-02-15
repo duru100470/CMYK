@@ -6,6 +6,7 @@ using MessageChannel;
 using UnityEngine.UI;
 using static Unity.Collections.AllocatorManager;
 using UnityEngine.SceneManagement;
+using Unity.Collections.LowLevel.Unsafe;
 
 public class MapPortal : MapObject, IObtainable
 {
@@ -41,6 +42,7 @@ public class MapPortal : MapObject, IObtainable
 
     public void Obtain()
     {
+        Debug.Log("checkin");
         if (!_lock)
         {
             _dataEffect.AnimationOn();
@@ -66,22 +68,38 @@ public class MapPortal : MapObject, IObtainable
         }
         else if (Input.GetKeyDown(KeyCode.Space) && _isMainScene && _inPlayer)
         {
-            SceneManager.LoadScene($"World{World}");
+            switch (World)
+            {
+                case 0:
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene0>(null).Forget();
+                    break;
+                case 1:
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene1>(null).Forget();
+                    break;
+                case 2:
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene2>(null).Forget();
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
-        if (!_init)
+        if (!_init && _worldLoader != null)
         {
             _mapStatus = _worldLoader.GetStatus(World, Chapter);
 
             switch (_mapStatus)
             {
                 case MapStatus.Cleared:
+                    Debug.Log("clear");
                     _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 1);
                     _spriteRenderer.sprite = _sprites[0];
                     _lock = false;
                     _init = true;
                     break;
                 case MapStatus.Available:
+                    Debug.Log("available");
                     _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 1);
                     _spriteRenderer.sprite = _sprites[1];
                     _lock = false;
