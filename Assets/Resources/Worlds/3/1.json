@@ -1,1 +1,745 @@
-{"MapObjects":[{"Item1":{"X":3,"Y":0},"Item2":{"Type":5,"Color":{"Type":7}}},{"Item1":{"X":3,"Y":3},"Item2":{"Type":4,"Color":{"Type":7}}},{"Item1":{"X":1,"Y":1},"Item2":{"Type":2,"Color":{"Type":7}}},{"Item1":{"X":-3,"Y":0},"Item2":{"Type":3,"Color":{"Type":7}}},{"Item1":{"X":0,"Y":0},"Item2":{"Type":1,"Color":{"Type":7}}},{"Item1":{"X":1,"Y":0},"Item2":{"Type":0,"Color":{"Type":7}}}],"DecorationObjects":[{"Item1":{"X":0,"Y":-3},"Item2":"Move"}],"InitColor":{"Type":0}}
+{
+  "MapObjects": [
+    {
+      "Item1": { "X": -4, "Y": 3 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 9,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -4, "Y": -4 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 12,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 3, "Y": -4 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 11,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 3, "Y": 3 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 8,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -4, "Y": 2 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 14,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -4, "Y": 1 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 14,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -4, "Y": 0 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 14,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -4, "Y": -1 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 14,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -4, "Y": -2 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 14,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -4, "Y": -3 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 14,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -3, "Y": -4 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 13,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -2, "Y": -4 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 13,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -1, "Y": -4 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 13,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 0, "Y": -4 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 13,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 1, "Y": -4 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 13,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 2, "Y": -4 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 13,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 3, "Y": -3 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 14,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 3, "Y": -2 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 14,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 3, "Y": 0 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 14,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 3, "Y": -1 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 14,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 3, "Y": 1 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 14,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 3, "Y": 2 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 14,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 2, "Y": 3 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 2,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 1, "Y": 3 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 13,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 0, "Y": 3 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 13,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -1, "Y": 3 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 13,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -2, "Y": 3 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 13,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -3, "Y": 3 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 13,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -2, "Y": -3 },
+      "Item2": {
+        "Type": 4,
+        "Color": { "Type": 4 },
+        "SpriteIndex": 0,
+        "IsSolidType": false
+      }
+    },
+    {
+      "Item1": { "X": -1, "Y": 2 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 4 },
+        "SpriteIndex": 3,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -1, "Y": 1 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 4 },
+        "SpriteIndex": 7,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 1, "Y": -1 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 4 },
+        "SpriteIndex": 1,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 2, "Y": -1 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 4 },
+        "SpriteIndex": 5,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 0, "Y": 1 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 3 },
+        "SpriteIndex": 7,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 0, "Y": 2 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 3 },
+        "SpriteIndex": 3,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 1, "Y": 0 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 3 },
+        "SpriteIndex": 1,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 2, "Y": 0 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 3 },
+        "SpriteIndex": 5,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -1, "Y": -1 },
+      "Item2": {
+        "Type": 8,
+        "Color": { "Type": 3 },
+        "SpriteIndex": 0,
+        "IsSolidType": false
+      }
+    },
+    {
+      "Item1": { "X": 0, "Y": 0 },
+      "Item2": {
+        "Type": 5,
+        "Color": { "Type": 6 },
+        "SpriteIndex": 0,
+        "IsSolidType": false
+      }
+    },
+    {
+      "Item1": { "X": 1, "Y": 2 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 7 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 2, "Y": 1 },
+      "Item2": {
+        "Type": 1,
+        "Color": { "Type": 7 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 1, "Y": 1 },
+      "Item2": {
+        "Type": 4,
+        "Color": { "Type": 7 },
+        "SpriteIndex": 0,
+        "IsSolidType": false
+      }
+    },
+    {
+      "Item1": { "X": 2, "Y": 2 },
+      "Item2": {
+        "Type": 3,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": false
+      }
+    },
+    {
+      "Item1": { "X": -1, "Y": 0 },
+      "Item2": {
+        "Type": 8,
+        "Color": { "Type": 2 },
+        "SpriteIndex": 0,
+        "IsSolidType": false
+      }
+    },
+    {
+      "Item1": { "X": -3, "Y": -3 },
+      "Item2": {
+        "Type": 0,
+        "Color": { "Type": 7 },
+        "SpriteIndex": 0,
+        "IsSolidType": false
+      }
+    },
+    {
+      "Item1": { "X": -3, "Y": -1 },
+      "Item2": {
+        "Type": 12,
+        "Color": { "Type": 7 },
+        "SpriteIndex": 0,
+        "IsSolidType": false
+      }
+    },
+    {
+      "Item1": { "X": -5, "Y": 4 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -5, "Y": 3 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -5, "Y": 2 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -5, "Y": 0 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -5, "Y": 1 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -5, "Y": -1 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -5, "Y": -2 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -5, "Y": -3 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -5, "Y": -4 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -5, "Y": -5 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -4, "Y": -5 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -2, "Y": -5 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -3, "Y": -5 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -1, "Y": -5 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 0, "Y": -5 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 1, "Y": -5 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 2, "Y": -5 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 3, "Y": -5 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 4, "Y": -5 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 4, "Y": -4 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 4, "Y": -3 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 4, "Y": -2 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 4, "Y": -1 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 4, "Y": 0 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 4, "Y": 1 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 4, "Y": 2 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 4, "Y": 3 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 4, "Y": 4 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 3, "Y": 4 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 2, "Y": 4 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 1, "Y": 4 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": 0, "Y": 4 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -1, "Y": 4 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -2, "Y": 4 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -3, "Y": 4 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    },
+    {
+      "Item1": { "X": -4, "Y": 4 },
+      "Item2": {
+        "Type": 13,
+        "Color": { "Type": 0 },
+        "SpriteIndex": 0,
+        "IsSolidType": true
+      }
+    }
+  ],
+  "DecorationObjects": [],
+  "InitColor": { "Type": 0 },
+  "MapSize": 0
+}
