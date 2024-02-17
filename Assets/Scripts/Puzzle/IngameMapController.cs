@@ -15,6 +15,8 @@ public class IngameMapController : MapController, IInitializable
     public MessageChannel.Channel<PlayerMoveEvent> _playerMoveEventChannel;
     [Inject]
     public WorldLoader _worldLoader;
+    [Inject]
+    public ISoundController _soundController;
 
     private bool _moveable = true;
     private ColorType _myColorType;
@@ -59,11 +61,17 @@ public class IngameMapController : MapController, IInitializable
 
             Invoke("SceneChange", 2);
 
+            _soundController.PlayEffect(SFXType.GameClear, 1f, 1f);
             // if (_world.Maps.Count > _worldClear.LastID)
             //     SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(_world.Maps[_worldClear.LastID].Data).Forget();
 
             // if (_world.Maps.Count == _worldClear.LastID)
             //     Application.Quit();
+        }
+
+        if (@event.Type == PlayerEventType.GameOver)
+        {
+            _soundController.PlayEffect(SFXType.GameOver, 1f, 1f);
         }
     }
 
@@ -110,12 +118,15 @@ public class IngameMapController : MapController, IInitializable
             _myColorType = colorType;
         _moveable = false;
         Invoke("MoveableSetTrue", 1);
+
+        _soundController.PlayEffect(SFXType.Paint, 1f, 1f);
     }
 
     private void MoveableSetTrue()
     {
         _moveable = true;
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z) && _moveable)

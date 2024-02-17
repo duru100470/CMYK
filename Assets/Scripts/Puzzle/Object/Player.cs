@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 public class Player : MapObject, IInitializable
 {
     [Inject]
+    public ISoundController _soundController;
+    [Inject]
     public Channel<PlayerEvent> channel;
     [Inject]
     public Channel<PlayerMoveEvent> moveChannel;
@@ -128,6 +130,8 @@ public class Player : MapObject, IInitializable
 
         Coordinate += dir;
         _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
+
+        _soundController.PlayEffect(SFXType.PlayerMove, 1f, 1f);
     }
 
     public void OnMoveRightInit()
