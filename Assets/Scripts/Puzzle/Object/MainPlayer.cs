@@ -8,16 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class MainPlayer : MapObject, IInitializable
 {
-    private Transform _transform;
-    private int sceneIndex;
     [Inject]
     public Channel<PlayerMoveEvent> moveChannel;
-    public int MaxRight;
+    [Inject]
+    public ISoundController _soundController;
 
-    void Start()
-    {
-        sceneIndex = SceneManager.GetActiveScene().buildIndex;
-    }
+    public int MaxRight;
+    private Transform _transform;
 
     public override void Initialize()
     {
@@ -58,5 +55,7 @@ public class MainPlayer : MapObject, IInitializable
 
         Coordinate += dir;
         _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
+
+        _soundController.PlayEffect(SFXType.PlayerMove, 1f, 1f);
     }
 }

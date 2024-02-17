@@ -94,6 +94,8 @@ public class SoundController : MonoBehaviour, ISoundController
 
     public void ChangeBGMVolume()
     {
+        Debug.Log(MasterVolume);
+
         _bgmAudioSource.volume = MasterVolume * MusicVolume;
     }
 

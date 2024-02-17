@@ -8,6 +8,11 @@ public interface ISoundController
 
 public enum SFXType
 {
+    Paint,
+    GameClear,
+    GameOver,
+    PlayerMove,
+    PlayerInteract,
     Test
 }
 

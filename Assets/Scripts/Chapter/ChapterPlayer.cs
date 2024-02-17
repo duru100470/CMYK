@@ -11,6 +11,8 @@ public class ChapterPlayer : MapObject, IInitializable
     public Channel<PlayerEvent> channel;
     [Inject]
     public Channel<PlayerMoveEvent> moveChannel;
+    [Inject]
+    public ISoundController _soundController;
 
     private ReactiveProperty<ColorType> _playerColor = new();
     public ReactiveProperty<ColorType> PlayerColor => _playerColor;
@@ -60,11 +62,13 @@ public class ChapterPlayer : MapObject, IInitializable
                 obtainableObj.Obtain();
             }
         }
-        if(target.X < -9 || target.Y > 4 || target.Y < -4 || target.X > MaxRight)
+        if (target.X < -9 || target.Y > 4 || target.Y < -4 || target.X > MaxRight)
         {
             return;
         }
         Coordinate += dir;
         _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
+
+        _soundController.PlayEffect(SFXType.PlayerMove, 1f, 1f);
     }
 }
