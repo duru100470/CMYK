@@ -48,5 +48,6 @@ public class SettingPanel : MonoBehaviour
     public void ChangeSFXVolume(float value)
     {
         _setting.SFXVolume = value;
+        _setting.Save();
     }
 }
