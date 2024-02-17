@@ -1,7 +1,8 @@
 using BasicInjector;
 using System.Collections.Generic;
 using UnityEngine;
-
+using MessageChannel;
+using System;
 public abstract class MapController : MonoBehaviour
 {
     [Inject]
@@ -13,6 +14,8 @@ public abstract class MapController : MonoBehaviour
 
     [SerializeField]
     protected Transform _puzzle;
+    [SerializeField]
+    protected Transform _decorations;
 
     private Stack<MapData> _moveRecord = new Stack<MapData>();
 
@@ -35,7 +38,28 @@ public abstract class MapController : MonoBehaviour
             Debug.Log($"Create MapObject! [{mo.Coordinate}, {mo.Info.Type}]");
         }
 
+        foreach (var (coor, name) in mapData.DecorationObjects)
+        {
+            var go =
+                SceneLoader.Instance.CurrentSceneScope.Instantiate(assetLoader.LoadPrefab<GameObject>($"Decorations/{name}"), _decorations);
+            go.transform.position = Coordinate.CoordinateToWorldPoint(coor);
+
+            Debug.Log($"Create DecorationObject! [{coor}, {name}]");
+        }
+
         mapModel.BackgroundColor.Value = mapData.InitColor;
+        ChangeCameraSize(mapData.MapSize);
+    }
+
+    protected void ChangeCameraSize(int size)
+    {
+        Camera.main.orthographicSize = size switch
+        {
+            0 => 5.6f,
+            1 => 10,
+            2 => 13,
+            _ => throw new InvalidOperationException()
+        };
     }
 
     public void Undo()
@@ -48,6 +72,7 @@ public abstract class MapController : MonoBehaviour
 
         ResetMap();
         var tempMapData = _moveRecord.Pop();
+
         foreach (var (coor, info) in tempMapData.MapObjects)
         {
             var go =
@@ -59,13 +84,16 @@ public abstract class MapController : MonoBehaviour
             mo.Init();
 
             mapModel.AddMapObject(mo);
-            Debug.Log($"Create MapObject! [{mo.Coordinate}, {mo.Info.Type}]");
+            if(info.Type == ObjectType.Wall)
+            {
+                go.GetComponent<Wall>().SpriteInit();
+            }
         }
 
         mapModel.BackgroundColor.Value = tempMapData.InitColor;
     }
 
-    public void OnPlayerEventOccurred(PlayerMoveEvent playerMoveEvent)
+    protected void OnPlayerMoveEventOccurred(PlayerMoveEvent playerMoveEvent)
     {
         switch (playerMoveEvent.Type)
         {
@@ -87,6 +115,5 @@ public abstract class MapController : MonoBehaviour
                 _moveRecord.Pop();
                 break;
         }
-
     }
 }

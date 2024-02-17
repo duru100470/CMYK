@@ -1,32 +1,79 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using BasicInjector;
+using System.Text;
 using Cysharp.Threading.Tasks;
-using TMPro;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "new World", menuName = "Models/World Data")]
 public class WorldScriptableObject : ScriptableObject
 {
     [HideInInspector]
-    [Inject]
-    public GameSetting _setting;
+    private GameSetting _setting;
     private bool _isLoaded = false;
     public bool IsLoaded => _isLoaded;
 
-    public int Index;
-    public List<MapInfo> Maps;
-    public List<int> Requirements;
+    // TODO: 월드 해금 조건 만들어야 함
+    public bool IsAvailable => true;
 
-    public async UniTaskVoid LoadAsync()
+    [SerializeField]
+    private int _index;
+    [SerializeField]
+    private List<Map> _maps;
+    [SerializeField]
+    private List<int> _requirements;
+
+    public int MapLength => _maps.Count;
+
+    public async UniTask LoadAsync(GameSetting setting)
     {
+        _setting = setting;
+
         await LoadClearDataAsync();
         await LoadMapDataAsync();
 
         _isLoaded = true;
+    }
+
+    public bool TryGetMapData(int index, out MapData mapData)
+    {
+        if (_isLoaded && _maps[index].IsAvailable)
+        {
+            mapData = _maps[index].Data;
+            return true;
+        }
+
+        mapData = null;
+        return false;
+    }
+
+    public async UniTask UpdateClearDataAsync(int index, bool isClear = true)
+    {
+        _isLoaded = false;
+
+        var clearString = _setting.WorldClearData[_index];
+        var nextState = isClear ? '1' : '0';
+
+        clearString = new StringBuilder(clearString)
+            .Remove(index, 1)
+            .Insert(index, nextState)
+            .ToString();
+
+        _setting.WorldClearData[_index] = clearString;
+        _setting.Save();
+
+        await LoadClearDataAsync();
+
+        _isLoaded = true;
+    }
+
+    public MapStatus GetStatus(int index)
+    {
+        if (_maps[index].IsClear)
+            return MapStatus.Cleared;
+        else if (_maps[index].IsAvailable)
+            return MapStatus.Available;
+        else
+            return MapStatus.Locked;
     }
 
     public async UniTask LoadClearDataAsync()
@@ -35,9 +82,9 @@ public class WorldScriptableObject : ScriptableObject
 
         var clearString = "";
 
-        if (_setting.WorldClearData.Count - 1 < Index)
+        if (_setting.WorldClearData.Count - 1 < _index)
         {
-            for (int i = 0; i < Maps.Count; i++)
+            for (int i = 0; i < _maps.Count; i++)
                 clearString += "0";
 
             _setting.WorldClearData.Add(clearString);
@@ -45,43 +92,43 @@ public class WorldScriptableObject : ScriptableObject
         }
         else
         {
-            clearString = _setting.WorldClearData[Index];
+            clearString = _setting.WorldClearData[_index];
         }
 
-        foreach (var map in Maps)
+        foreach (var map in _maps)
         {
-            map.IsClear = clearString[map.Index - 1] == 1;
+            map.IsClear = clearString[map.Index] == '1';
 
-            var isAvailable = false;
+            var isAvailable = true;
 
             foreach (var r in map.Requirements)
-                isAvailable &= clearString[r - 1] == 1;
+                isAvailable &= clearString[r] == '1';
 
             map.IsAvailable = isAvailable;
         }
     }
 
-    public async UniTask LoadMapDataAsync()
+    private async UniTask LoadMapDataAsync()
     {
-        foreach (var map in Maps)
+        foreach (var map in _maps)
         {
-            var asset = await Resources.LoadAsync<TextAsset>($"Worlds/{Index}/Map{map.Index}.json") as TextAsset;
+            var asset = await Resources.LoadAsync<TextAsset>($"Worlds/{_index + 1}/{map.Index + 1}") as TextAsset;
 
             var data = new MapData();
             data.ImportData(asset.text);
             map.Data = data;
         }
     }
-}
 
-[Serializable]
-public class MapInfo
-{
-    public int Index;
-    public MapData Data;
-    public List<int> Requirements;
-    [ReadOnly]
-    public bool IsClear;
-    [ReadOnly]
-    public bool IsAvailable;
+    [Serializable]
+    private class Map
+    {
+        public int Index;
+        public MapData Data;
+        public List<int> Requirements;
+        [HideInInspector]
+        public bool IsClear;
+        [HideInInspector]
+        public bool IsAvailable;
+    }
 }

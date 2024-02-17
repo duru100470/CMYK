@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using BasicInjector;
 using UnityEngine;
 
-public class MapObject : MonoBehaviour
+public class MapObject : MonoBehaviour, IInitializable
 {
     [Inject]
     public IMapModel MapModel;
@@ -17,7 +17,17 @@ public class MapObject : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Info.Color.ToColor();
     }
 
-    public void OnBackgroundColorChanged(ColorType color)
+    public virtual void Initialize()
+    {
+        Debug.Log(Info.Type);
+
+        if (MapModel != null)
+        {
+            MapModel.BackgroundColor.OnValueChanged += OnBackgroundColorChanged;
+        }
+    }
+
+    protected virtual void OnBackgroundColorChanged(ColorType color)
     {
         GetComponent<SpriteRenderer>().sortingOrder =
             color == Info.Color ? 0 : 1;
@@ -25,6 +35,11 @@ public class MapObject : MonoBehaviour
 
     public void DestroyObject()
     {
+        if (MapModel != null)
+        {
+            MapModel.BackgroundColor.OnValueChanged -= OnBackgroundColorChanged;
+        }
+
         Destroy(gameObject);
     }
 
@@ -32,7 +47,7 @@ public class MapObject : MonoBehaviour
     /// Called when the script is loaded or a value is changed in the
     /// inspector (Called in the editor only).
     /// </summary>
-    private void OnValidate()
+    protected virtual void OnValidate()
     {
         Init();
     }
@@ -46,6 +61,11 @@ public struct ObjectInfo
 {
     public ObjectType Type;
     public ColorType Color;
+    public int SpriteIndex;
+    public bool IsSolidType
+        => Type == ObjectType.Wall ||
+            Type == ObjectType.KeyDoor ||
+            Type == ObjectType.Barrier;
 }
 
 public enum ObjectType
@@ -55,5 +75,13 @@ public enum ObjectType
     Rock,
     Flag,
     Paint,
-    Eraser
+    Eraser,
+    Key,
+    KeyDoor,
+    CharacterPaint,
+    ComplementPaint,
+    CharacterComplementPaint,
+    ColorSwap,
+    CharacterEraser,
+    Barrier
 }

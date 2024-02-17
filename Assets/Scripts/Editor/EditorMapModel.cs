@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 namespace UnityEditor
 {
+#if UNITY_EDITOR
     public class EditorMapModel : IMapModel
     {
         private List<MapObject> _objectList = new();
@@ -36,5 +38,11 @@ namespace UnityEditor
             obj = target;
             return true;
         }
+
+        public IEnumerable<MapObject> GetObjects(bool ignoreColor = false)
+        {
+            throw new NotImplementedException();
+        }
     }
+#endif
 }

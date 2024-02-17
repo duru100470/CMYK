@@ -6,10 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/StartScene.unity
+    guid: a4a050aaa7f3b6247a944351e148bda6
   - enabled: 1
-    path: Assets/Scenes/TestScene.unity
-    guid: 8dafcbbaa2ed2a9418dc2b52ee29306a
+    path: Assets/Scenes/PuzzleScene.unity
+    guid: d7b9a061d7c35ed4ab3f37f4f1bf931f
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 08d73021406d37c42ac16ed4be2dde44
+  - enabled: 1
+    path: Assets/Scenes/ChapterScene0.unity
+    guid: 5f8da0bb56b74cf4c83c42e18532a7d0
+  - enabled: 1
+    path: Assets/Scenes/ChapterScene1.unity
+    guid: 05fd6cae241f3d4468b11e76dfd23135
+  - enabled: 1
+    path: Assets/Scenes/ChapterScene2.unity
+    guid: 224ca79ef25701f449163d71856933d3
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: e0f7c31a65e1e4542b2787c38da76da6, type: 2}

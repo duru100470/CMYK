@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class Rock : MapObject, IMoveable
@@ -24,7 +21,7 @@ public class Rock : MapObject, IMoveable
 
         if (MapModel.TryGetObject(target, out var obj))
         {
-            if (obj.Info.Type == ObjectType.Wall)
+            if (obj.Info.IsSolidType)
                 return false;
             if (obj is IMoveable)
                 return false;

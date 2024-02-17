@@ -15,7 +15,9 @@ public class GameSetting
 
     public GameSetting()
     {
+#if !UNITY_EDITOR
         LoadAsync().Forget();
+#endif
     }
 
     private bool _isAvailable = false;
@@ -66,7 +68,7 @@ public class GameSetting
         PlayerPrefs.Save();
     }
 
-    public async UniTaskVoid LoadAsync()
+    public async UniTask LoadAsync()
     {
         // try load
         var json = await LoadSettingsAsync();
