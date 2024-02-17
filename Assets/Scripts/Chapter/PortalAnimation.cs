@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PortalAnimation : MonoBehaviour
@@ -21,7 +20,7 @@ public class PortalAnimation : MonoBehaviour
 
     public void AnimationOff()
     {
-        _onAni= false;
+        _onAni = false;
     }
 
     private void Update()
@@ -33,7 +32,7 @@ public class PortalAnimation : MonoBehaviour
             _spriteRenderer.enabled = true;
             targetPos = new Vector3(0, 1, 0);
             targetScale = new Vector3(1, 1, 1);
-            if(!_init)
+            if (!_init)
             {
                 _init = true;
                 transform.localPosition = new Vector3(0, 0.5f, 0);
@@ -44,7 +43,7 @@ public class PortalAnimation : MonoBehaviour
             targetPos = new Vector3(0, 0, 0);
             targetScale = new Vector3(0, 0, 0);
         }
-        if(transform.localPosition.y < 0.5)
+        if (transform.localPosition.y < 0.5)
         {
             _init = false;
             _spriteRenderer.enabled = false;

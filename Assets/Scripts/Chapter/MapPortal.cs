@@ -3,10 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MessageChannel;
-using UnityEngine.UI;
-using static Unity.Collections.AllocatorManager;
 using UnityEngine.SceneManagement;
-using Unity.Collections.LowLevel.Unsafe;
 
 public class MapPortal : MapObject, IObtainable
 {
