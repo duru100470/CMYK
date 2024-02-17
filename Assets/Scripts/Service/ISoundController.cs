@@ -7,7 +7,7 @@ public interface ISoundController
 
 public enum SFXType
 {
-
+    Test
 }
 
 public enum BGMType

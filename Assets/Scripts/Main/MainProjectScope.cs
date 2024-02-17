@@ -8,6 +8,8 @@ public class MainProjectScope : ProjectScope
     [SerializeField]
     private WorldLoader _worldLoader;
     [SerializeField]
+    private SoundController _soundController;
+    [SerializeField]
     private GameSetting _gameSetting = new();
 
     public override void InitializeContainer(ContainerBuilder builder)
@@ -16,6 +18,7 @@ public class MainProjectScope : ProjectScope
         builder.AddSingleton<GameSetting>(_gameSetting);
         builder.AddTransient<AssetLoader>();
         builder.AddSingleton<WorldLoader>(_worldLoader);
+        builder.AddSingleton<ISoundController>(_soundController);
     }
 
     [ContextMenu("Reset Settings")]
