@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Paint
   m_EditorClassIdentifier: 
   Clip: {fileID: 8300000, guid: ffea3c0dffd370240a66cc9d4e031afb, type: 3}
-  Volume: 1
+  Volume: 0.442

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51607df00bad8854faebf867351795c8, type: 3}
   m_Name: GameClear
   m_EditorClassIdentifier: 
-  Clip: {fileID: 0}
-  Volume: 0
+  Clip: {fileID: 8300000, guid: add69a42bc52c8145aebf51c3f038056, type: 3}
+  Volume: 1

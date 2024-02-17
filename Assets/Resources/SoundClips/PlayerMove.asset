@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51607df00bad8854faebf867351795c8, type: 3}
   m_Name: PlayerMove
   m_EditorClassIdentifier: 
-  Clip: {fileID: 0}
-  Volume: 0
+  Clip: {fileID: 8300000, guid: df35434b257b8f14b807c3f2cc4b5e23, type: 3}
+  Volume: 1

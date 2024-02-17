@@ -459,14 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28330b38ec03bd47ba0275176ecc965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mapController: {fileID: 0}
-  _testView: {fileID: 0}
-  _gameSetting:
-    MasterVolume: 1
-    MusicVolume: 1
-    SFXVolume: 1
-    WorldClearData: []
-  _worldLoader: {fileID: 0}
+  _inject: {fileID: 833131451}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
