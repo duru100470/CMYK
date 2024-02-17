@@ -8,10 +8,11 @@ public interface ISoundController
 
 public enum SFXType
 {
-    ObtainEraser,
-    ObtainPaint,
+    Paint,
     GameClear,
     GameOver,
+    PlayerMove,
+    PlayerInteract,
     Test
 }
 

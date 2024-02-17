@@ -9,6 +9,9 @@ public class MapPortal : MapObject, IObtainable
 {
     [Inject]
     public Channel<PlayerMoveEvent> moveChannel;
+    [Inject]
+    public ISoundController _soundController;
+
     [SerializeField]
     private PortalAnimation _dataEffect;
     [SerializeField]
@@ -62,6 +65,8 @@ public class MapPortal : MapObject, IObtainable
         {
             if (_worldLoader.TryLoadMap(World, Chapter, out var data))
                 SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(data).Forget();
+
+            _soundController.PlayEffect(SFXType.PlayerInteract, 1f, 1f);
         }
         else if (Input.GetKeyDown(KeyCode.Space) && _isMainScene && _inPlayer)
         {
@@ -79,6 +84,8 @@ public class MapPortal : MapObject, IObtainable
                 default:
                     break;
             }
+
+            _soundController.PlayEffect(SFXType.PlayerInteract, 1f, 1f);
         }
 
         if (!_init && _worldLoader != null)

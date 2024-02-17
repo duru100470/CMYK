@@ -7,7 +7,7 @@ public class AudioClipSetting : ScriptableObject
 {
     public AudioClip Clip;
     [Range(0f, 1f)]
-    public float Volume;
+    public float Volume = 1f;
 
     public AudioClipSetting(float volume)
     {

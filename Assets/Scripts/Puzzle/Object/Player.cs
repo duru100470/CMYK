@@ -71,8 +71,6 @@ public class Player : MapObject, IInitializable
 
         if (Info.Color == color)
         {
-            _soundController.PlayEffect(SFXType.GameOver, 1.0f, 1.0f);
-
             channel.Notify(new PlayerEvent { Type = PlayerEventType.GameOver });
             MapModel.RemoveMapObject(this);
         }
@@ -132,6 +130,8 @@ public class Player : MapObject, IInitializable
 
         Coordinate += dir;
         _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
+
+        _soundController.PlayEffect(SFXType.PlayerMove, 1f, 1f);
     }
 
     public void OnMoveRightInit()
