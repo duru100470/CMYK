@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8696671941470648394}
   - component: {fileID: 7891989367990841838}
   - component: {fileID: 1087749625230404890}
+  - component: {fileID: 8608227001587835040}
   m_Layer: 0
   m_Name: MainPlayer
   m_TagString: Untagged
@@ -103,14 +104,42 @@ MonoBehaviour:
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_DeviceRegainedEvent:
     m_PersistentCalls:
       m_Calls: []
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5e6df938-9035-4dd7-ae9c-eedd86da6ec3
+    m_ActionName: MainPlayerActionMap/MoveUp[/Keyboard/upArrow,/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 648d9def-009a-4a44-901f-4e7dcd154477
+    m_ActionName: MainPlayerActionMap/MoveDown[/Keyboard/downArrow,/Keyboard/s]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2a446853-ba49-4770-9dfa-a65c927f1f36
+    m_ActionName: MainPlayerActionMap/MoveLeft[/Keyboard/leftArrow,/Keyboard/a]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 578a0ed0-276e-4475-8b43-77e826d90f08
+    m_ActionName: MainPlayerActionMap/MoveRight[/Keyboard/rightArrow,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: MainPlayerActionMap
@@ -136,4 +165,20 @@ MonoBehaviour:
   Coordinate:
     _x: 0
     _y: 0
+  _playerController: {fileID: 8608227001587835040}
   MaxRight: 0
+--- !u!114 &8608227001587835040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8951525513814730630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd5fa63ab386b454fbc6c4729f4fc07c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hasHoldInput: 1
+  _holdTime: 1
+  _moveDelay: 0.15
