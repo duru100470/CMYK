@@ -6,24 +6,13 @@ public class Flicker : MonoBehaviour
 {
 
     private SpriteRenderer _spriteRenderer;
-
     public float delay = 0.5f;
-
-    public int repeat = 4;
-
-    int value = 0;
-    private Player _player;
     private IEnumerator enumerator;
-    private bool _isMoving = false;
+    public bool _isMoving = false;
 
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _player = GetComponent<Player>();
-        if (_player == null)
-        {
-            _player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        }
     }
 
 
@@ -32,17 +21,8 @@ public class Flicker : MonoBehaviour
         StartMethod();
     }
 
-    void Update()
-    {
-        if (_player != null)
-        {
-            _isMoving = _player.IsMoving;
-        }
-    }
-
     void StartMethod()
     {
-        value = repeat;
         enumerator = FlickerCoroution();
         StartCoroutine(enumerator);
     }
@@ -57,15 +37,6 @@ public class Flicker : MonoBehaviour
 
     IEnumerator FlickerCoroution()
     {
-        if(value > 0)
-        {
-            value -= 1;
-        }
-        else
-        {
-            yield break;
-        }
-
         if(_isMoving)
         {
             yield break;
