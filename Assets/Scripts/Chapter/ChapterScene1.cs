@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using MessageChannel;
 using Cysharp.Threading.Tasks;
+using System.Linq;
+using UnityEngine.TextCore.Text;
+using UnityEngine.UIElements;
 
 public class ChapterScene1 : SceneScope, IScene
 {
@@ -13,6 +16,8 @@ public class ChapterScene1 : SceneScope, IScene
     [SerializeField]
     private TestView _testView;
     private MapData _mapData;
+    private ChapterPlayer _character;
+    private int _position;
 
     [Inject]
     public GameSetting _gameSetting;
@@ -26,8 +31,12 @@ public class ChapterScene1 : SceneScope, IScene
         Debug.Log("Main scene is loaded!");
 
         _mapController.InitMap();
-
         LoadAsync().Forget();
+
+        _position = (int)param;
+        _character = _testView.mapModel.GetObjects().First(obj => obj.Info.Type == ObjectType.Player) as ChapterPlayer;
+        _character.Coordinate = new Coordinate(_position, -1);
+        _character.GetComponent<UnityEngine.Transform>().position = Coordinate.CoordinateToWorldPoint(_character.Coordinate);
     }
 
     public override void Unload()

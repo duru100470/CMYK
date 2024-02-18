@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Info:
-    Type: 0
+    Type: 14
     Color:
       Type: 0
     SpriteIndex: 0

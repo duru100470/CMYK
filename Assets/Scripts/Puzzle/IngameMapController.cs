@@ -87,19 +87,19 @@ public class IngameMapController : MapController, IInitializable
                 if (_worldLoader.CurrentMapIndex.Item2 == 7)
                     SceneLoader.Instance.LoadSceneAsync<MainScene>(null).Forget();
                 else
-                    SceneLoader.Instance.LoadSceneAsync<ChapterScene0>(null).Forget();
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene0>(_worldLoader.CurrentMapIndex.Item2*5 + 4).Forget();
                 break;
             case 1:
                 if (_worldLoader.CurrentMapIndex.Item2 == 4)
                     SceneLoader.Instance.LoadSceneAsync<MainScene>(null).Forget();
                 else
-                    SceneLoader.Instance.LoadSceneAsync<ChapterScene1>(null).Forget();
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene1>(_worldLoader.CurrentMapIndex.Item2 * 5 + 4).Forget();
                 break;
             case 2:
                 if (_worldLoader.CurrentMapIndex.Item2 == 2)
                     SceneLoader.Instance.LoadSceneAsync<MainScene>(null).Forget();
                 else
-                    SceneLoader.Instance.LoadSceneAsync<ChapterScene2>(null).Forget();
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene2>(_worldLoader.CurrentMapIndex.Item2 * 5 + 4).Forget();
                 break;
             default:
                 break;
