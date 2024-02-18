@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using System.Linq;
+using UnityEngine.TextCore.Text;
+using UnityEngine.UIElements;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class ChapterScene0 : SceneScope, IScene
 {
@@ -11,13 +15,16 @@ public class ChapterScene0 : SceneScope, IScene
     private MapController _mapController;
     [SerializeField]
     private TestView _testView;
+    [SerializeField]
+    private GameObject _camera;
     private MapData _mapData;
+    private MainPlayer _character;
+    private int _position;
 
     [Inject]
     public GameSetting _gameSetting;
     [Inject]
     public WorldLoader _worldLoader;
-
 
     public override void Load(object param)
     {
@@ -27,6 +34,12 @@ public class ChapterScene0 : SceneScope, IScene
         _mapController.InitMap();
 
         LoadAsync().Forget();
+
+        _position = (int)param;
+        _character = _testView.mapModel.GetObjects().First(obj => obj.Info.Type == ObjectType.Player) as MainPlayer;
+        _character.Coordinate = new Coordinate(_position, -1);
+        _character.GetComponent<UnityEngine.Transform>().position = Coordinate.CoordinateToWorldPoint(_character.Coordinate);
+        _camera.GetComponent<UnityEngine.Transform>().position = new Vector3(_character.GetComponent<UnityEngine.Transform>().position.x, 0.5f, -10);
     }
 
     public override void Unload()

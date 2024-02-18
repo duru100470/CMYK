@@ -73,13 +73,13 @@ public class MapPortal : MapObject, IObtainable
             switch (World)
             {
                 case 0:
-                    SceneLoader.Instance.LoadSceneAsync<ChapterScene0>(null).Forget();
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene0>(-1).Forget();
                     break;
                 case 1:
-                    SceneLoader.Instance.LoadSceneAsync<ChapterScene1>(null).Forget();
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene1>(-1).Forget();
                     break;
                 case 2:
-                    SceneLoader.Instance.LoadSceneAsync<ChapterScene2>(null).Forget();
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene2>(-1).Forget();
                     break;
                 default:
                     break;
