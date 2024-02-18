@@ -8,6 +8,7 @@ public interface ISoundController
 
 public enum SFXType
 {
+    DestroyItem,
     Paint,
     GameClear,
     GameOver,

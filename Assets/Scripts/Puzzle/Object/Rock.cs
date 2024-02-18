@@ -1,7 +1,13 @@
+using BasicInjector;
 using UnityEngine;
 
 public class Rock : MapObject, IMoveable
 {
+    [Inject]
+    public ISoundController _soundController;
+
+    [SerializeField]
+    private GameObject _effect;
     private Transform _transform;
 
     private void Awake()
@@ -26,7 +32,14 @@ public class Rock : MapObject, IMoveable
             if (obj is IMoveable)
                 return false;
             if (obj is IObtainable)
+            {
+                var go = SceneLoader.Instance.CurrentSceneScope.Instantiate(_effect);
+                go.transform.position = obj.transform.position;
+                go.GetComponent<DestroyEffect>().Emit(obj.Info.Color);
+
                 MapModel.RemoveMapObject(obj);
+                _soundController.PlayEffect(SFXType.DestroyItem, 1f, 1f);
+            }
         }
 
         Move(dir);
