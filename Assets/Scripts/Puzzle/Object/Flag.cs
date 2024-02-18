@@ -16,6 +16,7 @@ public class Flag : MapObject, IObtainable
     {
         _flicker = GetComponent<Flicker>();
         _flicker.enabled = true;
+        _flicker._isFlag = true;
     }
 
     public void Obtain()

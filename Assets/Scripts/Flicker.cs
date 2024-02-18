@@ -7,14 +7,16 @@ public class Flicker : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
     public float delay = 0.5f;
+    public int repeat = 4; //반복 횟수
+    int value = 0;
     private IEnumerator enumerator;
     public bool _isMoving = false;
+    public bool _isFlag = false;
 
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
 
     void Start()
     {
@@ -23,6 +25,7 @@ public class Flicker : MonoBehaviour
 
     void StartMethod()
     {
+        value = repeat;
         enumerator = FlickerCoroution();
         StartCoroutine(enumerator);
     }
@@ -37,6 +40,18 @@ public class Flicker : MonoBehaviour
 
     IEnumerator FlickerCoroution()
     {
+        if (_isFlag)
+        {
+            if(value > 0)
+            {
+                value -= 1;
+            }
+            else
+            {
+                yield break;
+            }
+        }
+
         if(_isMoving)
         {
             yield break;

@@ -23,7 +23,7 @@ public class Player : MapObject, IInitializable
     public bool IsMoveable { get; set; } = true;
     public bool IsMoving { get; set; } = false;
     private Flicker _flickerPlayer;
-    private Flicker _flickerFlag;
+    //private Flicker _flickerFlag;
 
     public override void Initialize()
     {
@@ -38,7 +38,7 @@ public class Player : MapObject, IInitializable
         _playerController.OnPlayerMove += Move;
 
         _flickerPlayer = GetComponent<Flicker>();
-        _flickerFlag = GameObject.FindWithTag("Finish").GetComponent<Flicker>();
+        //_flickerFlag = GameObject.FindWithTag("Finish").GetComponent<Flicker>();
     }
 
     void Update()
@@ -46,7 +46,7 @@ public class Player : MapObject, IInitializable
         if (IsMoving)
         {
             _flickerPlayer._isMoving = true;
-            _flickerFlag._isMoving = true;
+            //_flickerFlag._isMoving = true;
         }
     }
 
