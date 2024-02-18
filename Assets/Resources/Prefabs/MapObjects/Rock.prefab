@@ -105,3 +105,4 @@ MonoBehaviour:
   Coordinate:
     _x: 0
     _y: 0
+  _effect: {fileID: 3056176903321803581, guid: 7b29e420170c1c3498968d690b2e2092, type: 3}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using BasicInjector;
@@ -13,26 +14,15 @@ public class MainPlayer : MapObject, IInitializable
     [Inject]
     public ISoundController _soundController;
 
+    [SerializeField]
+    private PlayerController _playerController;
     public int MaxRight;
-    private Transform _transform;
 
     public override void Initialize()
     {
         base.Initialize();
-        _transform = GetComponent<Transform>();
+        _playerController.OnPlayerMove += Move;
     }
-
-    private void OnMoveUp()
-        => Move(new Coordinate(0, 1));
-
-    private void OnMoveDown()
-        => Move(new Coordinate(0, -1));
-
-    private void OnMoveLeft()
-        => Move(new Coordinate(-1, 0));
-
-    private void OnMoveRight()
-        => Move(new Coordinate(1, 0));
 
     private void Move(Coordinate dir)
     {
@@ -54,7 +44,7 @@ public class MainPlayer : MapObject, IInitializable
         }
 
         Coordinate += dir;
-        _transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
+        transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
 
         _soundController.PlayEffect(SFXType.PlayerMove, 1f, 1f);
     }

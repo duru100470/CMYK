@@ -19,6 +19,7 @@ public class Player : MapObject, IInitializable
 
     private Transform _transform;
     private ColorType _myColorType;
+    private PlayerController _playerController;
     public bool IsMoveable { get; set; } = true;
 
     public override void Initialize()
@@ -29,6 +30,9 @@ public class Player : MapObject, IInitializable
         PlayerColor.Value = Info.Color;
         PlayerColor.OnValueChanged += OnPlayerColorChanged;
         _myColorType = MapModel.BackgroundColor.Value;
+
+        _playerController = GetComponent<PlayerController>();
+        _playerController.OnPlayerMove += Move;
     }
 
     void OnDestroy()
@@ -82,18 +86,6 @@ public class Player : MapObject, IInitializable
     {
         IsMoveable = true;
     }
-
-    private void OnMoveUp()
-        => Move(new Coordinate(0, 1));
-
-    private void OnMoveDown()
-        => Move(new Coordinate(0, -1));
-
-    private void OnMoveLeft()
-        => Move(new Coordinate(-1, 0));
-
-    private void OnMoveRight()
-        => Move(new Coordinate(1, 0));
 
     private void Move(Coordinate dir)
     {
