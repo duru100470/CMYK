@@ -3,6 +3,9 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using MessageChannel;
 using TMPro;
+using System.Linq;
+using UnityEngine.TextCore.Text;
+using UnityEngine.UIElements;
 
 public class MainScene : SceneScope, IScene
 {
@@ -14,6 +17,10 @@ public class MainScene : SceneScope, IScene
     private TestView _testView;
     [SerializeField]
     private TextMeshProUGUI _version;
+    [SerializeField]
+    private GameObject _camera;
+    private MainPlayer _character;
+    private int _position;
 
     [HideInInspector]
     [Inject]
@@ -31,6 +38,13 @@ public class MainScene : SceneScope, IScene
         LoadAsync().Forget();
 
         _version.text = "Version: " + Application.version;
+
+        _position = (int)param;
+        _character = _testView.mapModel.GetObjects().First(obj => obj.Info.Type == ObjectType.Player) as MainPlayer;
+        _character.Coordinate = new Coordinate(_position, -2);
+        _character.GetComponent<Transform>().position = Coordinate.CoordinateToWorldPoint(_character.Coordinate);
+        _camera.GetComponent<Transform>().position = new Vector3(_character.GetComponent<Transform>().position.x, 0.5f, -10);
+        _character.PosInit();
     }
 
     public override void Unload()

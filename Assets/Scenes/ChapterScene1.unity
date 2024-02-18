@@ -914,11 +914,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2162421605688584662, guid: b6a04de0d36f2244e8c17b6c5ac201b9, type: 3}
       propertyPath: World
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2162421605688584662, guid: b6a04de0d36f2244e8c17b6c5ac201b9, type: 3}
       propertyPath: Chapter
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2162421605688584662, guid: b6a04de0d36f2244e8c17b6c5ac201b9, type: 3}
       propertyPath: Coordinate._x

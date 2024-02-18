@@ -63,8 +63,8 @@ public class MapPortal : MapObject, IObtainable
     {
         if (Input.GetKeyDown(KeyCode.Space) && _worldLoader.IsWorldLoaded && _inPlayer && !_isMainScene)
         {
-            if (World == -1)
-                SceneLoader.Instance.LoadSceneAsync<MainScene>(null).Forget();
+            if (Chapter == -1)
+                SceneLoader.Instance.LoadSceneAsync<MainScene>((World+1)*19).Forget();
             else if (_worldLoader.TryLoadMap(World, Chapter, out var data))
                 SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(data).Forget();
 
@@ -90,7 +90,7 @@ public class MapPortal : MapObject, IObtainable
             _soundController.PlayEffect(SFXType.PlayerInteract, 1f, 1f);
         }
 
-        if(World == -1)
+        if(Chapter == -1)
         {
             _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 1);
             _spriteRenderer.sprite = _sprites[0];

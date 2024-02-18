@@ -15,7 +15,7 @@ public class StartScene : SceneScope, IScene
     {
         base.Load();
         GameObjectInjector.InjectSingle(_inject, Container);
-        SceneLoader.Instance.LoadSceneAsync<MainScene>(null).Forget();
+        SceneLoader.Instance.LoadSceneAsync<MainScene>(0).Forget();
     }
 
     public override void Unload()
