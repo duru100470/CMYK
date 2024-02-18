@@ -21,6 +21,7 @@ public class Player : MapObject, IInitializable
     private ColorType _myColorType;
     private PlayerController _playerController;
     public bool IsMoveable { get; set; } = true;
+    public bool IsMoving { get; set; } = false;
 
     public override void Initialize()
     {
@@ -93,6 +94,8 @@ public class Player : MapObject, IInitializable
             return;
 
         moveChannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
+
+        IsMoving = true;
 
         var target = Coordinate + dir;
         if (MapModel.TryGetObject(target, out var obj))
