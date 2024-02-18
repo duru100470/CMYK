@@ -651,6 +651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mapController: {fileID: 1725793472}
   _testView: {fileID: 316728321}
+  _camera: {fileID: 1120731026}
   _gameSetting:
     MasterVolume: 1
     MusicVolume: 1
