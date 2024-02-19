@@ -166,4 +166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.5
+  repeat: 4
   _isMoving: 0
+  _isFlag: 0
