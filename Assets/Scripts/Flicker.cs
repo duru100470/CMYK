@@ -13,12 +13,12 @@ public class Flicker : MonoBehaviour
     public bool _isMoving = false;
     public bool _isFlag = false;
 
-    void Awake()
+    private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Start()
+    private void Start()
     {
         StartMethod();
     }
