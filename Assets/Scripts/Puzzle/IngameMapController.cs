@@ -17,6 +17,10 @@ public class IngameMapController : MapController, IInitializable
     public WorldLoader _worldLoader;
     [Inject]
     public ISoundController _soundController;
+    [Inject]
+    public GameSetting _gameSetting;
+
+    private string _url = "http://duruchigy.ddns.net/cmyk/events";
 
     private bool _moveable = true;
     private ColorType _myColorType;
@@ -27,6 +31,9 @@ public class IngameMapController : MapController, IInitializable
         _playerMoveEventChannel.Subscribe(OnPlayerMoveEventOccurred);
         mapModel.BackgroundColor.OnValueChanged += OnColorEventOccurred;
         _myColorType = mapModel.BackgroundColor.Value;
+
+        var e = new GameEvent(_gameSetting.Id, "puzzle_start", Application.version, _worldLoader.CurrentMapIndex.Item1 * 1000 + _worldLoader.CurrentMapIndex.Item2);
+        NetworkManager.SendToServer(_url, SendType.POST, e.ToJson()).Forget();
     }
 
     private void OnDestroy()
@@ -59,6 +66,9 @@ public class IngameMapController : MapController, IInitializable
         {
             _moveable = false;
 
+            var e = new GameEvent(_gameSetting.Id, "puzzle_clear", Application.version, _worldLoader.CurrentMapIndex.Item1 * 1000 + _worldLoader.CurrentMapIndex.Item2);
+            NetworkManager.SendToServer(_url, SendType.POST, e.ToJson()).Forget();
+
             Invoke("SceneChange", 2);
 
             _soundController.PlayEffect(SFXType.GameClear, 1f, 1f);
@@ -79,15 +89,13 @@ public class IngameMapController : MapController, IInitializable
     {
         _worldLoader.UpdateClearDataAsync(_worldLoader.CurrentMapIndex.Item1, _worldLoader.CurrentMapIndex.Item2).Forget();
 
-
-
         switch (_worldLoader.CurrentMapIndex.Item1)
         {
             case 0:
                 if (_worldLoader.CurrentMapIndex.Item2 == 7)
                     SceneLoader.Instance.LoadSceneAsync<MainScene>((_worldLoader.CurrentMapIndex.Item1 + 1) * 19).Forget();
                 else
-                    SceneLoader.Instance.LoadSceneAsync<ChapterScene0>(_worldLoader.CurrentMapIndex.Item2*5 + 4).Forget();
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene0>(_worldLoader.CurrentMapIndex.Item2 * 5 + 4).Forget();
                 break;
             case 1:
                 if (_worldLoader.CurrentMapIndex.Item2 == 4)
@@ -139,6 +147,9 @@ public class IngameMapController : MapController, IInitializable
         {
             ResetMap();
             InitMap();
+
+            var e = new GameEvent(_gameSetting.Id, "puzzle_restart", Application.version, _worldLoader.CurrentMapIndex.Item1 * 1000 + _worldLoader.CurrentMapIndex.Item2);
+            NetworkManager.SendToServer(_url, SendType.POST, e.ToJson()).Forget();
         }
     }
 }
