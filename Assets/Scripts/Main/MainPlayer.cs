@@ -6,6 +6,7 @@ using MessageChannel;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static UnityEngine.GraphicsBuffer;
 
 public class MainPlayer : MapObject, IInitializable
 {
@@ -29,7 +30,7 @@ public class MainPlayer : MapObject, IInitializable
         moveChannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
 
         var target = Coordinate + dir;
-        if (MapModel.TryGetObject(target, out var obj))
+        if (MapModel.TryGetObject(target, out var obj)) 
         {
             if (obj is IObtainable)
             {
@@ -47,5 +48,15 @@ public class MainPlayer : MapObject, IInitializable
         transform.position = Coordinate.CoordinateToWorldPoint(Coordinate);
 
         _soundController.PlayEffect(SFXType.PlayerMove, 1f, 1f);
+    }
+
+
+    public void PosInit()
+    {
+        if (MapModel.TryGetObject(Coordinate, out var obj))
+        {
+            Debug.Log(obj);
+        }
+        
     }
 }

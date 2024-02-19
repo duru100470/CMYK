@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Linq;
-using UnityEngine.TextCore.Text;
-using UnityEngine.UIElements;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class ChapterScene0 : SceneScope, IScene
 {
@@ -38,8 +35,9 @@ public class ChapterScene0 : SceneScope, IScene
         _position = (int)param;
         _character = _testView.mapModel.GetObjects().First(obj => obj.Info.Type == ObjectType.Player) as MainPlayer;
         _character.Coordinate = new Coordinate(_position, -1);
-        _character.GetComponent<UnityEngine.Transform>().position = Coordinate.CoordinateToWorldPoint(_character.Coordinate);
-        _camera.GetComponent<UnityEngine.Transform>().position = new Vector3(_character.GetComponent<UnityEngine.Transform>().position.x, 0.5f, -10);
+        _character.GetComponent<Transform>().position = Coordinate.CoordinateToWorldPoint(_character.Coordinate);
+        _camera.GetComponent<Transform>().position = new Vector3(_character.GetComponent<Transform>().position.x, 0.5f, -10);
+        _character.PosInit();
     }
 
     public override void Unload()

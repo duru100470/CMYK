@@ -1126,6 +1126,7 @@ MonoBehaviour:
   _mapController: {fileID: 1201199809}
   _testView: {fileID: 997157161}
   _version: {fileID: 766567703}
+  _camera: {fileID: 1479335623}
   _gameSetting:
     MasterVolume: 1
     MusicVolume: 1
