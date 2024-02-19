@@ -21,6 +21,9 @@ public class Player : MapObject, IInitializable
     private ColorType _myColorType;
     private PlayerController _playerController;
     public bool IsMoveable { get; set; } = true;
+    public bool IsMoving { get; set; } = false;
+    private Flicker _flickerPlayer;
+    //private Flicker _flickerFlag;
 
     public override void Initialize()
     {
@@ -33,6 +36,18 @@ public class Player : MapObject, IInitializable
 
         _playerController = GetComponent<PlayerController>();
         _playerController.OnPlayerMove += Move;
+
+        _flickerPlayer = GetComponent<Flicker>();
+        //_flickerFlag = GameObject.FindWithTag("Finish").GetComponent<Flicker>();
+    }
+
+    void Update()
+    {
+        if (IsMoving)
+        {
+            _flickerPlayer._isMoving = true;
+            //_flickerFlag._isMoving = true;
+        }
     }
 
     void OnDestroy()
@@ -93,6 +108,8 @@ public class Player : MapObject, IInitializable
             return;
 
         moveChannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
+
+        IsMoving = true;
 
         var target = Coordinate + dir;
         if (MapModel.TryGetObject(target, out var obj))

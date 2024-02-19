@@ -83,5 +83,6 @@ public enum ObjectType
     CharacterComplementPaint,
     ColorSwap,
     CharacterEraser,
-    Barrier
+    Barrier,
+    Portal
 }

@@ -63,7 +63,9 @@ public class MapPortal : MapObject, IObtainable
     {
         if (Input.GetKeyDown(KeyCode.Space) && _worldLoader.IsWorldLoaded && _inPlayer && !_isMainScene)
         {
-            if (_worldLoader.TryLoadMap(World, Chapter, out var data))
+            if (Chapter == -1)
+                SceneLoader.Instance.LoadSceneAsync<MainScene>((World+1)*19).Forget();
+            else if (_worldLoader.TryLoadMap(World, Chapter, out var data))
                 SceneLoader.Instance.LoadSceneAsync<PuzzleScene>(data).Forget();
 
             _soundController.PlayEffect(SFXType.PlayerInteract, 1f, 1f);
@@ -73,13 +75,13 @@ public class MapPortal : MapObject, IObtainable
             switch (World)
             {
                 case 0:
-                    SceneLoader.Instance.LoadSceneAsync<ChapterScene0>(null).Forget();
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene0>(-1).Forget();
                     break;
                 case 1:
-                    SceneLoader.Instance.LoadSceneAsync<ChapterScene1>(null).Forget();
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene1>(-1).Forget();
                     break;
                 case 2:
-                    SceneLoader.Instance.LoadSceneAsync<ChapterScene2>(null).Forget();
+                    SceneLoader.Instance.LoadSceneAsync<ChapterScene2>(-1).Forget();
                     break;
                 default:
                     break;
@@ -88,7 +90,14 @@ public class MapPortal : MapObject, IObtainable
             _soundController.PlayEffect(SFXType.PlayerInteract, 1f, 1f);
         }
 
-        if (!_init && _worldLoader != null)
+        if(Chapter == -1)
+        {
+            _spriteRenderer.color = new Color(_spriteRenderer.color.r, _spriteRenderer.color.g, _spriteRenderer.color.b, 1);
+            _spriteRenderer.sprite = _sprites[0];
+            _lock = false;
+            _init = true;
+        }
+        else if (!_init && _worldLoader != null)
         {
             _mapStatus = _worldLoader.GetStatus(World, Chapter);
 

@@ -10,6 +10,14 @@ public class Flag : MapObject, IObtainable
 
     [SerializeField]
     private GameObject _effect;
+    private Flicker _flicker;
+
+    void Start()
+    {
+        _flicker = GetComponent<Flicker>();
+        _flicker.enabled = true;
+        _flicker._isFlag = true;
+    }
 
     public void Obtain()
     {
