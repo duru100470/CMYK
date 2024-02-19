@@ -88,6 +88,11 @@ public abstract class MapController : MonoBehaviour
             {
                 go.GetComponent<Wall>().SpriteInit();
             }
+
+            if(info.Type == ObjectType.Player || info.Type == ObjectType.Flag)
+            {
+                go.GetComponent<Flicker>()._isMoving = true;
+            }
         }
 
         mapModel.BackgroundColor.Value = tempMapData.InitColor;
