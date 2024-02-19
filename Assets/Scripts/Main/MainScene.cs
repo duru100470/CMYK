@@ -18,6 +18,8 @@ public class MainScene : SceneScope, IScene
     [SerializeField]
     private TextMeshProUGUI _version;
     [SerializeField]
+    private TextMeshProUGUI _id;
+    [SerializeField]
     private GameObject _camera;
     private MainPlayer _character;
     private int _position;
@@ -55,6 +57,8 @@ public class MainScene : SceneScope, IScene
     private async UniTaskVoid LoadAsync()
     {
         await (_gameSetting.LoadAsync(), _worldLoader.InitWorlds(_gameSetting));
+
+        _id.text = "UID: " + _gameSetting.Id;
     }
 
     public override void InitializeContainer(ContainerBuilder builder)
@@ -65,5 +69,12 @@ public class MainScene : SceneScope, IScene
         builder.AddSingleton<TestView>(_testView);
         builder.AddSingleton<MessageChannel.Channel<PlayerEvent>>();
         builder.AddSingleton<MessageChannel.Channel<PlayerMoveEvent>>();
+    }
+
+    [ContextMenu("Reset Settings")]
+    public void ResetSetting()
+    {
+        PlayerPrefs.DeleteKey("GameSettings");
+        Application.Quit();
     }
 }

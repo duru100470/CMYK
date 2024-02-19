@@ -12,6 +12,7 @@ public class GameSetting
     public float MusicVolume = 1.0f;
     public float SFXVolume = 1.0f;
     public List<string> WorldClearData = new();
+    public string Id;
 
     public GameSetting()
     {
@@ -76,6 +77,7 @@ public class GameSetting
         // if no settings saved, save default settings
         if (string.IsNullOrEmpty(json))
         {
+            Id = Guid.NewGuid().ToString();
             Save();
             _isAvailable = true;
             return;
