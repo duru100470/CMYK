@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using BasicInjector;
 using MessageChannel;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
-using static UnityEngine.GraphicsBuffer;
 
-public class MainPlayer : MapObject, IInitializable
+public class MainPlayer : MapObject
 {
     [Inject]
     public Channel<PlayerMoveEvent> moveChannel;
@@ -19,9 +16,9 @@ public class MainPlayer : MapObject, IInitializable
     private PlayerController _playerController;
     public int MaxRight;
 
-    public override void Initialize()
+    public override void Start()
     {
-        base.Initialize();
+        base.Start();
         _playerController.OnPlayerMove += Move;
     }
 
@@ -30,7 +27,7 @@ public class MainPlayer : MapObject, IInitializable
         moveChannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
 
         var target = Coordinate + dir;
-        if (MapModel.TryGetObject(target, out var obj)) 
+        if (_mapModel.TryGetObject(target, out var obj))
         {
             if (obj is IObtainable)
             {
@@ -53,10 +50,10 @@ public class MainPlayer : MapObject, IInitializable
 
     public void PosInit()
     {
-        if (MapModel.TryGetObject(Coordinate, out var obj))
+        if (_mapModel.TryGetObject(Coordinate, out var obj))
         {
             Debug.Log(obj);
         }
-        
+
     }
 }

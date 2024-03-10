@@ -10,8 +10,9 @@ public class Rock : MapObject, IMoveable
     private GameObject _effect;
     private Transform _transform;
 
-    private void Awake()
+    public override void Start()
     {
+        base.Start();
         _transform = GetComponent<Transform>();
     }
 
@@ -25,7 +26,7 @@ public class Rock : MapObject, IMoveable
     {
         var target = Coordinate + dir;
 
-        if (MapModel.TryGetObject(target, out var obj))
+        if (_mapModel.TryGetObject(target, out var obj))
         {
             if (obj.Info.IsSolidType)
                 return false;
@@ -37,7 +38,7 @@ public class Rock : MapObject, IMoveable
                 go.transform.position = obj.transform.position;
                 go.GetComponent<DestroyEffect>().Emit(obj.Info.Color);
 
-                MapModel.RemoveMapObject(obj);
+                _mapModel.RemoveMapObject(obj);
                 _soundController.PlayEffect(SFXType.DestroyItem, 1f, 1f);
             }
         }

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using BasicInjector;
 using MessageChannel;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class ChapterPlayer : MapObject, IInitializable
+public class ChapterPlayer : MapObject
 {
     [Inject]
     public Channel<PlayerEvent> channel;
@@ -21,15 +20,10 @@ public class ChapterPlayer : MapObject, IInitializable
 
     public int MaxRight;
 
-    public override void Initialize()
+    public override void Start()
     {
-        base.Initialize();
+        base.Start();
         _transform = GetComponent<Transform>();
-    }
-
-    void OnDestroy()
-    {
-
     }
 
     private void OnMoveUp()
@@ -49,7 +43,7 @@ public class ChapterPlayer : MapObject, IInitializable
         moveChannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
 
         var target = Coordinate + dir;
-        if (MapModel.TryGetObject(target, out var obj))
+        if (_mapModel.TryGetObject(target, out var obj))
         {
             if (obj.Info.Type == ObjectType.Wall || obj.Info.Type == ObjectType.KeyDoor)
             {

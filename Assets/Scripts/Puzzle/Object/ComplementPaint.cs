@@ -4,8 +4,8 @@ public class ComplementPaint : MapObject, IObtainable
 {
     public void Obtain()
     {
-        MapModel.BackgroundColor.Value = MapModel.BackgroundColor.Value.GetComplementColor();
+        _mapModel.BackgroundColor.Value = _mapModel.BackgroundColor.Value.GetComplementColor();
 
-        MapModel.RemoveMapObject(this);
+        _mapModel.RemoveMapObject(this);
     }
 }

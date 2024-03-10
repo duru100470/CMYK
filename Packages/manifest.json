@@ -46,7 +46,8 @@
     "com.bgtools.playerprefseditor": "1.2.2",
     "com.yasirkula.assetusagedetector": "2.5.1",
     "jp.hadashikick.vcontainer": "1.15.1",
-    "com.cysharp.messagepipe": "1.7.4"
+    "com.cysharp.messagepipe": "1.7.4",
+    "com.cysharp.messagepipe.vcontainer": "1.7.4"
   },
   "scopedRegistries": [
     {
@@ -55,6 +56,7 @@
       "scopes": [
         "com.bgtools.playerprefseditor",
         "com.cysharp.messagepipe",
+        "com.cysharp.messagepipe.vcontainer",
         "com.yasirkula.assetusagedetector",
         "jp.hadashikick.vcontainer"
       ]

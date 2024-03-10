@@ -1,20 +1,16 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using BasicInjector;
-using UnityEditor;
+using VContainer;
 using UnityEngine;
-using MessageChannel;
-using UnityEngine.U2D;
+using MessagePipe;
 
-public class TestMapController : MapController, IInitializable
+public class TestMapController : MapController
 {
     [Inject]
     public TestView testView;
     [Inject]
-    public Channel<PlayerMoveEvent> channel;
+    public ISubscriber<PlayerMoveEvent> channel;
 
     [SerializeField]
     private ColorType _startBGColor;
@@ -25,11 +21,7 @@ public class TestMapController : MapController, IInitializable
     private string _loadedFilename;
     private Stack<MapData> _moveRecord = new Stack<MapData>();
 
-    private void OnDestroy()
-    {
-        channel.Unsubscribe(OnPlayerMoveEventOccurred);
-    }
-    public void Initialize()
+    private void Awake()
     {
         channel.Subscribe(OnPlayerMoveEventOccurred);
     }
@@ -57,13 +49,13 @@ public class TestMapController : MapController, IInitializable
         {
             o.Coordinate = Coordinate.WorldPointToCoordinate(o.GetComponent<Transform>().position);
             testMapData.MapObjects.Add((o.Coordinate, o.Info));
-            mapModel.AddMapObject(o);
+            _mapModel.AddMapObject(o);
 
             Debug.Log($"Add MapObject! [{o.Coordinate}, {o.Info.Type}]");
         }
 
-        mapModel.BackgroundColor.Value = _startBGColor;
-        mapData = testMapData;
+        _mapModel.BackgroundColor.Value = _startBGColor;
+        _mapData = testMapData;
     }
 
     public override void ResetMap()
@@ -73,7 +65,7 @@ public class TestMapController : MapController, IInitializable
         for (int i = children - 1; i >= 0; i--)
         {
             var go = _puzzle.GetChild(i).gameObject;
-            mapModel.RemoveMapObject(go.GetComponent<MapObject>());
+            _mapModel.RemoveMapObject(go.GetComponent<MapObject>());
             Destroy(go);
         }
 
@@ -95,7 +87,7 @@ public class TestMapController : MapController, IInitializable
         if (Application.isPlaying)
         {
             ResetMap();
-            mapData.ImportData(jsonData);
+            _mapData.ImportData(jsonData);
             GenerateMapFromData();
         }
         else

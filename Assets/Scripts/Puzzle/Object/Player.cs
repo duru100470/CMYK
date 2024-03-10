@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using BasicInjector;
-using MessageChannel;
+using MessagePipe;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using VContainer;
 
-public class Player : MapObject, IInitializable
+public class Player : MapObject
 {
     [Inject]
     public ISoundController _soundController;
     [Inject]
-    public Channel<PlayerEvent> channel;
+    public IPublisher<PlayerEvent> channel;
     [Inject]
-    public Channel<PlayerMoveEvent> moveChannel;
+    public IPublisher<PlayerMoveEvent> moveChannel;
 
     private ReactiveProperty<ColorType> _playerColor = new();
     public ReactiveProperty<ColorType> PlayerColor => _playerColor;
@@ -25,14 +22,14 @@ public class Player : MapObject, IInitializable
     private Flicker _flickerPlayer;
     //private Flicker _flickerFlag;
 
-    public override void Initialize()
+    public override void Start()
     {
-        base.Initialize();
+        base.Start();
         _transform = GetComponent<Transform>();
 
         PlayerColor.Value = Info.Color;
         PlayerColor.OnValueChanged += OnPlayerColorChanged;
-        _myColorType = MapModel.BackgroundColor.Value;
+        _myColorType = _mapModel.BackgroundColor.Value;
 
         _playerController = GetComponent<PlayerController>();
         _playerController.OnPlayerMove += Move;
@@ -61,22 +58,22 @@ public class Player : MapObject, IInitializable
         Info.Color = color;
         GetComponent<SpriteRenderer>().color = color.ToColor();
 
-        if (MapModel.BackgroundColor.Value == color)
+        if (_mapModel.BackgroundColor.Value == color)
         {
-            channel.Notify(new PlayerEvent { Type = PlayerEventType.GameOver });
-            MapModel.RemoveMapObject(this);
+            channel.Publish(new PlayerEvent { Type = PlayerEventType.GameOver });
+            _mapModel.RemoveMapObject(this);
         }
     }
 
     // playerColor를 직접 변경하여 색상을 교환하는 과정에서 둘의 색상이 같아져 게임오버가 되는것을 방지하기 위해 구현 
     public void SwapColorWithBackground()
     {
-        ColorType playerColor = Info.Color, backgroundColor = MapModel.BackgroundColor.Value;
+        ColorType playerColor = Info.Color, backgroundColor = _mapModel.BackgroundColor.Value;
 
         Info.Color = backgroundColor;
         GetComponent<SpriteRenderer>().color = backgroundColor.ToColor();
 
-        MapModel.BackgroundColor.Value = playerColor;
+        _mapModel.BackgroundColor.Value = playerColor;
     }
 
     protected override void OnBackgroundColorChanged(ColorType color)
@@ -90,8 +87,8 @@ public class Player : MapObject, IInitializable
 
         if (Info.Color == color)
         {
-            channel.Notify(new PlayerEvent { Type = PlayerEventType.GameOver });
-            MapModel.RemoveMapObject(this);
+            channel.Publish(new PlayerEvent { Type = PlayerEventType.GameOver });
+            _mapModel.RemoveMapObject(this);
         }
         IsMoveable = false;
         Invoke("MoveableSetTrue", 1);
@@ -107,16 +104,16 @@ public class Player : MapObject, IInitializable
         if (!IsMoveable)
             return;
 
-        moveChannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
+        moveChannel.Publish(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
 
         IsMoving = true;
 
         var target = Coordinate + dir;
-        if (MapModel.TryGetObject(target, out var obj))
+        if (_mapModel.TryGetObject(target, out var obj))
         {
             if (obj.Info.IsSolidType)
             {
-                moveChannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.FakeMove });
+                moveChannel.Publish(new PlayerMoveEvent { Type = PlayerMoveEventType.FakeMove });
                 return;
             }
 
@@ -126,7 +123,7 @@ public class Player : MapObject, IInitializable
 
                 if (!movableObj.TryMove(dir))
                 {
-                    moveChannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.FakeMove });
+                    moveChannel.Publish(new PlayerMoveEvent { Type = PlayerMoveEventType.FakeMove });
                     return;
                 }
             }

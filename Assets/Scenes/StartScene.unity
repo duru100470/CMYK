@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 833131456}
   - component: {fileID: 833131457}
   m_Layer: 0
-  m_Name: SceneLoader
+  m_Name: ProjectScope
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: d5839572b5a76af4d83f0dc478fd1a32, type: 3}
   m_NavMeshLayer: 0
@@ -181,6 +181,7 @@ MonoBehaviour:
     MusicVolume: 1
     SFXVolume: 1
     WorldClearData: []
+    Id: 
 --- !u!114 &833131454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +226,7 @@ MonoBehaviour:
     MusicVolume: 1
     SFXVolume: 1
     WorldClearData: []
+    Id: 
   _bgmAudioSource: {fileID: 833131457}
   _debugMode: 0
 --- !u!82 &833131457

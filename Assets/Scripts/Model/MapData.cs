@@ -11,6 +11,7 @@ public class MapData
     public List<(Coordinate, string)> DecorationObjects = new();
     public ColorType InitColor;
     public int MapSize;
+    public bool IsLoaded { get; private set; } = false;
 
     public void ImportData(string json)
     {
@@ -24,6 +25,8 @@ public class MapData
 
         InitColor = mapData.InitColor;
         MapSize = mapData.MapSize;
+
+        IsLoaded = true;
     }
 
     public string ExportData()

@@ -1,13 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using BasicInjector;
 using UnityEngine;
+using VContainer;
 
-public class MapObject : MonoBehaviour, IInitializable
+public class MapObject : MonoBehaviour
 {
     [Inject]
-    public IMapModel MapModel;
+    public IMapModel _mapModel;
     public ObjectInfo Info;
     public Coordinate Coordinate;
 
@@ -17,14 +15,12 @@ public class MapObject : MonoBehaviour, IInitializable
         GetComponent<SpriteRenderer>().color = Info.Color.ToColor();
     }
 
-    public virtual void Initialize()
+    public virtual void Start()
     {
         Debug.Log(Info.Type);
 
-        if (MapModel != null)
-        {
-            MapModel.BackgroundColor.OnValueChanged += OnBackgroundColorChanged;
-        }
+        if (_mapModel != null)
+            _mapModel.BackgroundColor.OnValueChanged += OnBackgroundColorChanged;
     }
 
     protected virtual void OnBackgroundColorChanged(ColorType color)
@@ -35,10 +31,8 @@ public class MapObject : MonoBehaviour, IInitializable
 
     public void DestroyObject()
     {
-        if (MapModel != null)
-        {
-            MapModel.BackgroundColor.OnValueChanged -= OnBackgroundColorChanged;
-        }
+        if (_mapModel != null)
+            _mapModel.BackgroundColor.OnValueChanged -= OnBackgroundColorChanged;
 
         Destroy(gameObject);
     }

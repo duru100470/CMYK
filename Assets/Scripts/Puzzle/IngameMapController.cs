@@ -29,8 +29,8 @@ public class IngameMapController : MapController, IInitializable
     {
         _playerEventChannel.Subscribe(OnPlayerEventOccurred);
         _playerMoveEventChannel.Subscribe(OnPlayerMoveEventOccurred);
-        mapModel.BackgroundColor.OnValueChanged += OnColorEventOccurred;
-        _myColorType = mapModel.BackgroundColor.Value;
+        _mapModel.BackgroundColor.OnValueChanged += OnColorEventOccurred;
+        _myColorType = _mapModel.BackgroundColor.Value;
 
         var e = new GameEvent(_gameSetting.Id, "puzzle_start", Application.version, _worldLoader.CurrentMapIndex.Item1 * 1000 + _worldLoader.CurrentMapIndex.Item2);
         NetworkManager.SendToServer(_url, SendType.POST, e.ToJson()).Forget();
@@ -40,7 +40,7 @@ public class IngameMapController : MapController, IInitializable
     {
         _playerEventChannel.Unsubscribe(OnPlayerEventOccurred);
         _playerMoveEventChannel.Unsubscribe(OnPlayerMoveEventOccurred);
-        mapModel.BackgroundColor.OnValueChanged -= OnColorEventOccurred;
+        _mapModel.BackgroundColor.OnValueChanged -= OnColorEventOccurred;
     }
 
     public override void InitMap()
@@ -55,7 +55,7 @@ public class IngameMapController : MapController, IInitializable
         for (int i = children - 1; i >= 0; i--)
         {
             var go = _puzzle.GetChild(i).gameObject;
-            mapModel.RemoveMapObject(go.GetComponent<MapObject>());
+            _mapModel.RemoveMapObject(go.GetComponent<MapObject>());
             Destroy(go);
         }
     }

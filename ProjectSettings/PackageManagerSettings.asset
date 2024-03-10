@@ -32,6 +32,7 @@ MonoBehaviour:
     m_Scopes:
     - com.bgtools.playerprefseditor
     - com.cysharp.messagepipe
+    - com.cysharp.messagepipe.vcontainer
     - com.yasirkula.assetusagedetector
     - jp.hadashikick.vcontainer
     m_IsDefault: 0

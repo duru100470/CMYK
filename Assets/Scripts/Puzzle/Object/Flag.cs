@@ -12,7 +12,7 @@ public class Flag : MapObject, IObtainable
     private GameObject _effect;
     private Flicker _flicker;
 
-    void Start()
+    private void Awake()
     {
         _flicker = GetComponent<Flicker>();
         _flicker.enabled = true;
@@ -21,7 +21,7 @@ public class Flag : MapObject, IObtainable
 
     public void Obtain()
     {
-        var character = MapModel.GetObjects()
+        var character = _mapModel.GetObjects()
             .First(obj => obj.Info.Type == ObjectType.Player) as Player;
 
         character.IsMoveable = false;
@@ -30,6 +30,6 @@ public class Flag : MapObject, IObtainable
         go.GetComponent<ClearEffect>().Emit(character.PlayerColor.Value);
 
         channel.Notify(new PlayerEvent { Type = PlayerEventType.GameClear });
-        MapModel.RemoveMapObject(this);
+        _mapModel.RemoveMapObject(this);
     }
 }

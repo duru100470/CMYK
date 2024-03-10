@@ -1,16 +1,15 @@
-using BasicInjector;
 using System.Collections.Generic;
 using UnityEngine;
-using MessageChannel;
 using System;
+using VContainer;
 public abstract class MapController : MonoBehaviour
 {
     [Inject]
-    public IMapModel mapModel;
+    public IMapModel _mapModel;
     [Inject]
-    public MapData mapData;
+    public MapData _mapData;
     [Inject]
-    public AssetLoader assetLoader;
+    public AssetLoader _assetLoader;
 
     [SerializeField]
     protected Transform _puzzle;
@@ -24,31 +23,31 @@ public abstract class MapController : MonoBehaviour
 
     protected void GenerateMapFromData()
     {
-        foreach (var (coor, info) in mapData.MapObjects)
+        foreach (var (coor, info) in _mapData.MapObjects)
         {
             var go =
-                SceneLoader.Instance.CurrentSceneScope.Instantiate(assetLoader.LoadPrefab<GameObject>($"MapObjects/{info.Type}"), _puzzle);
+                SceneLoader.Instance.CurrentSceneScope.Instantiate(_assetLoader.LoadPrefab<GameObject>($"MapObjects/{info.Type}"), _puzzle);
 
             var mo = go.GetComponent<MapObject>();
             mo.Coordinate = coor;
             mo.Info = info;
             mo.Init();
 
-            mapModel.AddMapObject(mo);
+            _mapModel.AddMapObject(mo);
             Debug.Log($"Create MapObject! [{mo.Coordinate}, {mo.Info.Type}]");
         }
 
-        foreach (var (coor, name) in mapData.DecorationObjects)
+        foreach (var (coor, name) in _mapData.DecorationObjects)
         {
             var go =
-                SceneLoader.Instance.CurrentSceneScope.Instantiate(assetLoader.LoadPrefab<GameObject>($"Decorations/{name}"), _decorations);
+                SceneLoader.Instance.CurrentSceneScope.Instantiate(_assetLoader.LoadPrefab<GameObject>($"Decorations/{name}"), _decorations);
             go.transform.position = Coordinate.CoordinateToWorldPoint(coor);
 
             Debug.Log($"Create DecorationObject! [{coor}, {name}]");
         }
 
-        mapModel.BackgroundColor.Value = mapData.InitColor;
-        ChangeCameraSize(mapData.MapSize);
+        _mapModel.BackgroundColor.Value = _mapData.InitColor;
+        ChangeCameraSize(_mapData.MapSize);
     }
 
     protected void ChangeCameraSize(int size)
@@ -76,26 +75,26 @@ public abstract class MapController : MonoBehaviour
         foreach (var (coor, info) in tempMapData.MapObjects)
         {
             var go =
-                SceneLoader.Instance.CurrentSceneScope.Instantiate(assetLoader.LoadPrefab<GameObject>($"MapObjects/{info.Type}"), _puzzle);
+                SceneLoader.Instance.CurrentSceneScope.Instantiate(_assetLoader.LoadPrefab<GameObject>($"MapObjects/{info.Type}"), _puzzle);
 
             var mo = go.GetComponent<MapObject>();
             mo.Coordinate = coor;
             mo.Info = info;
             mo.Init();
 
-            mapModel.AddMapObject(mo);
-            if(info.Type == ObjectType.Wall)
+            _mapModel.AddMapObject(mo);
+            if (info.Type == ObjectType.Wall)
             {
                 go.GetComponent<Wall>().SpriteInit();
             }
 
-            if(info.Type == ObjectType.Player || info.Type == ObjectType.Flag)
+            if (info.Type == ObjectType.Player || info.Type == ObjectType.Flag)
             {
                 go.GetComponent<Flicker>()._isMoving = true;
             }
         }
 
-        mapModel.BackgroundColor.Value = tempMapData.InitColor;
+        _mapModel.BackgroundColor.Value = tempMapData.InitColor;
     }
 
     protected void OnPlayerMoveEventOccurred(PlayerMoveEvent playerMoveEvent)
@@ -111,7 +110,7 @@ public abstract class MapController : MonoBehaviour
                     o.Coordinate = Coordinate.WorldPointToCoordinate(o.GetComponent<Transform>().position);
                     tempMapData.MapObjects.Add((o.Coordinate, o.Info));
                 }
-                tempMapData.InitColor = mapModel.BackgroundColor.Value;
+                tempMapData.InitColor = _mapModel.BackgroundColor.Value;
 
                 _moveRecord.Push(tempMapData);
                 break;

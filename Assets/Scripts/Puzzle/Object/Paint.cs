@@ -9,8 +9,8 @@ public class Paint : MapObject, IObtainable
 {
     public void Obtain()
     {
-        MapModel.BackgroundColor.Value += Info.Color;
+        _mapModel.BackgroundColor.Value += Info.Color;
 
-        MapModel.RemoveMapObject(this);
+        _mapModel.RemoveMapObject(this);
     }
 }

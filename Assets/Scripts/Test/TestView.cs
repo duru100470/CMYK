@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using BasicInjector;
-using MessageChannel;
+using MessagePipe;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 public class TestView : MonoBehaviour, IInitializable
 {
     [Inject]
     public IMapModel mapModel;
     [Inject]
-    public Channel<PlayerEvent> channel;
+    public ISubscriber<PlayerEvent> channel;
 
     [SerializeField]
     private GameObject _effect;
@@ -25,7 +26,6 @@ public class TestView : MonoBehaviour, IInitializable
     private void OnDestroy()
     {
         mapModel.BackgroundColor.OnValueChanged -= ChangeBackgroundColor;
-        channel.Unsubscribe(OnPlayerEventOccurred);
     }
 
     public void ChangeBackgroundColor(ColorType colorType)
