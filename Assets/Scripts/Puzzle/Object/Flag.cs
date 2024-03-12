@@ -1,12 +1,12 @@
 using System.Linq;
-using BasicInjector;
-using MessageChannel;
+using MessagePipe;
 using UnityEngine;
+using VContainer;
 
 public class Flag : MapObject, IObtainable
 {
     [Inject]
-    public Channel<PlayerEvent> channel;
+    public IPublisher<PlayerEvent> channel;
 
     [SerializeField]
     private GameObject _effect;

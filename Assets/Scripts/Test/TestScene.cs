@@ -4,6 +4,8 @@ using BasicInjector;
 using UnityEngine;
 using MessageChannel;
 
+// TODO: Deprecated
+
 public class TestScene : SceneScope, IScene
 {
     [SerializeField]

@@ -7,9 +7,9 @@ public class Player : MapObject
     [Inject]
     public ISoundController _soundController;
     [Inject]
-    public IPublisher<PlayerEvent> channel;
+    public IPublisher<PlayerEvent> _playerEventPublisher;
     [Inject]
-    public IPublisher<PlayerMoveEvent> moveChannel;
+    public IPublisher<PlayerMoveEvent> _moveEventPublisher;
 
     private ReactiveProperty<ColorType> _playerColor = new();
     public ReactiveProperty<ColorType> PlayerColor => _playerColor;
@@ -60,7 +60,7 @@ public class Player : MapObject
 
         if (_mapModel.BackgroundColor.Value == color)
         {
-            channel.Publish(new PlayerEvent { Type = PlayerEventType.GameOver });
+            _playerEventPublisher.Publish(new PlayerEvent { Type = PlayerEventType.GameOver });
             _mapModel.RemoveMapObject(this);
         }
     }
@@ -87,7 +87,7 @@ public class Player : MapObject
 
         if (Info.Color == color)
         {
-            channel.Publish(new PlayerEvent { Type = PlayerEventType.GameOver });
+            _playerEventPublisher.Publish(new PlayerEvent { Type = PlayerEventType.GameOver });
             _mapModel.RemoveMapObject(this);
         }
         IsMoveable = false;
@@ -104,7 +104,7 @@ public class Player : MapObject
         if (!IsMoveable)
             return;
 
-        moveChannel.Publish(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
+        _moveEventPublisher.Publish(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
 
         IsMoving = true;
 
@@ -113,7 +113,7 @@ public class Player : MapObject
         {
             if (obj.Info.IsSolidType)
             {
-                moveChannel.Publish(new PlayerMoveEvent { Type = PlayerMoveEventType.FakeMove });
+                _moveEventPublisher.Publish(new PlayerMoveEvent { Type = PlayerMoveEventType.FakeMove });
                 return;
             }
 
@@ -123,7 +123,7 @@ public class Player : MapObject
 
                 if (!movableObj.TryMove(dir))
                 {
-                    moveChannel.Publish(new PlayerMoveEvent { Type = PlayerMoveEventType.FakeMove });
+                    _moveEventPublisher.Publish(new PlayerMoveEvent { Type = PlayerMoveEventType.FakeMove });
                     return;
                 }
             }
@@ -141,5 +141,5 @@ public class Player : MapObject
     }
 
     public void OnMoveRightInit()
-    => Move(new Coordinate(1, 0));
+        => Move(new Coordinate(1, 0));
 }

@@ -4,6 +4,8 @@ using BasicInjector;
 using MessageChannel;
 using UnityEngine;
 
+// TODO: 메인 플레이어로 통합 Deprecated
+
 public class ChapterPlayer : MapObject
 {
     [Inject]

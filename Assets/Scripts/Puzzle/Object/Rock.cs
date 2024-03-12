@@ -1,4 +1,4 @@
-using BasicInjector;
+using VContainer;
 using UnityEngine;
 
 public class Rock : MapObject, IMoveable

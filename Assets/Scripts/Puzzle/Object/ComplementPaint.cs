@@ -1,5 +1,3 @@
-using BasicInjector;
-
 public class ComplementPaint : MapObject, IObtainable
 {
     public void Obtain()

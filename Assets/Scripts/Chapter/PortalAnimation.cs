@@ -9,10 +9,12 @@ public class PortalAnimation : MonoBehaviour
     private float _speed = 5.0f;
 
     private SpriteRenderer _spriteRenderer;
+
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
     public void AnimationOn()
     {
         _onAni = true;

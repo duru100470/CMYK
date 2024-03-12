@@ -6,6 +6,8 @@ using BasicInjector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// TODO: VContainer LifeTimeScope parenting 해야함
+
 public abstract class SceneScope : MonoBehaviour, IInstaller
 {
     public static SceneScope Instance { get; private set; } = null;

@@ -5,6 +5,9 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Linq;
 
+// TODO: VContainer로 바꾸기
+// TODO: ChapterScene 하나로 통합
+
 public class ChapterScene0 : SceneScope, IScene
 {
     public SceneScope SceneScope => this;

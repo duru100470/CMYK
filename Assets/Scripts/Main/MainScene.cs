@@ -7,6 +7,8 @@ using System.Linq;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
+// TODO: VContainer로 바꾸기
+
 public class MainScene : SceneScope, IScene
 {
     public SceneScope SceneScope => this;

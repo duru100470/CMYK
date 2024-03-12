@@ -9,9 +9,8 @@ using UnityEngine.TextCore.Text;
 public class MainCamera : MonoBehaviour
 {
 
-    public IMapModel MapModel;
     public MainPlayer _mainPlayer;
-    public int cameraMax = 90;
+    public int CameraMax = 90;
 
     private float _speed = 2.0f;
 
@@ -22,7 +21,7 @@ public class MainCamera : MonoBehaviour
         {
             targetPos = new Vector3(0.5f, 0.5f, -10);
         }
-        else if (_mainPlayer.Coordinate.X >= cameraMax)
+        else if (_mainPlayer.Coordinate.X >= CameraMax)
         {
             targetPos = new Vector3(76.5f, 0.5f, -10);
         }

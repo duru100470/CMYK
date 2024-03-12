@@ -4,6 +4,8 @@ using BasicInjector;
 using MessageChannel;
 using UnityEngine;
 
+// TODO: VContainer로 바꾸기
+
 public class PuzzleScene : SceneScope, IScene
 {
     [SerializeField]

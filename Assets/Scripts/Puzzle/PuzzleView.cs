@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using BasicInjector;
+using VContainer;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -23,6 +23,7 @@ public class TestMapController : MapController
 
     private void Awake()
     {
+        // TODO: dispose 해야함
         channel.Subscribe(OnPlayerMoveEventOccurred);
     }
 

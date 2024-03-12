@@ -9,7 +9,6 @@ using UnityEngine.TextCore.Text;
 public class ChapterCamera : MonoBehaviour
 {
 
-    public IMapModel MapModel;
     public MainPlayer _player;
     public int cameraMax = 20;
 

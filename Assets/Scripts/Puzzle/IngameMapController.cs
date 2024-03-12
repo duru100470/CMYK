@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using BasicInjector;
 using Cysharp.Threading.Tasks;
-using MessageChannel;
-using Unity.Collections.LowLevel.Unsafe;
+using MessagePipe;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 public class IngameMapController : MapController, IInitializable
 {
     [Inject]
-    public MessageChannel.Channel<PlayerEvent> _playerEventChannel;
+    public ISubscriber<PlayerEvent> _playerEventSubscriber;
     [Inject]
-    public MessageChannel.Channel<PlayerMoveEvent> _playerMoveEventChannel;
+    public ISubscriber<PlayerMoveEvent> _moveEventSubscriber;
     [Inject]
     public WorldLoader _worldLoader;
     [Inject]
@@ -27,8 +26,8 @@ public class IngameMapController : MapController, IInitializable
 
     public void Initialize()
     {
-        _playerEventChannel.Subscribe(OnPlayerEventOccurred);
-        _playerMoveEventChannel.Subscribe(OnPlayerMoveEventOccurred);
+        _playerEventSubscriber.Subscribe(OnPlayerEventOccurred);
+        _moveEventSubscriber.Subscribe(OnPlayerMoveEventOccurred);
         _mapModel.BackgroundColor.OnValueChanged += OnColorEventOccurred;
         _myColorType = _mapModel.BackgroundColor.Value;
 
@@ -38,8 +37,9 @@ public class IngameMapController : MapController, IInitializable
 
     private void OnDestroy()
     {
-        _playerEventChannel.Unsubscribe(OnPlayerEventOccurred);
-        _playerMoveEventChannel.Unsubscribe(OnPlayerMoveEventOccurred);
+        // TODO: dispose 해야함
+        // _playerEventChannel.Unsubscribe(OnPlayerEventOccurred);
+        // _playerMoveEventChannel.Unsubscribe(OnPlayerMoveEventOccurred);
         _mapModel.BackgroundColor.OnValueChanged -= OnColorEventOccurred;
     }
 

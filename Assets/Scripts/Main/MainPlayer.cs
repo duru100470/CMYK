@@ -1,14 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using BasicInjector;
-using MessageChannel;
+using MessagePipe;
+using VContainer;
 using UnityEngine;
+
 
 public class MainPlayer : MapObject
 {
     [Inject]
-    public Channel<PlayerMoveEvent> moveChannel;
+    public IPublisher<PlayerMoveEvent> _publisher;
     [Inject]
     public ISoundController _soundController;
 
@@ -24,7 +25,7 @@ public class MainPlayer : MapObject
 
     private void Move(Coordinate dir)
     {
-        moveChannel.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
+        _publisher.Notify(new PlayerMoveEvent { Type = PlayerMoveEventType.TrueMove });
 
         var target = Coordinate + dir;
         if (_mapModel.TryGetObject(target, out var obj))
@@ -46,7 +47,6 @@ public class MainPlayer : MapObject
 
         _soundController.PlayEffect(SFXType.PlayerMove, 1f, 1f);
     }
-
 
     public void PosInit()
     {

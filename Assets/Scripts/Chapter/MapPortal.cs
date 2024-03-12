@@ -1,14 +1,13 @@
-using BasicInjector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MessageChannel;
-using UnityEngine.SceneManagement;
+using MessagePipe;
+using VContainer;
 
 public class MapPortal : MapObject, IObtainable
 {
     [Inject]
-    public Channel<PlayerMoveEvent> moveChannel;
+    public ISubscriber<PlayerMoveEvent> _subscriber;
     [Inject]
     public ISoundController _soundController;
 
@@ -32,7 +31,7 @@ public class MapPortal : MapObject, IObtainable
     {
         base.Start();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        moveChannel.Subscribe(OnPlayeMoveEventOccurred);
+        _subscriber.Subscribe(OnPlayeMoveEventOccurred);
 
         var sceneName = SceneManager.GetActiveScene().name;
 
